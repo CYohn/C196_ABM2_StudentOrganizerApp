@@ -1,8 +1,10 @@
-package com.zybooks.c196_abm2_charity_yohn;
+package UI;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.zybooks.c196_abm2_charity_yohn.R;
 
 public class MainActivity extends AppCompatActivity {
 
