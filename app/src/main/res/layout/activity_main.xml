@@ -43,17 +43,17 @@
         app:srcCompat="@drawable/ic_book_foreground" />
 
     <Button
-        android:id="@+id/currentCoursesBtn"
+        android:id="@+id/allCoursesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/current_courses"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allTermsBtn"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.144" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
