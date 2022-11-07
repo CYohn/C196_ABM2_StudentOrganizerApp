@@ -14,6 +14,9 @@
         android:theme="@style/Theme.C196_ABM2_Charity_Yohn"
         tools:targetApi="31">
         <activity
+            android:name=".AllAssessmentsList"
+            android:exported="false" />
+        <activity
             android:name=".AllCourseList"
             android:exported="false" />
         <activity
