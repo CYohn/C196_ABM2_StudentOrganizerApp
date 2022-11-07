@@ -16,10 +16,12 @@
         <activity
             android:name="UI.AllAssessmentsList"
             android:exported="false"
+            android:label="Assessments"
             android:parentActivityName="UI.MainActivity"/>
         <activity
             android:name="UI.AllCourseList"
             android:parentActivityName="UI.MainActivity"
+            android:label="Courses"
             android:exported="false" />
         <activity
             android:name="UI.AllTermsList"
