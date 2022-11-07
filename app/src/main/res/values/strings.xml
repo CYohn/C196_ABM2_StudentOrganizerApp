@@ -2,6 +2,7 @@
     <string name="app_name">C196_ABM2_Charity_Yohn</string>
     <string name="allTerms">Terms</string>
     <string name="title_activity_all_terms_list">AllTermsList</string>
+    <string name="bookIconDescription">Icon_of_a_book</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
