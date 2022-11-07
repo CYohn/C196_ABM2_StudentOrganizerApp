@@ -20,4 +20,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, UI.AllTermsList.class);
         startActivity(intent);
     }
+
+    public void allCoursesBtn(View view) {
+        Intent intent = new Intent(MainActivity.this, UI.AllCourseList.class);
+        startActivity(intent);
+    }
+
+    public void allAssessmentsBtn(View view) {
+        Intent intent = new Intent(MainActivity.this, UI.AllAssessmentsList.class);
+        startActivity(intent);
+    }
 }
