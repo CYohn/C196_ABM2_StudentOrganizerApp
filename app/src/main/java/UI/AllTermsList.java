@@ -1,8 +1,10 @@
 package UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,5 +31,10 @@ public class AllTermsList extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addTermBtnPressed(View view) {
+        Intent intent=new Intent(AllTermsList.this, AddTermFragment.class);
+        startActivity(intent);
     }
 }
