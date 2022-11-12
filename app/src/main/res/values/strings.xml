@@ -97,4 +97,7 @@
     <string name="welcome_to_your_study_organizer">Welcome to your study organizer!</string>
     <string name="coursesBtn">Courses</string>
     <string name="assessmentsBtn">Assessments</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="AllTermsFragmentTitle">All Terms</string>
+    <string name="AddTermsFragmentTitle">Add Term</string>
 </resources>

@@ -1,12 +1,12 @@
 package UI;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
@@ -33,8 +33,11 @@ public class AllTermsList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public void addTermBtnPressed(View view) {
-        Intent intent=new Intent(AllTermsList.this, AddTermFragment.class);
-        startActivity(intent);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, new AddTermFragment())
+                .commit();
     }
 }
