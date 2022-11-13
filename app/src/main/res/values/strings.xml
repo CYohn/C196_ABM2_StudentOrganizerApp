@@ -118,4 +118,6 @@
     <string name="addCourseBtnTxt">Add Course</string>
     <string name="enterNameOfCourseInstruction">Please Enter the Course Name</string>
     <string name="enterCourseStartDate">Please Enter The Course Start Date</string>
+    <string name="enterCourseEndInstruction">Please Enter The Course End Date</string>
+    <string name="chooseCourseInstructorInstruction">Please Choose or Add The Course Instructor</string>
 </resources>

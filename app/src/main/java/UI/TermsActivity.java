@@ -18,14 +18,14 @@ public class TermsActivity extends AppCompatActivity {
 
     public void pressedListAllTermsBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.coursesFragmentContainerView, new AllTermsListFragment());
+        fragmentTransaction.replace(R.id.termsFragmentContainerView, new AllTermsListFragment());
         fragmentTransaction.addToBackStack("allTermsListFragmentView");
         fragmentTransaction.commit();
     }
 
     public void pressedAddTermsBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.coursesFragmentContainerView, new AddTermFragment());
+        fragmentTransaction.replace(R.id.termsFragmentContainerView, new AddTermFragment());
         fragmentTransaction.addToBackStack("allTermsListFragmentView");
         fragmentTransaction.commit();
     }

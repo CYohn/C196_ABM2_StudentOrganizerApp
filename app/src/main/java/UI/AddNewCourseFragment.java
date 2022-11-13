@@ -62,4 +62,13 @@ public class AddNewCourseFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_new_course, container, false);
     }
+
+    public void pressedAddInstructor(View view) {
+    }
+
+    public void pressedAddAssessment(View view) {
+    }
+
+    public void pressedAddNote(View view) {
+    }
 }
