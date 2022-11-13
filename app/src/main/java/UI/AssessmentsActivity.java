@@ -11,6 +11,6 @@ public class AssessmentsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_assessments_list);
+        setContentView(R.layout.activity_assessments);
     }
 }
