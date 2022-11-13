@@ -112,4 +112,5 @@
     <string name="monthLabel">Month</string>
     <string name="dayLabel">Day</string>
     <string name="yearLabel">Year</string>
+    <string name="addCoursesLabel">Add Courses</string>
 </resources>

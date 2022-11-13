@@ -62,4 +62,16 @@ public class AddTermFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_term, container, false);
     }
+
+    //TODO: Link this button to the add course fragment
+    public void pressedAddCoursesFromTermAddBtn(View view) {
+    }
+
+    //TODO: Make this button save the current state and return to all terms fragment
+    public void pressesCloseAddTermBtn(View view) {
+    }
+
+    //TODO: Make this button save the new Term, add it to the list of terms, and return to the All Terms fragment
+    public void pressedSaveNewTermBtn(View view) {
+    }
 }

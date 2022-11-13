@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     android:visibility="visible"
     tools:context="UI.AddTermFragment"
+    tools:layout_editor_absoluteX="-4dp"
+    tools:layout_editor_absoluteY="-106dp"
     tools:visibility="visible">
 
     <Space
         android:id="@+id/space"
         android:layout_width="410dp"
         android:layout_height="106dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +24,9 @@
         android:id="@+id/enterTermTitleInstruction"
         android:layout_width="403dp"
         android:layout_height="54dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space">
 
@@ -43,7 +49,9 @@
         android:id="@+id/containerForTermTitleTxtInput"
         android:layout_width="402dp"
         android:layout_height="55dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterTermTitleInstruction">
 
@@ -66,6 +74,7 @@
         android:id="@+id/enterStartDateInstruction"
         android:layout_width="401dp"
         android:layout_height="56dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/containerForTermTitleTxtInput">
@@ -89,7 +98,9 @@
         android:id="@+id/containerToHoldStartDateSpinners"
         android:layout_width="402dp"
         android:layout_height="55dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterStartDateInstruction">
 
@@ -131,8 +142,9 @@
         android:id="@+id/EnterEndDateInstruction"
         android:layout_width="402dp"
         android:layout_height="55dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/containerToHoldStartDateSpinners">
 
@@ -156,7 +168,9 @@
         android:id="@+id/containerToHoldEndDateSpinners"
         android:layout_width="410dp"
         android:layout_height="76dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EnterEndDateInstruction">
 
@@ -194,53 +208,57 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/containerToHoldMenuButtons"
-        android:layout_width="240dp"
-        android:layout_height="287dp"
+    <ImageButton
+        android:id="@+id/addCoursesFromTermAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/ic_next_button_right"
+        android:onClick="pressedAddCoursesFromTermAddBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCoursesLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/addCoursesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/addCoursesLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerToHoldEndDateSpinners" />
+
+    <ImageButton
+        android:id="@+id/closeAddTermsBtn"
+        android:layout_width="38dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="17dp"
+        android:src="@android:drawable/btn_dialog"
+        android:onClick="pressesCloseAddTermBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintStart_toStartOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/space" />
+
+    <ImageButton
+        android:id="@+id/saveNewTermBtn"
+        android:layout_width="52dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="55dp"
+        android:src="@android:drawable/ic_menu_save"
+        android:onClick="pressedSaveNewTermBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addCoursesFromTermAddBtn"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/containerToHoldEndDateSpinners"
-        app:layout_constraintVertical_bias="0.438">
-
-        <LinearLayout
-            android:layout_width="239dp"
-            android:layout_height="290dp"
-            android:layout_marginStart="4dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <Button
-                android:id="@+id/saveAndAddCourses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/saveAndAddCourseBtn"
-                tools:text="@string/saveAndAddCourseBtn" />
-
-            <Button
-                android:id="@+id/saveAndExitBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/saveAndExitBtn"
-                tools:text="@string/saveAndExitBtn" />
-
-            <Button
-                android:id="@+id/cancelBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cancelBtn"
-                tools:text="@string/cancelBtn" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
