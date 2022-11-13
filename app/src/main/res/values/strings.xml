@@ -102,4 +102,7 @@
     <string name="AddTermsFragmentTitle">Add Term</string>
     <string name="listAllTermsBtnTxt">List All</string>
     <string name="addTermBtnTxt">Add Term</string>
+    <string name="enterTermName">Please Enter The Term Name (Ex Spring 2022)</string>
+    <string name="startDateInstruction">Please Enter The Start Date</string>
+    <string name="endDateInstruction">Please Enter The End Date</string>
 </resources>

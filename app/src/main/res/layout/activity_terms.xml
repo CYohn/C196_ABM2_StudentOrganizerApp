@@ -37,8 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"
-            android:onClick="listAllTerms"
+            android:onClick="pressedListAllTermsBtn"
+            android:text="@string/listAllTermsBtnTxt"
             tools:text="@string/listAllTermsBtnTxt" />
 
         <Button
@@ -46,8 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"
-            tools:text="@string/addTermBtnTxt" />
+            android:text="@string/addTermBtnTxt"
+            android:onClick="pressedAddTermsBtn"
+            tools:text="@string/addTermBtnTxt"
+            tools:ignore="OnClick" />
 
         <Button
             android:id="@+id/button5"

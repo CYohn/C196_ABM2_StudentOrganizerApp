@@ -16,9 +16,16 @@ public class TermsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_terms);
     }
 
-    public void listAllTerms(View view) {
+    public void pressedListAllTermsBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.termsFragmentContainerView, new AllTermsListFragment());
+        fragmentTransaction.addToBackStack("allTermsListFragmentView");
+        fragmentTransaction.commit();
+    }
+
+    public void pressedAddTermsBtn(View view) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.termsFragmentContainerView, new AddTermFragment());
         fragmentTransaction.addToBackStack("allTermsListFragmentView");
         fragmentTransaction.commit();
     }
