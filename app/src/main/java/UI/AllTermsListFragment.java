@@ -64,12 +64,5 @@ public class AllTermsListFragment extends Fragment {
     }
 
 
-//    public void addTermBtnPressed(View view) {
-//        FragmentManager fragmentManager = getParentFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.frameLayout, AddTermFragment.class, null)
-//                .setReorderingAllowed(true)
-//                .addToBackStack("Add_Term") // name can be null
-//                .commit();
-//    }
+
 }

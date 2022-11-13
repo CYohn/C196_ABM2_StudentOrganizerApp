@@ -105,4 +105,5 @@
     <string name="enterTermName">Please Enter The Term Name (Ex Spring 2022)</string>
     <string name="startDateInstruction">Please Enter The Start Date</string>
     <string name="endDateInstruction">Please Enter The End Date</string>
+    <string name="currentOnlySwitchLabel">Current Only</string>
 </resources>
