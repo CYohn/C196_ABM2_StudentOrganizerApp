@@ -106,4 +106,10 @@
     <string name="startDateInstruction">Please Enter The Start Date</string>
     <string name="endDateInstruction">Please Enter The End Date</string>
     <string name="currentOnlySwitchLabel">Current Only</string>
+    <string name="saveAndAddCourseBtn"><![CDATA[Save & Add Courses]]></string>
+    <string name="saveAndExitBtn">Save and Exit</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="monthLabel">Month</string>
+    <string name="dayLabel">Day</string>
+    <string name="yearLabel">Year</string>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:visibility="visible"
     tools:context="UI.AddTermFragment"
-    tools:visibility="visible" >
+    tools:visibility="visible">
 
     <Space
         android:id="@+id/space"
@@ -107,19 +107,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:minHeight="48dp" />
+                android:autofillHints="Month"
+                android:minHeight="48dp"
+                android:tooltipText="@string/monthLabel" />
 
             <Spinner
                 android:id="@+id/startDateDaySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:tooltipText="@string/dayLabel" />
 
             <Spinner
                 android:id="@+id/startDateYearSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:tooltipText="@string/yearLabel" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -145,16 +149,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/endDateInstruction" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerToHoldEndDateSpinners"
-        android:layout_width="402dp"
-        android:layout_height="55dp"
-        app:layout_constraintBottom_toTopOf="@id/space2"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enterStartDateInstruction">
+        app:layout_constraintTop_toBottomOf="@+id/EnterEndDateInstruction">
 
         <LinearLayout
             android:layout_width="400dp"
@@ -169,31 +173,74 @@
                 android:id="@+id/endDateMonthSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:tooltipText="@string/monthLabel" />
 
             <Spinner
                 android:id="@+id/endDateDaySpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:tooltipText="@string/dayLabel" />
 
             <Spinner
                 android:id="@+id/endDateYearSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:tooltipText="@string/yearLabel" />
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Space
-        android:id="@+id/space2"
-        android:layout_width="397dp"
-        android:layout_height="78dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerToHoldMenuButtons"
+        android:layout_width="240dp"
+        android:layout_height="287dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/containerToHoldEndDateSpinners"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.438">
+
+        <LinearLayout
+            android:layout_width="239dp"
+            android:layout_height="290dp"
+            android:layout_marginStart="4dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <Button
+                android:id="@+id/saveAndAddCourses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/saveAndAddCourseBtn"
+                tools:text="@string/saveAndAddCourseBtn" />
+
+            <Button
+                android:id="@+id/saveAndExitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/saveAndExitBtn"
+                tools:text="@string/saveAndExitBtn" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancelBtn"
+                tools:text="@string/cancelBtn" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
