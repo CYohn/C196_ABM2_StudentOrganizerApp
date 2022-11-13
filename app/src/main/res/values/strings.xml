@@ -100,4 +100,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="AllTermsFragmentTitle">All Terms</string>
     <string name="AddTermsFragmentTitle">Add Term</string>
+    <string name="listAllTermsBtnTxt">List All</string>
+    <string name="addTermBtnTxt">Add Term</string>
 </resources>

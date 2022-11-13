@@ -16,7 +16,8 @@
         <activity
             android:name="UI.TermsActivity"
             android:exported="false"
-            android:label="Terms"/>
+            android:label="Terms"
+            android:parentActivityName="UI.MainActivity"/>
         <activity
             android:name="UI.AssessmentsActivity"
             android:exported="false"
