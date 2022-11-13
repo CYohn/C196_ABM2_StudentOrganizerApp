@@ -17,17 +17,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void allTermsBtnPressed(View view){
-        Intent intent = new Intent(MainActivity.this, UI.AllTermsList.class);
+        Intent intent = new Intent(MainActivity.this, TermsActivity.class);
         startActivity(intent);
     }
 
     public void allCoursesBtn(View view) {
-        Intent intent = new Intent(MainActivity.this, UI.AllCourseList.class);
+        Intent intent = new Intent(MainActivity.this, CourseActivity.class);
         startActivity(intent);
     }
 
     public void allAssessmentsBtn(View view) {
-        Intent intent = new Intent(MainActivity.this, UI.AllAssessmentsList.class);
+        Intent intent = new Intent(MainActivity.this, AssessmentsActivity.class);
         startActivity(intent);
     }
 }

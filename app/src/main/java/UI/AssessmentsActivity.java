@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
-public class AllAssessmentsList extends AppCompatActivity {
+public class AssessmentsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

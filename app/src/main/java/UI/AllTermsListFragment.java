@@ -62,4 +62,14 @@ public class AllTermsListFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_terms_list, container, false);
     }
+
+
+//    public void addTermBtnPressed(View view) {
+//        FragmentManager fragmentManager = getParentFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.frameLayout, AddTermFragment.class, null)
+//                .setReorderingAllowed(true)
+//                .addToBackStack("Add_Term") // name can be null
+//                .commit();
+//    }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/termsFloatingActionBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="UI.AllTermsList">
+    tools:context="UI.TermsActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addTermFloatingActionBtn"
@@ -14,14 +14,15 @@
         android:layout_marginEnd="44dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
-        android:onClick="addTermBtnPressed"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
+        //android:onClick="addTermBtnPressed"
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="UI.AddTermFragment"
+        android:name="UI.AllTermsListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
