@@ -1,13 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutCourses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="UI.AddNewCourseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="408dp"
+        android:layout_height="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/courseNameInstruction"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:text="@string/enterNameOfCourseInstruction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space2"
+        tools:text="@string/enterNameOfCourseInstruction" />
+
+    <EditText
+        android:id="@+id/courseNameTxtInput"
+        android:layout_width="405dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="3dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ex: Math 101"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseNameInstruction" />
+
+    <TextView
+        android:id="@+id/courseStartInstruction"
+        android:layout_width="404dp"
+        android:layout_height="32dp"
+        android:text="@string/enterCourseStartDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseNameTxtInput"
+        tools:text="@string/enterCourseStartDate" />
+</androidx.constraintlayout.widget.ConstraintLayout>
