@@ -25,7 +25,7 @@ public class CourseActivity extends AppCompatActivity {
 
     public void pressedAddCourseBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddTermFragment());
+        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddNewCourseFragment());
         fragmentTransaction.addToBackStack("addCourseFragmentView");
         fragmentTransaction.commit();
     }

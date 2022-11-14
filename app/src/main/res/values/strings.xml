@@ -120,4 +120,12 @@
     <string name="enterCourseStartDate">Please Enter The Course Start Date</string>
     <string name="enterCourseEndInstruction">Please Enter The Course End Date</string>
     <string name="chooseCourseInstructorInstruction">Please Choose or Add The Course Instructor</string>
+    <string name="addAssesmentsBtnLabel">Add Assessment</string>
+    <string name="addNoteBtnLabel">Add Note</string>
+    <string name="performanceExamLabel">Performance</string>
+    <string name="objectiveExamLabel">Objective</string>
+    <string name="typeLabel">Type</string>
+    <string name="assessmentName">Assessment Name (Ex: Math Midterm)</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDateLabel">End Date</string>
 </resources>
