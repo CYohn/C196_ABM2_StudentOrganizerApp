@@ -1,5 +1,6 @@
 package UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,8 +68,12 @@ public class AddNewCourseFragment extends Fragment {
     }
 
     public void pressedAddAssessment(View view) {
+        Intent intent = new Intent(getActivity(), AssessmentsActivity.class);
+        startActivity(intent);
     }
 
     public void pressedAddNote(View view) {
     }
+
+
 }
