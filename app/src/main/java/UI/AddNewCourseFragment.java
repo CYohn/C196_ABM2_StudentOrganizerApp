@@ -65,6 +65,9 @@ public class AddNewCourseFragment extends Fragment {
     }
 
     public void pressedAddInstructor(View view) {
+        Intent intent = new Intent(getActivity(), CourseActivity.class);
+        startActivity(intent);
+
     }
 
     public void pressedAddAssessment(View view) {
