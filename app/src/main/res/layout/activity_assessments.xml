@@ -4,4 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="UI.AssessmentsActivity"/>
+    tools:context="UI.AssessmentsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="UI.TermsActivity">
+
+        <LinearLayout
+            android:id="@+id/assessmentFragmentLayout"
+            android:layout_width="352dp"
+            android:layout_height="406dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/assessmentBtnsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/assessmentFragmentContainerView"
+                android:name="UI.AllTermsListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="389dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/assessmentBtnsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/assessmentFragmentLayout">
+
+            <Button
+                android:id="@+id/listAllAssessmentsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="pressedListAllAssessmentsBtn"
+                android:text="@string/listAllTermsBtnTxt"
+                tools:text="@string/listAllTermsBtnTxt" />
+
+            <Button
+                android:id="@+id/openAddAssessmentFragBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="pressedOpenAddAssessmentFragBtn"
+                android:text="@string/addTermBtnTxt"
+                tools:ignore="OnClick"
+                tools:text="@string/addTermBtnTxt" />
+
+            <Button
+                android:id="@+id/extraBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

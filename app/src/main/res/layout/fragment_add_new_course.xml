@@ -8,8 +8,8 @@
 
     <Space
         android:id="@+id/space2"
-        android:layout_width="357dp"
-        android:layout_height="62dp"
+        android:layout_width="345dp"
+        android:layout_height="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
     <EditText
         android:id="@+id/courseNameTxtInput"
         android:layout_width="358dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginTop="3dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -49,7 +49,7 @@
     <FrameLayout
         android:id="@+id/frameLayout2"
         android:layout_width="358dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
     <FrameLayout
         android:id="@+id/frameLayout3"
         android:layout_width="358dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterCourseEndInstruction">
@@ -136,7 +136,7 @@
     <FrameLayout
         android:id="@+id/frameLayout4"
         android:layout_width="357dp"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,8 +194,8 @@
         android:id="@+id/addAssessmentBtnLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="36dp"
         android:text="@string/addAssesmentsBtnLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
@@ -204,8 +204,8 @@
         android:id="@+id/addNoteBtnLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="72dp"
         android:text="@string/addNoteBtnLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />

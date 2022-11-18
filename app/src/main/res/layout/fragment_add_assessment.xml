@@ -11,7 +11,7 @@
         android:id="@+id/assessmentNameTxtinput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -19,7 +19,7 @@
         android:text="@string/assessmentName"
         app:layout_constraintBottom_toTopOf="@+id/addAssessmentStartDateInstruction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/addAssessmentStartDateInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/startDateInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,9 +36,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="407dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="309dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,19 +46,19 @@
 
         <Spinner
             android:id="@+id/assessmentMonthStartSpinner"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/assessmentDayStartSpinner"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/assessmentStartYearSpinner"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
@@ -67,7 +67,7 @@
         android:id="@+id/assessmentEndDateInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="5dp"
         android:text="@string/endDateInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,9 +75,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="407dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="315dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,7 @@
         android:id="@+id/assessmentTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="18dp"
         android:text="@string/typeLabel"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
@@ -116,9 +116,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout7"
-        android:layout_width="407dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="310dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,8 +151,8 @@
         android:id="@+id/assessmentAssociatedCourseLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/assessmentAssociatedCourseLabel"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,8 +163,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout8"
-        android:layout_width="407dp"
-        android:layout_height="78dp"
+        android:layout_width="312dp"
+        android:layout_height="36dp"
         android:layout_marginTop="18dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -186,10 +186,9 @@
         android:src="@android:drawable/ic_menu_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/addAssessmentFragmentCloseBtn"
@@ -200,6 +199,7 @@
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context="UI.TermsActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/assessmentFragmentViewer"
         android:layout_width="409dp"
         android:layout_height="750dp"
         android:orientation="vertical"
