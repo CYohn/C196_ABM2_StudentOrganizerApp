@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
@@ -61,7 +63,43 @@ public class AddNewCourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_new_course, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_new_course, container, false);
+
+        ImageButton addAssessmentBtn = (ImageButton) view.findViewById(R.id.addAssessmentBtn);
+        addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddAssessmentFragment());
+                fragmentTransaction.addToBackStack("addAssessmentView");
+                fragmentTransaction.commit();
+            }
+        });
+
+        ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
+        addInstructorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new InstructorFragment());
+                fragmentTransaction.addToBackStack("addInstructorView");
+                fragmentTransaction.commit();
+            }
+    });
+
+        ImageButton addNoteBtn = (ImageButton) view.findViewById(R.id.addNoteBtn);
+        addNoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new NotesFragment());
+                fragmentTransaction.addToBackStack("addNoteView");
+                fragmentTransaction.commit();
+            }
+        });
+
+
+    return view;
     }
 
     public void pressedAddInstructor(View view) {
@@ -71,12 +109,17 @@ public class AddNewCourseFragment extends Fragment {
     }
 
     public void pressedAddAssessment(View view) {
-        Intent intent = new Intent(getActivity(), AssessmentsActivity.class);
-        startActivity(intent);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddAssessmentFragment());
+        fragmentTransaction.addToBackStack("addAssessmentView");
+        fragmentTransaction.commit();
     }
 
     public void pressedAddNote(View view) {
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new NotesFragment());
+        fragmentTransaction.addToBackStack("notesFragmentView");
+        fragmentTransaction.commit();
     }
-
 
 }
