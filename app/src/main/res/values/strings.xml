@@ -132,4 +132,5 @@
     <string name="addAssessmentFragmentCloseBtn">Close the Add Assessment Screen</string>
     <string name="chooseAssociatedCourse">Choose the associated course</string>
     <string name="addAssociatedTermInstruction">Please Add The Associated Term</string>
+    <string name="dateLabel">Date</string>
 </resources>

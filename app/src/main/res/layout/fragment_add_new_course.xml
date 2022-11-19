@@ -130,6 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
         </LinearLayout>
     </FrameLayout>
 
@@ -142,6 +143,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer">
+
+        <TextView
+            android:id="@+id/addAssessmentBtnLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/addAssesmentsBtnLabel" />
+
+        <ImageButton
+            android:id="@+id/addAssessmentBtn"
+            android:layout_width="67dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:src="?attr/actionModePasteDrawable" />
+
+        <TextView
+            android:id="@+id/addNoteBtnLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/addNoteBtnLabel" />
+
+        <ImageButton
+            android:id="@+id/addNoteBtn"
+            android:layout_width="69dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_book_foreground" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout4"
@@ -172,49 +219,6 @@
         </LinearLayout>
     </FrameLayout>
 
-    <ImageButton
-        android:id="@+id/addAssessmentBtn"
-        android:layout_width="67dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_assessment_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addAssessmentBtnLabel"
-        app:layout_constraintVertical_bias="0.555" />
-
-    <ImageButton
-        android:id="@+id/addNoteBtn"
-        android:layout_width="69dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_book_foreground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/addAssessmentBtn"
-        app:layout_constraintTop_toBottomOf="@+id/addNoteBtnLabel"
-        app:layout_constraintVertical_bias="0.542" />
-
-    <TextView
-        android:id="@+id/addAssessmentBtnLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/addAssesmentsBtnLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <TextView
-        android:id="@+id/addNoteBtnLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:text="@string/addNoteBtnLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="421dp" />
-
     <LinearLayout
         android:id="@+id/associatedTermContainer"
         android:layout_width="357dp"
@@ -236,5 +240,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@android:drawable/ic_input_add" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
