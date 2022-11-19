@@ -75,18 +75,16 @@ public class AddTermFragment extends Fragment {
             }
         });
 
-        ImageButton addNoteBtn = (ImageButton) view.findViewById(R.id.addNoteBtn);
-        addNoteBtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton closeAddTermsBtn = (ImageButton) view.findViewById(R.id.closeAddTermsBtn);
+        closeAddTermsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new NotesFragment());
+                fragmentTransaction.replace(R.id.termsFragmentContainerView, new AllTermsListFragment());
                 fragmentTransaction.addToBackStack("addNoteView");
                 fragmentTransaction.commit();
             }
         });
-
-
 
         return view;
     }
