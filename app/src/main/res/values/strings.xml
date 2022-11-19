@@ -133,4 +133,6 @@
     <string name="chooseAssociatedCourse">Choose the associated course</string>
     <string name="addAssociatedTermInstruction">Please Add The Associated Term</string>
     <string name="dateLabel">Date</string>
+    <string name="instructorEmail">Email</string>
+    <string name="instructorPhone">Phone</string>
 </resources>
