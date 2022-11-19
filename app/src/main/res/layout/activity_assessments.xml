@@ -60,9 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="pressedOpenAddAssessmentFragBtn"
-                android:text="@string/addTermBtnTxt"
+                android:text="@string/addAssesmentsBtnLabel"
                 tools:ignore="OnClick"
-                tools:text="@string/addTermBtnTxt" />
+                tools:text="@string/addAssesmentsBtnLabel" />
 
             <Button
                 android:id="@+id/extraBtn"
