@@ -1,6 +1,5 @@
 package UI;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,24 +101,6 @@ public class AddNewCourseFragment extends Fragment {
     return view;
     }
 
-    public void pressedAddInstructor(View view) {
-        Intent intent = new Intent(getActivity(), CourseActivity.class);
-        startActivity(intent);
 
-    }
-
-    public void pressedAddAssessment(View view) {
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddAssessmentFragment());
-        fragmentTransaction.addToBackStack("addAssessmentView");
-        fragmentTransaction.commit();
-    }
-
-    public void pressedAddNote(View view) {
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new NotesFragment());
-        fragmentTransaction.addToBackStack("notesFragmentView");
-        fragmentTransaction.commit();
-    }
 
 }
