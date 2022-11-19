@@ -158,7 +158,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="pressedAddInstructor"
                 android:src="@android:drawable/ic_input_add" />
         </LinearLayout>
     </FrameLayout>
@@ -169,7 +168,6 @@
         android:layout_height="63dp"
         android:layout_marginStart="96dp"
         android:layout_marginTop="28dp"
-        android:onClick="pressedAddAssessment"
         android:src="@drawable/ic_assessment_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +179,6 @@
         android:layout_width="69dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:onClick="pressedAddNote"
         android:src="@drawable/ic_book_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
