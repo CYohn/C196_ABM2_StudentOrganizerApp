@@ -70,16 +70,23 @@
 
             <ImageButton
                 android:id="@+id/closeNoteBtn"
-                android:layout_width="177dp"
+                android:layout_width="123dp"
                 android:layout_height="match_parent"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
             <ImageButton
                 android:id="@+id/saveNoteBtn"
-                android:layout_width="212dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_save" />
+
+            <ImageButton
+                android:id="@+id/shareNoteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_share" />
 
         </LinearLayout>
 
