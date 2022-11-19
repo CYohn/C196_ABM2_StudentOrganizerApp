@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="UI.AddNewCourseFragment">
 
+    <TextView
+        android:id="@+id/chooseInstructorInstruction2"
+        android:layout_width="351dp"
+        android:layout_height="18dp"
+        android:text="@string/addAssociatedTermInstruction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
+
     <Space
         android:id="@+id/space2"
         android:layout_width="345dp"
@@ -166,44 +176,65 @@
         android:id="@+id/addAssessmentBtn"
         android:layout_width="67dp"
         android:layout_height="63dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/ic_assessment_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addAssessmentBtnLabel"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.555" />
 
     <ImageButton
         android:id="@+id/addNoteBtn"
         android:layout_width="69dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/ic_book_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/addAssessmentBtn"
         app:layout_constraintTop_toBottomOf="@+id/addNoteBtnLabel"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.542" />
 
     <TextView
         android:id="@+id/addAssessmentBtnLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="4dp"
         android:text="@string/addAssesmentsBtnLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
+        tools:layout_editor_absoluteY="421dp" />
 
     <TextView
         android:id="@+id/addNoteBtnLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/addNoteBtnLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
+        tools:layout_editor_absoluteY="421dp" />
+
+    <LinearLayout
+        android:id="@+id/associatedTermContainer"
+        android:layout_width="357dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/chooseInstructorInstruction2"
+        tools:layout_editor_absoluteX="1dp">
+
+        <Spinner
+            android:id="@+id/associatedTermSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/addAssociatedTermBtn"
+            android:layout_width="151dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_input_add" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
