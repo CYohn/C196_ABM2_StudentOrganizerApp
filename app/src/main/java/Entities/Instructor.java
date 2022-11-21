@@ -1,17 +1,29 @@
 package Entities;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "instructors")
+@Entity(tableName = "instructors",
+        primaryKeys = { "instructorId", "courseId" },
+        foreignKeys = {
+                @ForeignKey(entity = Course.class,
+                        parentColumns = "instructorId",
+                        childColumns = "courseId"),
+                @ForeignKey(entity = Instructor.class,
+                        parentColumns = "courseId",
+                        childColumns = "InstructorId")
+        })
 public class Instructor {
 
     @PrimaryKey(autoGenerate = true)
 
-    //private int instructorPrimaryKey;
+    //@PrimaryKey private int instructorPrimaryKey;
     private String instructorName;
     private String instructorEmail;
     private String instructorPhone;
+
+
 
     @Override
     public String toString() {
@@ -20,6 +32,12 @@ public class Instructor {
                 ", instructorEmail='" + instructorEmail + '\'' +
                 ", instructorPhone=" + instructorPhone +
                 '}';
+    }
+
+    public Instructor(String instructorName, String instructorEmail, String instructorPhone) {
+        this.instructorName = instructorName;
+        this.instructorEmail = instructorEmail;
+        this.instructorPhone = instructorPhone;
     }
 
     public String getInstructorName() {
