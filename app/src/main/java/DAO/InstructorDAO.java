@@ -12,7 +12,7 @@ import java.util.List;
 import Entities.Instructor;
 
 @Dao
-public interface instructorDAO {
+public interface InstructorDAO {
     @Insert(onConflict= OnConflictStrategy.IGNORE)
     void insert(Instructor instructor);
 
