@@ -14,11 +14,31 @@ public class Assessment {
     private String assessmentEndDate;
     private String assessmentStartDate;
 
-    public Assessment(String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate) {
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                ", assessmentId=" + assessmentId +
+                ", assessmentType=" + assessmentType +
+                ", assessmentTitle=" + assessmentTitle +
+                ", assessmentStartDate=" + assessmentStartDate +
+                ", assessmentEndDate='" + assessmentEndDate + '\'' +
+                '}';
+    }
+
+    public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate) {
+        this.assessmentId = assessmentId;
         this.assessmentType = assessmentType;
         this.assessmentTitle = assessmentTitle;
         this.assessmentEndDate = assessmentEndDate;
         this.assessmentStartDate = assessmentStartDate;
+    }
+
+    public int getAssessmentId() {
+        return assessmentId;
+    }
+
+    public void setAssessmentId(int assessmentId) {
+        this.assessmentId = assessmentId;
     }
 
     public String getAssessmentType() {

@@ -18,15 +18,17 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Instructor{" +
-                "courseTitle=" + courseTitle +
-                ", courseStartDate='" + courseStartDate + '\'' +
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseTitle=" + courseTitle +
                 ", courseEndDate=" + courseEndDate +
                 ", courseStatus=" + courseStatus +
+                ", courseStartDate='" + courseStartDate + '\'' +
                 '}';
     }
 
-    public Course(String courseTitle, Date courseStartDate, Date courseEndDate, String courseStatus) {
+    public Course(int courseId,  String courseTitle, Date courseStartDate, Date courseEndDate, String courseStatus) {
+        this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;

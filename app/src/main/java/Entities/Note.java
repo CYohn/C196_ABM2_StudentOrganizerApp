@@ -12,9 +12,27 @@ public class Note {
     private String noteDate;
     private String noteText;
 
-    public Note(String noteDate, String noteText) {
+    @Override
+    public String toString() {
+        return "Note{" +
+                "noteId=" + noteId +
+                ", noteDate=" + noteDate +
+                ", noteText='" + noteText + '\'' +
+                '}';
+    }
+
+    public Note(int noteId, String noteDate, String noteText) {
+        this.noteId = noteId;
         this.noteDate = noteDate;
         this.noteText = noteText;
+    }
+
+    public int getNoteId() {
+        return noteId;
+    }
+
+    public void setNoteId(int noteId) {
+        this.noteId = noteId;
     }
 
     public String getNoteDate() {

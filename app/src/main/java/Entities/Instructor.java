@@ -18,13 +18,15 @@ public class Instructor {
     @Override
     public String toString() {
         return "Instructor{" +
-                "instructorName=" + instructorName +
-                ", instructorEmail='" + instructorEmail + '\'' +
+                ", instructorId=" + instructorId +
+                ", instructorName=" + instructorName +
                 ", instructorPhone=" + instructorPhone +
+                ", instructorEmail='" + instructorEmail + '\'' +
                 '}';
     }
 
-    public Instructor(String instructorName, String instructorEmail, String instructorPhone) {
+    public Instructor(int instructorId, String instructorName, String instructorEmail, String instructorPhone) {
+        this.instructorId = instructorId;
         this.instructorName = instructorName;
         this.instructorEmail = instructorEmail;
         this.instructorPhone = instructorPhone;

@@ -8,15 +8,34 @@ import androidx.room.PrimaryKey;
 public class Term {
 
     @PrimaryKey(autoGenerate = true)
-    private int termsId;
+    private int termId;
     private String termTitle;
     private String termEndDate;
     private String termStartDate;
 
-    public Term(String termTitle, String termEndDate, String termStartDate) {
+    @Override
+    public String toString() {
+        return "Term{" +
+                "termId=" + termId +
+                ", termTitle=" + termTitle +
+                ", termStartDate=" + termStartDate +
+                ", termEndDate='" + termEndDate + '\'' +
+                '}';
+    }
+
+    public Term(int termId, String termTitle, String termEndDate, String termStartDate) {
+        this.termId = termId;
         this.termTitle = termTitle;
         this.termEndDate = termEndDate;
         this.termStartDate = termStartDate;
+    }
+
+    public int getTermId() {
+        return termId;
+    }
+
+    public void setTermId(int termId) {
+        this.termId = termId;
     }
 
     public String getTermTitle() {
