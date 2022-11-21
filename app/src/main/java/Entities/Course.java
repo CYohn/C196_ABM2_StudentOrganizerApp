@@ -9,7 +9,7 @@ import java.util.Date;
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
-
+    private int  courseId;
     private String courseTitle;
     private Date courseStartDate;
     private Date courseEndDate;

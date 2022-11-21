@@ -8,7 +8,7 @@ public class Instructor {
 
     @PrimaryKey(autoGenerate = true)
 
-    //@PrimaryKey private int instructorPrimaryKey;
+    private int instructorId;
     private String instructorName;
     private String instructorEmail;
     private String instructorPhone;

@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class Assessment {
 
     @PrimaryKey(autoGenerate = true)
+    private int assessmentId;
     private String assessmentType;
     private String assessmentTitle;
     private String assessmentEndDate;

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Note {
 
     @PrimaryKey(autoGenerate = true)
-
+    private int noteId;
     private String noteDate;
     private String noteText;
 

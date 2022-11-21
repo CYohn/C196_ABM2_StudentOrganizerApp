@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class Term {
 
     @PrimaryKey(autoGenerate = true)
+    private int termsId;
     private String termTitle;
     private String termEndDate;
     private String termStartDate;

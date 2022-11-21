@@ -3,6 +3,7 @@ package Database;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
@@ -17,11 +18,10 @@ import Entities.Instructor;
 import Entities.Note;
 import Entities.Term;
 
-public abstract class StudentOrganizerDatabaseBuilder {
 
+@Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class}, version=1, exportSchema = false)
 
-    @Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class}, version=1, exportSchema = false)
-    public abstract static class StudentOrganizerDatabaseBuilder extends RoomDatabase {
+    public abstract class StudentOrganizerDatabaseBuilder extends RoomDatabase {
         public abstract AssessmentDAO assessmentDAO();
         public abstract CourseDAO courseDAO();
         public abstract InstructorDAO instructorDAO();
@@ -43,4 +43,4 @@ public abstract class StudentOrganizerDatabaseBuilder {
             return INSTANCE;
         }
     }
-}
+
