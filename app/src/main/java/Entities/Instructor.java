@@ -1,19 +1,9 @@
 package Entities;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "instructors",
-        primaryKeys = { "instructorId", "courseId" },
-        foreignKeys = {
-                @ForeignKey(entity = Course.class,
-                        parentColumns = "instructorId",
-                        childColumns = "courseId"),
-                @ForeignKey(entity = Instructor.class,
-                        parentColumns = "courseId",
-                        childColumns = "InstructorId")
-        })
+@Entity(tableName = "instructors")
 public class Instructor {
 
     @PrimaryKey(autoGenerate = true)
