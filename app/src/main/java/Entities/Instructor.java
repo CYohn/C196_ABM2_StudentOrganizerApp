@@ -32,6 +32,14 @@ public class Instructor {
         this.instructorPhone = instructorPhone;
     }
 
+    public int getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
     public String getInstructorName() {
         return instructorName;
     }

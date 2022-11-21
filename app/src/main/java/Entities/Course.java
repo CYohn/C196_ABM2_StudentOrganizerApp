@@ -3,16 +3,14 @@ package Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "courses")
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
     private int  courseId;
     private String courseTitle;
-    private Date courseStartDate;
-    private Date courseEndDate;
+    private String courseStartDate;
+    private String courseEndDate;
     private String courseStatus;
 
 
@@ -27,12 +25,21 @@ public class Course {
                 '}';
     }
 
-    public Course(int courseId,  String courseTitle, Date courseStartDate, Date courseEndDate, String courseStatus) {
+    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
+    }
+
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getCourseTitle() {
@@ -43,19 +50,19 @@ public class Course {
         this.courseTitle = courseTitle;
     }
 
-    public Date getCourseStartDate() {
+    public String getCourseStartDate() {
         return courseStartDate;
     }
 
-    public void setCourseStartDate(Date courseStartDate) {
+    public void setCourseStartDate(String courseStartDate) {
         this.courseStartDate = courseStartDate;
     }
 
-    public Date getCourseEndDate() {
+    public String getCourseEndDate() {
         return courseEndDate;
     }
 
-    public void setCourseEndDate(Date courseEndDate) {
+    public void setCourseEndDate(String courseEndDate) {
         this.courseEndDate = courseEndDate;
     }
 
