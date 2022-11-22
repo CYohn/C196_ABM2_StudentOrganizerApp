@@ -52,6 +52,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
             return mAllAssessments;
         }
@@ -64,6 +66,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             }catch(InterruptedException e){
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
 
         }
@@ -75,6 +79,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void delete(Assessment assessment){
@@ -85,6 +91,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
 
@@ -98,6 +106,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
             return mAllCourses;
         }
@@ -109,6 +119,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void update(Course course){
@@ -119,6 +131,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void delete(Course course){
@@ -129,6 +143,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
 
@@ -143,6 +159,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
             return mAllInstructors;
         }
@@ -154,6 +172,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void update(Instructor instructor){
@@ -164,6 +184,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void delete(Instructor instructor){
@@ -174,6 +196,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
 
@@ -187,6 +211,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
             return mAllNotes;
         }
@@ -198,6 +224,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void update(Note note){
@@ -208,6 +236,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void delete(Note note){
@@ -218,6 +248,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
 
@@ -231,6 +263,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
             return mAllTerms;
         }
@@ -242,6 +276,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void update(Term term){
@@ -252,6 +288,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
         public void delete(Term term){
@@ -262,6 +300,8 @@ public class RepositoryForStudentOrganizer {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                e.getCause();
+                e.getMessage();
             }
         }
     }
