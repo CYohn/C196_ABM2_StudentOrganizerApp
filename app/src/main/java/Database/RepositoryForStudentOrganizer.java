@@ -19,7 +19,7 @@ import Entities.Term;
 
 public class RepositoryForStudentOrganizer {
 
-    public class Repository {
+    public static class Repository {
         private AssessmentDAO mAssessmentDAO;
         private CourseDAO mCourseDAO;
         private InstructorDAO mInstructorDAO;
