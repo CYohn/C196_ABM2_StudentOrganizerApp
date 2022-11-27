@@ -28,10 +28,15 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
 
 
     class TermsViewHolder extends RecyclerView.ViewHolder{
-       private final TextView ListItemView;
+       private final TextView DBTermTitle;
+       private final TextView DBTermStartDate;
+       private final TextView DBTermEndDate;
        private TermsViewHolder(View itemView){
            super(itemView);
-           ListItemView = itemView.findViewById(R.id.list_item);
+           DBTermTitle = itemView.findViewById(R.id.dbTermTitle);
+           DBTermStartDate = itemView.findViewById(R.id.dbTermStartDate);
+           DBTermEndDate = itemView.findViewById(R.id.dbTermEndDate);
+
            itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -55,7 +60,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
     @NonNull
     @Override
     public TermsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView=mInflator.inflate(R.layout.list_item_layout,parent,false);
+        View itemView=mInflator.inflate(R.layout.term_list_item_layout,parent,false);
         return new TermsViewHolder(itemView);
     }
 
@@ -65,10 +70,16 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
         if(mTerms!=null){
             Term selectedTerm=mTerms.get(position);
             String name=selectedTerm.getTermTitle();
-            holder.ListItemView.setText(name);
+            String startDate = selectedTerm.getTermStartDate();
+            String endDate = selectedTerm.getTermEndDate();
+            holder.DBTermTitle.setText(name);
+            holder.DBTermStartDate.setText(startDate);
+            holder.DBTermEndDate.setText(endDate);
         }
         else{
-            holder.ListItemView.setText("No term name");
+            holder.DBTermTitle.setText("No Term Available");
+            holder.DBTermStartDate.setText("N/A");
+            holder.DBTermEndDate.setText("N/A");
         }
     }
     public void setTerms(List<Term> terms){

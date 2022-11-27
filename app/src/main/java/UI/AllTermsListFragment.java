@@ -69,7 +69,6 @@ public class AllTermsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //RecyclerView recyclerView = getView().findViewById(R.id.termRecyclerView);
         return inflater.inflate(R.layout.fragment_all_terms_list, container, false);
     }
 
