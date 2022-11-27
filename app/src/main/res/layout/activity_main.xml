@@ -37,7 +37,7 @@
         android:id="@+id/bookImage"
         android:layout_width="261dp"
         android:layout_height="218dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/bookIconDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,27 +48,27 @@
         android:id="@+id/allCoursesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/coursesBtn"
         android:onClick="allCoursesBtn"
+        android:text="@string/coursesBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allTermsBtn"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.038" />
 
     <Button
         android:id="@+id/allAssessmentsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/assessmentsBtn"
         android:onClick="allAssessmentsBtn"
+        android:text="@string/assessmentsBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allCoursesBtn"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
