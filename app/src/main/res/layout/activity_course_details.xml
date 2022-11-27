@@ -6,4 +6,178 @@
     android:layout_height="match_parent"
     tools:context="UI.CourseDetailsActivity">
 
+    <TableLayout
+        android:layout_width="358dp"
+        android:layout_height="509dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/courseTitleRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/courseTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseTitleLabel"
+                tools:text="@string/courseTitleLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/courseTitleTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/courseStartRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/courseStartLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseStartLabel"
+                tools:text="@string/courseStartLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/courseStartTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/courseEndRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/courseEndLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseEndLabel"
+                tools:text="@string/courseEndLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/courseEndTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/courseStatusRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/courseStatusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                tools:text="@string/courseStatusLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/courseStatusTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/courseInstructorRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/courseInstructorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseInstructorLabel"
+                tools:text="@string/courseInstructorLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/courseInstructorTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/buttonsRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/notesBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/addNoteBtnLabel"
+                app:srcCompat="@drawable/ic_book_foreground" />
+
+            <ImageButton
+                android:id="@+id/alertBtn"
+                android:layout_width="121dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/alertBtn"
+                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+            <ImageButton
+                android:id="@+id/editBtn"
+                android:layout_width="87dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/editBtn"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

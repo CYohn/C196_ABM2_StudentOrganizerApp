@@ -12,6 +12,7 @@ public class Course {
     private String courseStartDate;
     private String courseEndDate;
     private String courseStatus;
+    private String courseInstructor;
 
 
     @Override
@@ -21,22 +22,22 @@ public class Course {
                 ", courseTitle=" + courseTitle +
                 ", courseEndDate=" + courseEndDate +
                 ", courseStatus=" + courseStatus +
+                ", courseInstructor=" + courseInstructor +
                 ", courseStartDate='" + courseStartDate + '\'' +
                 '}';
     }
 
-    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus) {
+    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
+        this.courseInstructor = courseInstructor;
     }
 
 
-    public int getCourseId() {
-        return courseId;
-    }
+    public int getCourseId() {return courseId;}
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
@@ -54,9 +55,7 @@ public class Course {
         return courseStartDate;
     }
 
-    public void setCourseStartDate(String courseStartDate) {
-        this.courseStartDate = courseStartDate;
-    }
+    public void setCourseStartDate(String courseStartDate) {this.courseStartDate = courseStartDate;}
 
     public String getCourseEndDate() {
         return courseEndDate;
@@ -73,4 +72,9 @@ public class Course {
     public void setCourseStatus(String courseStatus) {
         this.courseStatus = courseStatus;
     }
+
+    public String getCourseInstructor() {return courseInstructor;}
+
+    public void setCourseInstructor(String courseInstructor) {this.courseInstructor = courseInstructor;}
 }
+

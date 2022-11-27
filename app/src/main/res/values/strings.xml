@@ -140,4 +140,12 @@
     <string name="termStartDateLabel" />
     <string name="termEndDateLabel">Term End Date</string>
     <string name="coursesThisTermLabel">Courses This Term</string>
+    <string name="courseTitleLabel">Course Title</string>
+    <string name="courseStartLabel">Start Date</string>
+    <string name="courseEndLabel">End Date</string>
+    <string name="courseStatusLabel">Status</string>
+    <string name="courseInstructorLabel">Instructor</string>
+    <string name="noteBtnLabel">Notes Button</string>
+    <string name="alertBtn">Associated Alerts Button</string>
+    <string name="editBtn">Edit Course Information</string>
 </resources>

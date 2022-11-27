@@ -77,7 +77,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
             holder.DBTermEndDate.setText(endDate);
         }
         else{
-            holder.DBTermTitle.setText("No Term Available");
+            holder.DBTermTitle.setText("No Term Found");
             holder.DBTermStartDate.setText("N/A");
             holder.DBTermEndDate.setText("N/A");
         }
