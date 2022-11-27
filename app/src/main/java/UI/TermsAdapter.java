@@ -16,20 +16,20 @@ import java.util.List;
 
 import Entities.Term;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHolder> {
 
     private List<Term>mTerms;
     private final Context context;
     private final LayoutInflater mInflator;
-    private Adapter(Context context){
+    TermsAdapter(Context context){
         mInflator= LayoutInflater.from(context);
         this.context=context;
     }
 
-    
-    class ViewHolder extends RecyclerView.ViewHolder{
+
+    class TermsViewHolder extends RecyclerView.ViewHolder{
        private final TextView ListItemView;
-       private ViewHolder(View itemView){
+       private TermsViewHolder(View itemView){
            super(itemView);
            ListItemView = itemView.findViewById(R.id.list_item);
            itemView.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +51,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
 
-
+    //Inflate the list item
     @NonNull
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TermsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView=mInflator.inflate(R.layout.list_item_layout,parent,false);
-        return new ViewHolder(itemView);
+        return new TermsViewHolder(itemView);
     }
 
+    //Put things on the text view
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TermsViewHolder holder, int position) {
         if(mTerms!=null){
             Term selectedTerm=mTerms.get(position);
             String name=selectedTerm.getTermTitle();

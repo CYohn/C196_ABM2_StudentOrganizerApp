@@ -26,35 +26,13 @@
         app:layout_constraintBottom_toTopOf="@+id/termRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseTopSpace">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Switch
-                android:id="@+id/currentOnlySwitch"
-                android:layout_width="136dp"
-                android:layout_height="52dp"
-                android:text="@string/currentOnlySwitchLabel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.939"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.473"
-                tools:text="@string/currentOnlySwitchLabel" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/courseTopSpace"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/termRecyclerView"
         android:layout_width="403dp"
         android:layout_height="537dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="3dp"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
