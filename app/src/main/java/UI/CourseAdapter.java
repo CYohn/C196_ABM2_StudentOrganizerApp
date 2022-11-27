@@ -73,8 +73,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseAdapter.CourseViewHolder holder, int position) {
         if(mCourses!=null){
-            Course selectedCourse=mCourses.get(position);
-            String name=selectedCourse.getCourseTitle();
+            Course selectedCourse = mCourses.get(position);
+            String name = selectedCourse.getCourseTitle();
             String startDate = selectedCourse.getCourseStartDate();
             String endDate = selectedCourse.getCourseEndDate();
             String instructor = selectedCourse.getCourseInstructor();

@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/termRecyclerView"
+            android:id="@+id/courseRecyclerView"
             android:layout_width="390dp"
             android:layout_height="559dp"
             android:layout_marginTop="127dp"
@@ -33,7 +33,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="396dp"
             android:layout_height="61dp"
-            app:layout_constraintBottom_toTopOf="@+id/termRecyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/courseRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
