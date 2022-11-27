@@ -135,4 +135,9 @@
     <string name="dateLabel">Date</string>
     <string name="instructorEmail">Email</string>
     <string name="instructorPhone">Phone</string>
+    <string name="title_activity_term_detail">TermDetailActivity</string>
+    <string name="termTitleLabel">Term Title</string>
+    <string name="termStartDateLabel" />
+    <string name="termEndDateLabel">Term End Date</string>
+    <string name="coursesThisTermLabel">Courses This Term</string>
 </resources>
