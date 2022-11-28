@@ -27,4 +27,6 @@ public interface CourseDAO {
     @Query("SELECT * FROM COURSES ORDER BY courseStartDate DESC")
     List<Course> getAllCourses();
 
+    //@Query("SELECT * FROM COURSES WHERE TERMID = termId ORDER BY courseStartDate DESC")
+
 }

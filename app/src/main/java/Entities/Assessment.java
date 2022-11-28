@@ -13,6 +13,7 @@ public class Assessment {
     private String assessmentTitle;
     private String assessmentEndDate;
     private String assessmentStartDate;
+    private int associatedCourseId;
 
     @Override
     public String toString() {
@@ -21,16 +22,18 @@ public class Assessment {
                 ", assessmentType=" + assessmentType +
                 ", assessmentTitle=" + assessmentTitle +
                 ", assessmentStartDate=" + assessmentStartDate +
-                ", assessmentEndDate='" + assessmentEndDate + '\'' +
+                ", assessmentEndDate='" + assessmentEndDate +
+                ", associatedCourseId='" + associatedCourseId + '\'' +
                 '}';
     }
 
-    public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate) {
+    public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate, int associatedCourseId) {
         this.assessmentId = assessmentId;
         this.assessmentType = assessmentType;
         this.assessmentTitle = assessmentTitle;
         this.assessmentEndDate = assessmentEndDate;
         this.assessmentStartDate = assessmentStartDate;
+        this.associatedCourseId = associatedCourseId;
     }
 
     public int getAssessmentId() {

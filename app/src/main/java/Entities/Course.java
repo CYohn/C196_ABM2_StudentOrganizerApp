@@ -13,6 +13,7 @@ public class Course {
     private String courseEndDate;
     private String courseStatus;
     private String courseInstructor;
+    private int associatedTermId;
 
 
     @Override
@@ -24,18 +25,23 @@ public class Course {
                 ", courseStatus=" + courseStatus +
                 ", courseInstructor=" + courseInstructor +
                 ", courseStartDate='" + courseStartDate + '\'' +
+                ", associatedTerm='" + associatedTermId + '\'' +
                 '}';
     }
 
-    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor) {
+    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor, int associatedTermId) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
         this.courseInstructor = courseInstructor;
+        this.associatedTermId = associatedTermId;
     }
 
+    public int getAssociatedTermId() {return associatedTermId;}
+
+    public void setAssociatedTermId(int associatedTermId) {this.associatedTermId = associatedTermId;}
 
     public int getCourseId() {return courseId;}
 

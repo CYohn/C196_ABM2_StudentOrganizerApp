@@ -11,21 +11,29 @@ public class Note {
     private int noteId;
     private String noteDate;
     private String noteText;
+    private int associatedCourseId;
 
     @Override
     public String toString() {
         return "Note{" +
                 "noteId=" + noteId +
                 ", noteDate=" + noteDate +
-                ", noteText='" + noteText + '\'' +
+                ", noteText='" + noteText +
+                ", associatedCourseId='" + associatedCourseId + '\'' +
                 '}';
     }
 
-    public Note(int noteId, String noteDate, String noteText) {
+    public Note(int noteId, String noteDate, String noteText, int associatedCourseId) {
         this.noteId = noteId;
         this.noteDate = noteDate;
         this.noteText = noteText;
+        this.associatedCourseId=associatedCourseId;
     }
+
+
+    public int getAssociatedCourseId() {return associatedCourseId;}
+
+    public void setAssociatedCourseId(int associatedCourseId) {this.associatedCourseId = associatedCourseId;}
 
     public int getNoteId() {
         return noteId;
