@@ -14,7 +14,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/assessmentFragmentContainerView"
-        android:name="UI.AllTermsListFragment"
+        android:name="UI.AllAssessmentsListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="45dp"
@@ -40,8 +40,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="pressedListAllAssessmentsBtn"
-            android:text="@string/listAllTermsBtnTxt"
-            tools:text="@string/listAllTermsBtnTxt" />
+            android:text="@string/listAllAssessmentsBtn"
+            tools:text="@string/listAllAssessmentsBtn" />
 
         <Button
             android:id="@+id/openAddAssessmentFragBtn"

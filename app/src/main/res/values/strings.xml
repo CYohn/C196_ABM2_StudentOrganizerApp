@@ -148,4 +148,7 @@
     <string name="noteBtnLabel">Notes Button</string>
     <string name="alertBtn">Associated Alerts Button</string>
     <string name="editBtn">Edit Course Information</string>
+    <string name="assessmentTitleLabel">Assessment Title</string>
+    <string name="assessmentTypeLabel">Type</string>
+    <string name="listAllAssessmentsBtn">List All</string>
 </resources>

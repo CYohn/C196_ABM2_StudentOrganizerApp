@@ -14,33 +14,33 @@
         android:theme="@style/Theme.C196_ABM2_Charity_Yohn"
         tools:targetApi="31">
         <activity
-            android:name=".AssessmentDetailsActivity"
+            android:name="UI.AssessmentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".CourseDetailsActivity"
+            android:name="UI.CourseDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".TermDetailsActivity"
+            android:name="UI.TermDetailsActivity"
             android:exported="false"
             android:label="Term Details"
-            android:parentActivityName=".TermsActivity" />
+            android:parentActivityName="UI.TermsActivity" />
         <activity
-            android:name=".TermsActivity"
+            android:name="UI.TermsActivity"
             android:exported="false"
             android:label="Terms"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="UI.MainActivity" />
         <activity
-            android:name=".AssessmentsActivity"
+            android:name="UI.AssessmentsActivity"
             android:exported="false"
             android:label="Assessments"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="UI.MainActivity" />
         <activity
-            android:name=".CourseActivity"
+            android:name="UI.CourseActivity"
             android:exported="false"
             android:label="Courses"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="UI.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

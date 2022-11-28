@@ -1,9 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="UI.AssessmentDetailsActivity">
+    tools:context="UI.CourseDetailsActivity">
 
+    <TableLayout
+        android:layout_width="358dp"
+        android:layout_height="509dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/assessmentTitleRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assessmentTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/assessmentTitleLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"
+                tools:text="@string/assessmentTitleLabel" />
+
+            <TextView
+                android:id="@+id/assessmentTitleTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/assessmentStartRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assessmentStartLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseStartLabel"
+                tools:text="@string/courseStartLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/assessmentStartTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/assessmentEndRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assessmentEndLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/courseEndLabel"
+                tools:text="@string/courseEndLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/assessmentEndTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/assessmentStatusRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assessmentStatusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                tools:text="@string/courseStatusLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+
+            <TextView
+                android:id="@+id/assessmentStatusTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/assessmentTypeRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assessmentTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/assessmentTypeLabel"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"
+                tools:text="@string/assessmentTypeLabel" />
+
+            <TextView
+                android:id="@+id/assessmentTypeTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:lineHeight="10dp"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/assessmentButtonsRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/notesBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/addNoteBtnLabel"
+                app:srcCompat="@drawable/ic_book_foreground" />
+
+            <ImageButton
+                android:id="@+id/assessmentAlertBtn"
+                android:layout_width="78dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/alertBtn"
+                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+            <ImageButton
+                android:id="@+id/assessmentEditBtn"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/editBtn"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

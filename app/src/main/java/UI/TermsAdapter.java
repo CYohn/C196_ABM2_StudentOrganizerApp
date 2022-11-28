@@ -31,6 +31,8 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
        private final TextView DBTermTitle;
        private final TextView DBTermStartDate;
        private final TextView DBTermEndDate;
+
+
        private TermsViewHolder(View itemView){
            super(itemView);
            DBTermTitle = itemView.findViewById(R.id.dbTermTitle);
@@ -41,7 +43,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
                @Override
                public void onClick(View view) {
                    int position=getAdapterPosition();
-                   final Term selectedTerm=mTerms.get(position);
+                   final Term selectedTerm = mTerms.get(position);
                    Intent intent = new Intent(context,TermDetailsActivity.class);
 
                    intent.putExtra("termTitleView", selectedTerm.getTermTitle());
@@ -60,7 +62,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
     @NonNull
     @Override
     public TermsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView=mInflator.inflate(R.layout.term_list_item_layout,parent,false);
+        View itemView = mInflator.inflate(R.layout.term_list_item_layout,parent,false);
         return new TermsViewHolder(itemView);
     }
 
@@ -68,8 +70,8 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
     @Override
     public void onBindViewHolder(@NonNull TermsViewHolder holder, int position) {
         if(mTerms!=null){
-            Term selectedTerm=mTerms.get(position);
-            String name=selectedTerm.getTermTitle();
+            Term selectedTerm = mTerms.get(position);
+            String name = selectedTerm.getTermTitle();
             String startDate = selectedTerm.getTermStartDate();
             String endDate = selectedTerm.getTermEndDate();
             holder.DBTermTitle.setText(name);

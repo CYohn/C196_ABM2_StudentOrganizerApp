@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/assessmentTitleItemView"
+            android:id="@+id/dbAssessmentTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,7 +32,7 @@
             android:layout_margin="10dp"/>
 
         <TextView
-            android:id="@+id/assessmentStartItemView"
+            android:id="@+id/dbAssessmentStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
             android:layout_margin="10dp"/>
 
         <TextView
-            android:id="@+id/assessmentEndItemView"
+            android:id="@+id/dbAssessmentEndDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
             android:layout_margin="10dp"/>
 
         <TextView
-            android:id="@+id/assessmentTypeItemView"
+            android:id="@+id/dbAssessmentType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
