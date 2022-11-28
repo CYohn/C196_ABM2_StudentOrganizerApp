@@ -36,6 +36,14 @@ public class Assessment {
         this.associatedCourseId = associatedCourseId;
     }
 
+    public int getAssociatedCourseId() {
+        return associatedCourseId;
+    }
+
+    public void setAssociatedCourseId(int associatedCourseId) {
+        this.associatedCourseId = associatedCourseId;
+    }
+
     public int getAssessmentId() {
         return assessmentId;
     }
