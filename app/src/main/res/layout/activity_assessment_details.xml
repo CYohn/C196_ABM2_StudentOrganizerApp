@@ -35,8 +35,8 @@
                 app:lineHeight="10dp"
                 tools:text="@string/assessmentTitleLabel" />
 
-            <TextView
-                android:id="@+id/assessmentTitleTxtView"
+            <EditText
+                android:id="@+id/assessmentTitleEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -62,8 +62,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/assessmentStartTxtView"
+            <EditText
+                android:id="@+id/assessmentStartEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -89,8 +89,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/assessmentEndTxtView"
+            <EditText
+                android:id="@+id/assessmentEndEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -116,8 +116,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/assessmentStatusTxtView"
+            <EditText
+                android:id="@+id/assessmentStatusEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -143,8 +143,8 @@
                 app:lineHeight="10dp"
                 tools:text="@string/assessmentTypeLabel" />
 
-            <TextView
-                android:id="@+id/assessmentTypeTxtView"
+            <EditText
+                android:id="@+id/assessmentTypeEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

@@ -34,8 +34,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/courseTitleTxtView"
+            <EditText
+                android:id="@+id/courseTitleEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -61,8 +61,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/courseStartTxtView"
+            <EditText
+                android:id="@+id/courseStartEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -88,8 +88,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/courseEndTxtView"
+            <EditText
+                android:id="@+id/courseEndEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -115,8 +115,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/courseStatusTxtView"
+            <EditText
+                android:id="@+id/courseStatusEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -142,8 +142,8 @@
                 android:textSize="20sp"
                 app:lineHeight="10dp"/>
 
-            <TextView
-                android:id="@+id/courseInstructorTxtView"
+            <EditText
+                android:id="@+id/courseInstructorEditTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
