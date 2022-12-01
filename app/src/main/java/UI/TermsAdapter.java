@@ -46,9 +46,9 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
                    final Term selectedTerm = mTerms.get(position);
                    Intent intent = new Intent(context,TermDetailsActivity.class);
 
-                   intent.putExtra("termTitleView", selectedTerm.getTermTitle());
-                   intent.putExtra("termStartDateView", selectedTerm.getTermStartDate());
-                   intent.putExtra("termEndDateView", selectedTerm.getTermEndDate());
+                   intent.putExtra("termTitleValue", selectedTerm.getTermTitle());
+                   intent.putExtra("termStartDateValue", selectedTerm.getTermStartDate());
+                   intent.putExtra("termEndDateValue", selectedTerm.getTermEndDate());
                    context.startActivity(intent);
 
 
@@ -67,16 +67,17 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
     }
 
     //Put things on the text view
+
     @Override
     public void onBindViewHolder(@NonNull TermsViewHolder holder, int position) {
         if(mTerms!=null){
             Term selectedTerm = mTerms.get(position);
-            String name = selectedTerm.getTermTitle();
-            String startDate = selectedTerm.getTermStartDate();
-            String endDate = selectedTerm.getTermEndDate();
-            holder.DBTermTitle.setText(name);
-            holder.DBTermStartDate.setText(startDate);
-            holder.DBTermEndDate.setText(endDate);
+            String nameValue = selectedTerm.getTermTitle();
+            String startDateValue = selectedTerm.getTermStartDate();
+            String endDateValue = selectedTerm.getTermEndDate();
+            holder.DBTermTitle.setText(nameValue);
+            holder.DBTermStartDate.setText(startDateValue);
+            holder.DBTermEndDate.setText(endDateValue);
         }
         else{
             holder.DBTermTitle.setText("No Term Found");

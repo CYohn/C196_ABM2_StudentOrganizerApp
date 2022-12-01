@@ -8,10 +8,10 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="411dp"
-        android:layout_height="300dp"
+        android:layout_width="352dp"
+        android:layout_height="228dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/coursesThisTermLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,7 +21,7 @@
         <TableRow
             android:id="@+id/termTitleRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/termTitleLabel"
@@ -37,7 +37,7 @@
 
             <EditText
                 android:id="@+id/termTitleEditTxt"
-                android:layout_width="wrap_content"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginHorizontal="10dp"
@@ -51,7 +51,7 @@
         <TableRow
             android:id="@+id/termStartDateRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/termStartDateLabel"
@@ -81,7 +81,7 @@
         <TableRow
             android:id="@+id/termEndDateRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/TermEndDateLabel"
@@ -112,23 +112,22 @@
 
     <TextView
         android:id="@+id/coursesThisTermLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="174dp"
+        android:layout_height="30dp"
         android:layout_marginTop="326dp"
         android:text="@string/coursesThisTermLabel"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tableLayout"
         tools:text="@string/coursesThisTermLabel" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="412dp"
-        android:layout_height="431dp"
+        android:layout_width="317dp"
+        android:layout_height="190dp"
         android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
