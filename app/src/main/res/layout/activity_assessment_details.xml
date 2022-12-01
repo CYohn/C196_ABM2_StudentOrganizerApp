@@ -5,11 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:label="Assessment Details"
     tools:context="UI.CourseDetailsActivity">
 
+
     <TableLayout
-        android:layout_width="358dp"
-        android:layout_height="509dp"
+        android:layout_width="381dp"
+        android:layout_height="591dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -22,12 +24,12 @@
         <TableRow
             android:id="@+id/assessmentTitleRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/assessmentTitleLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_margin="20dp"
                 android:text="@string/assessmentTitleLabel"
                 android:textAlignment="center"
@@ -43,7 +45,7 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp" />
         </TableRow>
 
         <TableRow
@@ -57,10 +59,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:text="@string/courseStartLabel"
-                tools:text="@string/courseStartLabel"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp"
+                tools:text="@string/courseStartLabel" />
 
             <EditText
                 android:id="@+id/assessmentStartEditTxt"
@@ -70,7 +72,7 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp" />
         </TableRow>
 
         <TableRow
@@ -84,10 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:text="@string/courseEndLabel"
-                tools:text="@string/courseEndLabel"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp"
+                tools:text="@string/courseEndLabel" />
 
             <EditText
                 android:id="@+id/assessmentEndEditTxt"
@@ -97,35 +99,9 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp" />
         </TableRow>
 
-        <TableRow
-            android:id="@+id/assessmentStatusRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/assessmentStatusLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="TextView"
-                tools:text="@string/courseStatusLabel"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:lineHeight="10dp"/>
-
-            <EditText
-                android:id="@+id/assessmentStatusEditTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:lineHeight="10dp"/>
-        </TableRow>
 
         <TableRow
             android:id="@+id/assessmentTypeRow"
@@ -151,17 +127,17 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:lineHeight="10dp"/>
+                app:lineHeight="10dp" />
         </TableRow>
 
         <TableRow
             android:id="@+id/assessmentButtonsRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/notesBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="89dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/addNoteBtnLabel"
                 app:srcCompat="@drawable/ic_book_foreground" />

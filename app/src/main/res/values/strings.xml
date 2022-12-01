@@ -124,7 +124,7 @@
     <string name="addNoteBtnLabel">Add Note</string>
     <string name="performanceExamLabel">Performance</string>
     <string name="objectiveExamLabel">Objective</string>
-    <string name="typeLabel">Assessment Type</string>
+    <string name="typeLabel">Type</string>
     <string name="assessmentName">Assessment Name (Ex: Math Midterm)</string>
     <string name="startDate">Start Date</string>
     <string name="endDateLabel">End Date</string>
@@ -148,7 +148,7 @@
     <string name="noteBtnLabel">Notes Button</string>
     <string name="alertBtn">Associated Alerts Button</string>
     <string name="editBtn">Edit Course Information</string>
-    <string name="assessmentTitleLabel">Assessment Title</string>
+    <string name="assessmentTitleLabel">Title</string>
     <string name="assessmentTypeLabel">Type</string>
     <string name="listAllAssessmentsBtn">List All</string>
 </resources>
