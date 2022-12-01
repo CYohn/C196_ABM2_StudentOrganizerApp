@@ -151,4 +151,6 @@
     <string name="assessmentTitleLabel">Title</string>
     <string name="assessmentTypeLabel">Type</string>
     <string name="listAllAssessmentsBtn">List All</string>
+    <string name="noteText">Note Text</string>
+    <string name="shareBtn">share</string>
 </resources>

@@ -4,12 +4,12 @@
     android:id="@+id/constraintLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:label="Notes"
+    android:label="All Notes"
     tools:context="UI.NotesFragment" >
 
     <LinearLayout
-        android:layout_width="354dp"
-        android:layout_height="508dp"
+        android:layout_width="350dp"
+        android:layout_height="493dp"
         android:layout_marginTop="3dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,50 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/noteDateTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date" />
-
-            <ImageButton
-                android:id="@+id/noteDateBtn"
-                android:layout_width="114dp"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_my_calendar" />
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notesRecyclerList"
-            android:layout_width="359dp"
-            android:layout_height="153dp" />
-
-        <Spinner
-            android:id="@+id/selectCourseSpinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <EditText
-            android:id="@+id/noteTitleInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <EditText
-            android:id="@+id/noteTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:layout_height="391dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,13 +40,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_save" />
-
-            <ImageButton
-                android:id="@+id/shareNoteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_share" />
 
         </LinearLayout>
 

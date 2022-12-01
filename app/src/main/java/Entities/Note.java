@@ -11,6 +11,7 @@ public class Note {
     private int noteId;
     private String noteDate;
     private String noteText;
+    private String noteTitle;
     private int associatedCourseId;
 
     @Override
@@ -19,17 +20,22 @@ public class Note {
                 "noteId=" + noteId +
                 ", noteDate=" + noteDate +
                 ", noteText='" + noteText +
+                ", noteTitle='" + noteTitle +
                 ", associatedCourseId='" + associatedCourseId + '\'' +
                 '}';
     }
 
-    public Note(int noteId, String noteDate, String noteText, int associatedCourseId) {
+    public Note(int noteId, String noteDate, String noteText, String noteTitle, int associatedCourseId) {
         this.noteId = noteId;
         this.noteDate = noteDate;
         this.noteText = noteText;
+        this.noteTitle = noteTitle;
         this.associatedCourseId=associatedCourseId;
     }
 
+    public String getNoteTitle() {return noteTitle;}
+
+    public void setNoteTitle(String noteTitle) {this.noteTitle = noteTitle;}
 
     public int getAssociatedCourseId() {return associatedCourseId;}
 

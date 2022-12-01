@@ -1,6 +1,9 @@
 package UI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,24 +32,43 @@ public class CourseDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_details);
 
 
-        courseTitleEditTxt=findViewById(R.id.courseTitleEditTxt);
-        courseStartDateEditTxt=findViewById(R.id.courseStartEditTxt);
-        courseEndDateEditTxt=findViewById(R.id.courseEndEditTxt);
-        courseStatusEditTxt=findViewById(R.id.courseStatusEditTxt);
-        courseInstructorEditTxt=findViewById(R.id.courseInstructorEditTxt);
+        courseTitleEditTxt = findViewById(R.id.courseTitleEditTxt);
+        courseStartDateEditTxt = findViewById(R.id.courseStartEditTxt);
+        courseEndDateEditTxt = findViewById(R.id.courseEndEditTxt);
+        courseStatusEditTxt = findViewById(R.id.courseStatusEditTxt);
+        courseInstructorEditTxt = findViewById(R.id.courseInstructorEditTxt);
 
-        courseName=getIntent().getStringExtra("courseTitleValue");
-        courseStartDate=getIntent().getStringExtra("courseStartValue");
-        courseEndDate=getIntent().getStringExtra("courseEndValue");
-        courseStatus=getIntent().getStringExtra("courseStatusValue");
-        courseInstructor=getIntent().getStringExtra("courseInstructorValue");
+        courseName = getIntent().getStringExtra("courseTitleValue");
+        courseStartDate = getIntent().getStringExtra("courseStartValue");
+        courseEndDate = getIntent().getStringExtra("courseEndValue");
+        courseStatus = getIntent().getStringExtra("courseStatusValue");
+        courseInstructor = getIntent().getStringExtra("courseInstructorValue");
 
         courseTitleEditTxt.setText(courseName);
         courseStartDateEditTxt.setText(courseStartDate);
         courseEndDateEditTxt.setText(courseEndDate);
         courseStatusEditTxt.setText(courseStatus);
         courseInstructorEditTxt.setText(courseInstructor);
+
+        Button notesBtn;
+        notesBtn = (Button) findViewById(R.id.notesBtn);
+        notesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CourseDetailsActivity.this, NotesActivity.class);
+                CourseDetailsActivity.this.startActivity(intent);
+            }
+        });
+
     }
 
 
+
+
+
+
+
+    public void assessmentsBtnPressed(View view) {
+    }
 }
+
