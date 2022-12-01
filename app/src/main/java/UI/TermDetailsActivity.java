@@ -12,9 +12,10 @@ public class TermDetailsActivity extends AppCompatActivity {
     EditText termTitleEditTxt;
     EditText termStartDateEditTxt;
     EditText termEndDateEditTxt;
-    String name;
-    String startDate;
-    String endDate;
+    String termName;
+    String termStartDate;
+    String termEndDate;
+
 
 
     @Override
@@ -25,13 +26,14 @@ public class TermDetailsActivity extends AppCompatActivity {
         termStartDateEditTxt=findViewById(R.id.termStartDateEditTxt);
         termEndDateEditTxt=findViewById(R.id.termEndDateEditTxt);
 
-        name=getIntent().getStringExtra("termTitleValue");
-        startDate=getIntent().getStringExtra("termStartDateValue");
-        endDate=getIntent().getStringExtra("termEndDateValue");
+        termName =getIntent().getStringExtra("courseTitleValue");
+        termStartDate =getIntent().getStringExtra("courseStartValue");
+        termEndDate =getIntent().getStringExtra("courseEndValue");
 
-        termTitleEditTxt.setText(name);
-        termStartDateEditTxt.setText(startDate);
-        termEndDateEditTxt.setText(endDate);
+        termTitleEditTxt.setText(termName);
+        termStartDateEditTxt.setText(termStartDate);
+        termEndDateEditTxt.setText(termEndDate);
+
 
     }
 }
