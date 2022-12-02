@@ -15,8 +15,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/assessmentFragmentContainerView"
         android:name="UI.AllAssessmentsListFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="285dp"
+        android:layout_height="338dp"
         android:layout_marginBottom="45dp"
         app:layout_constraintBottom_toTopOf="@+id/assessmentBtnsLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,12 +53,6 @@
             tools:ignore="OnClick"
             tools:text="@string/addAssesmentsBtnLabel" />
 
-        <Button
-            android:id="@+id/extraBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Button" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
