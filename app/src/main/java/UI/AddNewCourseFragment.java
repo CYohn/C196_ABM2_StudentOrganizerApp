@@ -91,7 +91,7 @@ public class AddNewCourseFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new NotesFragment());
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AllNotesFragment());
                 fragmentTransaction.addToBackStack("addNoteView");
                 fragmentTransaction.commit();
             }

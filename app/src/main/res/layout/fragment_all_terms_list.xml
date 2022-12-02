@@ -6,37 +6,48 @@
     android:layout_height="match_parent"
     tools:context="UI.AllTermsListFragment">
 
-    <Space
-        android:id="@+id/courseTopSpace"
-        android:layout_width="400dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="9dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTermFloatingAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        android:onClick="addNotePressed"
+        app:backgroundTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/termRecyclerView"
+        app:rippleColor="@color/teal_700"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="402dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
+    <FrameLayout
+        android:id="@+id/allTermsMenuHolder"
+        android:layout_width="358dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toTopOf="@+id/termRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseTopSpace"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/termRecyclerView"
-        android:layout_width="403dp"
-        android:layout_height="537dp"
+        android:layout_width="321dp"
+        android:layout_height="351dp"
         android:layout_margin="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/addTermFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/allTermsMenuHolder"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

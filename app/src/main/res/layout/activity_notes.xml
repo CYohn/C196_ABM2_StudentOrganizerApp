@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/notesActivityFragmentViewer"
-        android:name="UI.NotesFragment"
+        android:name="UI.AllNotesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"

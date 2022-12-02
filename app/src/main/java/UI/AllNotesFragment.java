@@ -18,16 +18,16 @@ import Database.RepositoryForStudentOrganizer;
 import Entities.Note;
 
 
-public class NotesFragment extends Fragment {
+public class AllNotesFragment extends Fragment {
 
 
-    public NotesFragment() {
+    public AllNotesFragment() {
         // Required empty public constructor
     }
 
 
-    public static NotesFragment newInstance(String param1, String param2) {
-        NotesFragment fragment = new NotesFragment();
+    public static AllNotesFragment newInstance(String param1, String param2) {
+        AllNotesFragment fragment = new AllNotesFragment();
         Bundle args = new Bundle();
 
         fragment.setArguments(args);
