@@ -15,8 +15,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/assessmentFragmentContainerView"
         android:name="UI.AllAssessmentsListFragment"
-        android:layout_width="285dp"
-        android:layout_height="338dp"
+        android:layout_width="388dp"
+        android:layout_height="644dp"
         android:layout_marginBottom="45dp"
         app:layout_constraintBottom_toTopOf="@+id/assessmentBtnsLayout"
         app:layout_constraintEnd_toEndOf="parent"
