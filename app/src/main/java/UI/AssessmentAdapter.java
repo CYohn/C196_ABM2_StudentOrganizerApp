@@ -37,10 +37,10 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
         private AssessmentViewHolder(View itemView){
             super(itemView);
-            DBAssessmentTitle = itemView.findViewById(R.id.dbAssessmentTitle);
-            DBAssessmentStartDate = itemView.findViewById(R.id.dbAssessmentStartDate);
-            DBAssessmentEndDate = itemView.findViewById(R.id.dbAssessmentEndDate);
-            DBAssessmentType = itemView.findViewById(R.id.dbAssessmentType);
+            DBAssessmentTitle = itemView.findViewById(R.id.assessmentTitleView);
+            DBAssessmentStartDate = itemView.findViewById(R.id.assessmentStartDateView);
+            DBAssessmentEndDate = itemView.findViewById(R.id.assessmentEndDateView);
+            DBAssessmentType = itemView.findViewById(R.id.assessmentTypeView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,7 +66,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
     @NonNull
     @Override
     public AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mInflator.inflate(R.layout.assessment_list_item_layout,parent,false);
+        View itemView = mInflator.inflate(R.layout.assessment_list_item,parent,false);
         return new AssessmentViewHolder(itemView);
     }
 
