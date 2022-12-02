@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:contentDescription="@string/addCourseBtnTxt"
         android:onClick="addNotePressed"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"

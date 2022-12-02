@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:label="All Notes"
+    android:label="@string/all_notes"
     tools:context="UI.AllNotesFragment" >
 
     <FrameLayout
@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:contentDescription="@string/todo"
         android:onClick="addNotePressed"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -154,4 +154,6 @@
     <string name="noteText">Note Text</string>
     <string name="shareBtn">share</string>
     <string name="notes">Notes</string>
+    <string name="all_notes">All Notes</string>
+    <string name="todo">TODO</string>
 </resources>
