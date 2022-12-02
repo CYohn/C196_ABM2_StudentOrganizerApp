@@ -7,9 +7,9 @@
     tools:context="UI.TermsActivity">
 
     <LinearLayout
-        android:id="@+id/assessmentFragmentViewer"
-        android:layout_width="409dp"
-        android:layout_height="750dp"
+        android:id="@+id/termsFragmentHolder"
+        android:layout_width="345dp"
+        android:layout_height="442dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
             android:id="@+id/termsFragmentContainerView"
             android:name="UI.AllTermsListFragment"
             android:layout_width="match_parent"
-            android:layout_height="736dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout

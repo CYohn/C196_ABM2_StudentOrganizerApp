@@ -40,7 +40,7 @@ public class AddTermFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.termsFragmentContainerView, new AddNewCourseFragment());
+                fragmentTransaction.replace(R.id.termsFragmentHolder, new AddNewCourseFragment());
                 fragmentTransaction.addToBackStack("addInstructorView");
                 fragmentTransaction.commit();
             }
@@ -51,7 +51,7 @@ public class AddTermFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.termsFragmentContainerView, new AllTermsListFragment());
+                fragmentTransaction.replace(R.id.termsFragmentHolder, new AllTermsListFragment());
                 fragmentTransaction.addToBackStack("addNoteView");
                 fragmentTransaction.commit();
             }
