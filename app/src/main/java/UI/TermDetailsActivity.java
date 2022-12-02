@@ -26,9 +26,9 @@ public class TermDetailsActivity extends AppCompatActivity {
         termStartDateEditTxt=findViewById(R.id.termStartDateEditTxt);
         termEndDateEditTxt=findViewById(R.id.termEndDateEditTxt);
 
-        termName =getIntent().getStringExtra("courseTitleValue");
-        termStartDate =getIntent().getStringExtra("courseStartValue");
-        termEndDate =getIntent().getStringExtra("courseEndValue");
+        termName =getIntent().getStringExtra("termTitleValue");
+        termStartDate =getIntent().getStringExtra("termStartDateValue");
+        termEndDate =getIntent().getStringExtra("termEndDateValue");
 
         termTitleEditTxt.setText(termName);
         termStartDateEditTxt.setText(termStartDate);
