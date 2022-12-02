@@ -38,34 +38,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <Button
-                android:id="@+id/listAllCoursesBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="pressedListAllCoursesBtn"
-                android:text="@string/listAllTermsBtnTxt"
-                tools:text="@string/listAllTermsBtnTxt" />
-
-            <Button
-                android:id="@+id/addCourseBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="pressedAddCourseBtn"
-                android:text="@string/addCourseBtnTxt"
-                tools:ignore="OnClick"
-                tools:text="@string/addCourseBtnTxt" />
-
-            <Button
-                android:id="@+id/button5Courses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
