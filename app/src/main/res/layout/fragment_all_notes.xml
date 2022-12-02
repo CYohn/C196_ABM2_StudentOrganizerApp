@@ -1,0 +1,38 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:label="All Notes"
+    tools:context="UI.NotesFragment" >
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNoteFloatingAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="addNotePressed"
+        app:backgroundTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notesRecyclerList"
+        app:rippleColor="@color/teal_700"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRecyclerList"
+        android:layout_width="351dp"
+        android:layout_height="384dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/addNoteFloatingAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

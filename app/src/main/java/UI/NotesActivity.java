@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,5 +58,13 @@ public class NotesActivity extends AppCompatActivity {
 
             default:return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void addNotePressed(View view) {
+        setContentView(R.layout.activity_notes);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.notesActivityFragmentViewer, new AddNoteFragment());
+        fragmentTransaction.addToBackStack("AddNoteFragment");
+        fragmentTransaction.commit();
     }
 }
