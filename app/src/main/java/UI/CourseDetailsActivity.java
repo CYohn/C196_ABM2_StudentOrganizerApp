@@ -70,5 +70,10 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
     public void assessmentsBtnPressed(View view) {
     }
+
+    public void notesBtnPressed(View view) {
+        Intent intent = new Intent(CourseDetailsActivity.this, NotesActivity.class);
+        startActivity(intent);
+    }
 }
 

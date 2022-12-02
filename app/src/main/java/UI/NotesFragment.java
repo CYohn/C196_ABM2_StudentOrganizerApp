@@ -5,9 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
+
+import java.util.List;
+
+import Database.RepositoryForStudentOrganizer;
+import Entities.Note;
 
 
 public class NotesFragment extends Fragment {
@@ -37,5 +45,16 @@ public class NotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        RecyclerView recyclerView = getView().findViewById(R.id.notesRecyclerList);
+        RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
+        List<Note> notes=repo.getAllNotes();
+        final NoteAdapter noteAdapter= new NoteAdapter(getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(noteAdapter);
+        noteAdapter.setmNotes(notes);
     }
 }

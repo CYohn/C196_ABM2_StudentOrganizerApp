@@ -30,15 +30,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     class NoteViewHolder extends RecyclerView.ViewHolder{
         private final TextView DBNoteDate;
-        //private final TextView DBNoteText;
+        private final TextView DBNoteText;
         private final TextView DBNoteTitle;
 
 
         private NoteViewHolder(View itemView){
             super(itemView);
-            DBNoteDate = itemView.findViewById(R.id.noteDateTxt);
-            //DBNoteText = itemView.findViewById(R.id.noteTextInput);
-            DBNoteTitle = itemView.findViewById(R.id.noteTitleInput);
+            DBNoteDate = itemView.findViewById(R.id.noteDateCardView);
+            DBNoteText = itemView.findViewById(R.id.noteTextCardView);
+            DBNoteTitle = itemView.findViewById(R.id.noteTitleCardView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -49,7 +49,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
                     intent.putExtra("noteDateValue", selectedNote.getNoteDate());
                     intent.putExtra("noteTextValue", selectedNote.getNoteText());
-                    intent.putExtra("notTitleValue", selectedNote.getNoteTitle());
+                    intent.putExtra("noteTitleValue", selectedNote.getNoteTitle());
 
                     context.startActivity(intent);
                 }
@@ -77,14 +77,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
             holder.DBNoteTitle.setText(name);
             holder.DBNoteDate.setText(date);
-            //holder.DBNoteText.setText(text);
+            holder.DBNoteText.setText(text);
 
         }
         else{
             holder.DBNoteTitle.setText("No Note Found");
             holder.DBNoteDate.setText("N/A");
-            //holder.DBNoteText.setText("N/A");
-
+            holder.DBNoteText.setText("N/A");
         }
     }
     public void setmNotes(List<Note> notes){
