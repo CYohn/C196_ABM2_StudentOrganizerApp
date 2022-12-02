@@ -13,7 +13,7 @@
         android:layout_marginBottom="28dp"
         android:clickable="true"
         android:contentDescription="@string/addTermBtnTxt"
-        android:onClick="addNotePressed"
+        android:onClick="pressedAddTermsBtn"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

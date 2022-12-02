@@ -51,4 +51,6 @@ public class AllTermsListFragment extends Fragment {
     }
 
 
+    public void addTermPressed(View view) {
+    }
 }

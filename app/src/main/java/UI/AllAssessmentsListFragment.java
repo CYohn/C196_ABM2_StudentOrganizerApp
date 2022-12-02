@@ -81,4 +81,7 @@ public class AllAssessmentsListFragment extends Fragment {
         recyclerView.setAdapter(assessmentAdapter);
         assessmentAdapter.setmAssessments(assessments);
     }
+
+    public void addAssessmentPressed(View view) {
+    }
 }

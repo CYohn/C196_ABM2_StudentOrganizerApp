@@ -44,7 +44,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="@string/addAssesmentsBtnLabel"
-        android:onClick="addNotePressed"
+        android:onClick="pressedOpenAddAssessmentFragBtn"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
