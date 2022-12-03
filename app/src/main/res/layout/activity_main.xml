@@ -14,11 +14,10 @@
         android:text="@string/welcome_to_your_study_organizer"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintBottom_toTopOf="@id/bookImage"/>
 
     <ImageView
         android:id="@+id/bookImage"
@@ -29,18 +28,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@id/getStartedBtn"
         app:srcCompat="@drawable/ic_book_foreground" />
 
     <Button
         android:id="@+id/getStartedBtn"
-        android:layout_width="295dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="139dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="259dp"
-        android:text="Button"
+        android:layout_width="321dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="24dp"
         android:onClick="allTermsBtnPressed"
+        android:text="@string/get_started"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
