@@ -16,19 +16,23 @@
         <activity
             android:name="UI.NotesActivity"
             android:exported="false"
-            android:label="Notes"/>
+            android:label="Notes"
+            android:parentActivityName="UI.CourseActivity"/>
         <activity
             android:name="UI.NotesDetailsActivity"
             android:exported="false"
-            android:label="Note Details"/>
+            android:label="Note Details"
+            android:parentActivityName="UI.NotesActivity"/>
         <activity
             android:name="UI.AssessmentDetailsActivity"
             android:exported="false"
-            android:label="Assessment Details"/>
+            android:label="Assessment Details"
+            android:parentActivityName="UI.AssessmentsActivity"/>
         <activity
             android:name="UI.CourseDetailsActivity"
             android:exported="false"
-            android:label="Course Details"/>
+            android:label="Course Details"
+            android:parentActivityName="UI.CourseActivity"/>
         <activity
             android:name="UI.TermDetailsActivity"
             android:exported="false"
@@ -43,12 +47,12 @@
             android:name="UI.AssessmentsActivity"
             android:exported="false"
             android:label="Assessments"
-            android:parentActivityName="UI.MainActivity" />
+            android:parentActivityName="UI.CourseActivity" />
         <activity
             android:name="UI.CourseActivity"
             android:exported="false"
             android:label="Courses"
-            android:parentActivityName="UI.MainActivity" />
+            android:parentActivityName="UI.TermsActivity" />
         <activity
             android:name="UI.MainActivity"
             android:exported="true">
