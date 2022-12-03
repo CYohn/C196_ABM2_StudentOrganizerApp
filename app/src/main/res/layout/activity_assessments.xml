@@ -17,42 +17,9 @@
         android:name="UI.AllAssessmentsListFragment"
         android:layout_width="388dp"
         android:layout_height="644dp"
-        android:layout_marginBottom="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/assessmentBtnsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <LinearLayout
-        android:id="@+id/assessmentBtnsLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentFragmentContainerView">
-
-        <Button
-            android:id="@+id/listAllAssessmentsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="pressedListAllAssessmentsBtn"
-            android:text="@string/listAllAssessmentsBtn"
-            tools:text="@string/listAllAssessmentsBtn" />
-
-        <Button
-            android:id="@+id/openAddAssessmentFragBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="pressedOpenAddAssessmentFragBtn"
-            android:text="@string/addAssesmentsBtnLabel"
-            tools:ignore="OnClick"
-            tools:text="@string/addAssesmentsBtnLabel" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
