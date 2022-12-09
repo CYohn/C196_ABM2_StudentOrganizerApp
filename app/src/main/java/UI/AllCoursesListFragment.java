@@ -48,5 +48,6 @@ public class AllCoursesListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(courseAdapter);
         courseAdapter.setmCourses(courses);
+
     }
 }

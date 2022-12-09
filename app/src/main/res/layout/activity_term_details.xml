@@ -8,11 +8,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="352dp"
-        android:layout_height="228dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/coursesThisTermLabel"
+        android:layout_width="348dp"
+        android:layout_height="211dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,27 +107,19 @@
 
     </TableLayout>
 
-    <TextView
-        android:id="@+id/coursesThisTermLabel"
-        android:layout_width="174dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="326dp"
-        android:text="@string/coursesThisTermLabel"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tableLayout"
-        tools:text="@string/coursesThisTermLabel" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="317dp"
-        android:layout_height="190dp"
+    <Button
+        android:id="@+id/termSaveBtn"
+        android:layout_width="129dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="195dp"
+        android:layout_marginBottom="208dp"
+        android:onClick="termSaveAndAddCourseBtn"
+        android:text="@string/saveAndAddCourseBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coursesThisTermLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

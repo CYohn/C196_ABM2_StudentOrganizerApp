@@ -23,11 +23,11 @@ public class Term {
                 '}';
     }
 
-    public Term(int termId, String termTitle, String termEndDate, String termStartDate) {
+    public Term(int termId, String termTitle, String termStartDate, String termEndDate) {
         this.termId = termId;
         this.termTitle = termTitle;
-        this.termEndDate = termEndDate;
         this.termStartDate = termStartDate;
+        this.termEndDate = termEndDate;
     }
 
     public int getTermId() {
