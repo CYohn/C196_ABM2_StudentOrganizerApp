@@ -32,7 +32,7 @@ public class TermDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
-        termId = getIntent().getIntExtra("id", -1);
+        termId = getIntent().getIntExtra("termId", -1);
         termTitleEditTxt=findViewById(R.id.termTitleEditTxt);
         termStartDateEditTxt=findViewById(R.id.termStartDateEditTxt);
         termEndDateEditTxt=findViewById(R.id.termEndDateEditTxt);
@@ -44,6 +44,7 @@ public class TermDetailsActivity extends AppCompatActivity {
         termTitleEditTxt.setText(termName);
         termStartDateEditTxt.setText(termStartDate);
         termEndDateEditTxt.setText(termEndDate);
+        repo = new RepositoryForStudentOrganizer.Repository(getApplication());
 
     }
 
