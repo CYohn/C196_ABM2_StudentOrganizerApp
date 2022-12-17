@@ -12,114 +12,86 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="@string/assessmentName"
-        app:layout_constraintBottom_toTopOf="@+id/addAssessmentStartDateInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/addAssessmentStartDateInstruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/startDateInstruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentNameTxtinput" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/assessmentStartAndEndHolder"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="309dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="5dp"
+        android:id="@+id/assessmentStartAndEndHolder"
+        android:layout_width="357dp"
+        android:layout_height="58dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/assessmentAssociatedCourseLabel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addAssessmentStartDateInstruction">
+        app:layout_constraintTop_toBottomOf="@+id/assessmentNameTxtinput"
+        app:layout_constraintVertical_bias="1.0">
 
-        <Spinner
-            android:id="@+id/assessmentMonthStartSpinner"
+        <Button
+            android:id="@+id/assessmentStartDateBtn"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:text="@string/courseStartLabel" />
+
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Spinner
-            android:id="@+id/assessmentDayStartSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Spinner
-            android:id="@+id/assessmentStartYearSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+        <Button
+            android:id="@+id/assessmentEndDateBtn"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:text="@string/endDateLabel" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/assessmentEndDateInstruction"
+        android:id="@+id/assessmentAssociatedCourseLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="@string/endDateInstruction"
+        android:text="@string/assessmentAssociatedCourseLabel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/assessmentStartAndEndHolder"
+        app:layout_constraintBottom_toTopOf="@id/assessmentAssociatedCourseSpinner"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="315dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Spinner
+        android:id="@+id/assessmentAssociatedCourseSpinner"
+        android:layout_width="321dp"
+        android:layout_height="44dp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="135dp"
+        app:layout_constraintBottom_toTopOf="@id/assessmentTypeLabel"
+        app:layout_constraintTop_toBottomOf="@id/assessmentAssociatedCourseLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentEndDateInstruction">
-
-        <Spinner
-            android:id="@+id/assessmentMonthEndSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Spinner
-            android:id="@+id/assessmentDayEndSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Spinner
-            android:id="@+id/assessmentEndYearSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/assessmentTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/typeLabel"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintBottom_toTopOf="@+id/assessmentTypeHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+        app:layout_constraintTop_toBottomOf="@id/assessmentAssociatedCourseSpinner" />
 
     <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="310dp"
+        android:id="@+id/assessmentTypeHolder"
+        android:layout_width="0dp"
         android:layout_height="35dp"
-        android:layout_marginTop="5dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentTypeLabel">
@@ -145,46 +117,18 @@
             android:layout_weight="1"
             android:text="@string/objectiveExamLabel"
             android:textAlignment="center" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/assessmentAssociatedCourseLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/assessmentAssociatedCourseLabel"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:layout_constraintVertical_bias="0.212" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="312dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="18dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assessmentAssociatedCourseLabel">
-
-        <Spinner
-            android:id="@+id/assessmentAssociatedCourseSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bottomNavigationHolder"
         android:layout_width="355dp"
         android:layout_height="54dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+        app:layout_constraintTop_toBottomOf="@id/assessmentTypeHolder">
 
         <ImageButton
             android:id="@+id/addAssessmentFragmentCloseBtn"
