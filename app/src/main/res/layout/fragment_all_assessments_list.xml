@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/allAssessmentMenuHolder"
-        android:layout_width="358dp"
-        android:layout_height="63dp"
+        android:layout_width="307dp"
+        android:layout_height="57dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -25,8 +25,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentsRecyclerView"
-        android:layout_width="334dp"
-        android:layout_height="364dp"
+        android:layout_width="311dp"
+        android:layout_height="303dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toTopOf="@+id/addAssessmentFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assessmentsRecyclerView"
         app:rippleColor="@color/teal_700"

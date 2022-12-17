@@ -157,4 +157,5 @@
     <string name="all_notes">All Notes</string>
     <string name="todo">TODO</string>
     <string name="get_started">Get Started</string>
+    <string name="setNotificationLabelText">Set Notification</string>
 </resources>
