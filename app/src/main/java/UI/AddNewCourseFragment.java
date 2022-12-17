@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -63,7 +64,7 @@ public class AddNewCourseFragment extends Fragment {
         termsSelectionSpinner.setAdapter(termArrayAdapter);
 
 
-        ImageButton addAssessmentBtn = (ImageButton) view.findViewById(R.id.addAssessmentBtn);
+        Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
 
         addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +91,7 @@ public class AddNewCourseFragment extends Fragment {
 
 
 
-        ImageButton addNoteBtn = (ImageButton) view.findViewById(R.id.addNoteBtn);
+        Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

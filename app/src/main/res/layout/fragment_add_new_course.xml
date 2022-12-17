@@ -6,218 +6,95 @@
     android:layout_height="match_parent"
     tools:context="UI.AddNewCourseFragment">
 
-    <TextView
-        android:id="@+id/chooseInstructorInstruction2"
-        android:layout_width="351dp"
-        android:layout_height="18dp"
-        android:text="@string/addAssociatedTermInstruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
-
-    <Space
-        android:id="@+id/space2"
-        android:layout_width="345dp"
-        android:layout_height="23dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/courseNameInstruction"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:text="@string/enterNameOfCourseInstruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space2"
-        tools:text="@string/enterNameOfCourseInstruction" />
-
     <EditText
         android:id="@+id/courseNameTxtInput"
         android:layout_width="358dp"
         android:layout_height="48dp"
-        android:layout_marginTop="3dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ex: Math 101"
+        android:text="@string/enterNameOfCourseInstruction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseNameInstruction" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/startAndEndBtnHolder" />
 
-    <TextView
-        android:id="@+id/courseStartInstruction"
-        android:layout_width="359dp"
-        android:layout_height="32dp"
-        android:text="@string/enterCourseStartDate"
+    <LinearLayout
+        android:id="@+id/startAndEndBtnHolder"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseNameTxtInput"
-        tools:text="@string/enterCourseStartDate" />
+        app:layout_constraintBottom_toTopOf="@id/chooseInstructorInstruction">
 
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="358dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/courseStartInstruction">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/courseStartMonthSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/CourseStartDaySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/courseStartYearSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/enterCourseEndInstruction"
-        android:layout_width="360dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/enterCourseEndInstruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout3"
-        android:layout_width="358dp"
-        android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterCourseEndInstruction">
-
-        <LinearLayout
-            android:layout_width="359dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/courseEndMonthSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/courseEndDaySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/courseEndYearSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/chooseInstructorInstruction"
-        android:layout_width="351dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/chooseCourseInstructorInstruction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout3" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer">
-
-        <TextView
-            android:id="@+id/addAssessmentBtnLabel"
+        <Button
+            android:id="@+id/button6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/addAssesmentsBtnLabel" />
+            android:layout_weight="1"
+            android:text="@string/courseStartLabel" />
 
-        <ImageButton
-            android:id="@+id/addAssessmentBtn"
-            android:layout_width="67dp"
-            android:layout_height="63dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:src="?attr/actionModePasteDrawable" />
-
-        <TextView
-            android:id="@+id/addNoteBtnLabel"
+        <Button
+            android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/addNoteBtnLabel" />
-
-        <ImageButton
-            android:id="@+id/addNoteBtn"
-            android:layout_width="69dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_book_foreground" />
+            android:layout_weight="1"
+            android:text="@string/endDateLabel" />
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayout4"
-        android:layout_width="357dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="1dp"
+    <TextView
+        android:id="@+id/chooseInstructorInstruction"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/chooseCourseInstructorInstruction"
+        app:layout_constraintBottom_toTopOf="@+id/chooseInstructorWidgetHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder"
+        app:layout_constraintVertical_bias="0.244" />
+
+    <LinearLayout
+        android:id="@+id/chooseInstructorWidgetHolder"
+        android:layout_width="356dp"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseInstructorInstruction">
+        tools:layout_editor_absoluteY="212dp"
+        app:layout_constraintTop_toBottomOf="@id/chooseInstructorInstruction"
+        app:layout_constraintBottom_toTopOf="@id/chooseTermInstruction">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/chooseInstructorSpinner"
-                android:layout_width="263dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+        <Spinner
+            android:id="@+id/chooseInstructorSpinner"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/addInstructorBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@android:drawable/ic_input_add" />
-        </LinearLayout>
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/addInstructorBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_input_add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/chooseTermInstruction"
+        android:layout_width="351dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/addAssociatedTermInstruction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseInstructorWidgetHolder"
+        app:layout_constraintBottom_toTopOf="@id/associatedTermContainer"/>
 
     <LinearLayout
         android:id="@+id/associatedTermContainer"
@@ -225,15 +102,17 @@
         android:layout_height="48dp"
         android:layout_marginTop="1dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/chooseInstructorInstruction2"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintBottom_toTopOf="@id/addNotesAndAssessmentsBtnHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseTermInstruction">
 
         <Spinner
             android:id="@+id/associatedTermSpinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:dropDownSelector="@color/light_teal"/>
+            android:dropDownSelector="@color/light_teal" />
 
         <ImageButton
             android:id="@+id/addAssociatedTermBtn"
@@ -243,5 +122,50 @@
             android:src="@android:drawable/ic_input_add" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addNotesAndAssessmentsBtnHolder"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/saveCourseBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer"
+        app:layout_constraintVertical_bias="0.14">
+
+        <Button
+            android:id="@+id/addAssessmentBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addAssesmentsBtnLabel" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addNoteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addNoteBtnLabel" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/saveCourseBtn"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_baseline_save_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNotesAndAssessmentsBtnHolder"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
