@@ -2,6 +2,7 @@ package Entities;
 
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "terms")
@@ -23,11 +24,16 @@ public class Term {
                 '}';
     }
 
+    @Ignore
     public Term(int termId, String termTitle, String termStartDate, String termEndDate) {
         this.termId = termId;
         this.termTitle = termTitle;
         this.termStartDate = termStartDate;
         this.termEndDate = termEndDate;
+    }
+
+    public Term(String termTitle){
+        this.termTitle = termTitle;
     }
 
     public int getTermId() {

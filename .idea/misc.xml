@@ -3,13 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable-anydpi/ic_next_button_right.xml" value="0.1705" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.168" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_StudentApp_foreground.xml" value="0.168" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.264" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.344" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1705" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1705" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_book_foreground.xml" value="0.168" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_green_menu.xml" value="0.1705" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_launcher_background.xml" value="0.168" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_launcher_foreground_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_white_menu.xml" value="0.1705" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_assessments_list.xml" value="0.33" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_course_list.xml" value="0.33" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_terms_list.xml" value="0.19704433497536947" />
@@ -41,6 +46,7 @@
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/note_list_item.xml" value="0.41768579492003766" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/note_list_item_layout.xml" value="0.28559213339033773" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/sample_custom_calendar_component_view.xml" value="0.2289156626506024" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/spinner_layout.xml" value="0.25" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/term_list_item_layout.xml" value="0.33" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/menu/main_navigation_menu.xml" value="0.25" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/menu/menu_all_terms_list.xml" value="0.2736212056434374" />

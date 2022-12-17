@@ -232,7 +232,8 @@
             android:id="@+id/associatedTermSpinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:dropDownSelector="@color/light_teal"/>
 
         <ImageButton
             android:id="@+id/addAssociatedTermBtn"

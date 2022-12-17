@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
+import java.util.ArrayList;
+
+import Entities.Term;
+
 public class CourseActivity extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
