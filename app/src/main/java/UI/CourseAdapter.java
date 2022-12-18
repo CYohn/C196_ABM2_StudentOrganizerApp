@@ -45,7 +45,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 public void onClick(View view) {
                     int position=getAdapterPosition();
                     final Course selectedCourse=mCourses.get(position);
-                    Intent intent = new Intent(context,CourseDetailsActivity.class);
+                    Intent intent = new Intent(context,CourseDetailsFragment.class);
 
                     intent.putExtra("courseTitleValue", selectedCourse.getCourseTitle());
                     intent.putExtra("courseStartValue", selectedCourse.getCourseStartDate());

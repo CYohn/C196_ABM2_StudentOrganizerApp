@@ -158,4 +158,5 @@
     <string name="todo">TODO</string>
     <string name="get_started">Get Started</string>
     <string name="setNotificationLabelText">Set Notification</string>
+    <string name="genericSwitchLabel">Switch To Select</string>
 </resources>

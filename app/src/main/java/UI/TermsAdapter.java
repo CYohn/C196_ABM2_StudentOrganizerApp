@@ -44,7 +44,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
                public void onClick(View view) {
                    int position=getAdapterPosition();
                    final Term selectedTerm = mTerms.get(position);
-                   Intent intent = new Intent(context,TermDetailsActivity.class);
+                   Intent intent = new Intent(context,TermDetailsFragment.class);
 
                    intent.putExtra("termTitleValue", selectedTerm.getTermTitle());
                    intent.putExtra("termStartDateValue", selectedTerm.getTermStartDate());

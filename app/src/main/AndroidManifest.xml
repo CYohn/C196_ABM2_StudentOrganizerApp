@@ -19,26 +19,6 @@
             android:label="Notes"
             android:parentActivityName="UI.CourseActivity"/>
         <activity
-            android:name="UI.NotesDetailsActivity"
-            android:exported="false"
-            android:label="Note Details"
-            android:parentActivityName="UI.NotesActivity"/>
-        <activity
-            android:name="UI.AssessmentDetailsActivity"
-            android:exported="false"
-            android:label="Assessment Details"
-            android:parentActivityName="UI.AssessmentsActivity"/>
-        <activity
-            android:name="UI.CourseDetailsActivity"
-            android:exported="false"
-            android:label="Course Details"
-            android:parentActivityName="UI.CourseActivity"/>
-        <activity
-            android:name="UI.TermDetailsActivity"
-            android:exported="false"
-            android:label="Term Details"
-            android:parentActivityName="UI.TermsActivity" />
-        <activity
             android:name="UI.TermsActivity"
             android:exported="false"
             android:label="Terms"

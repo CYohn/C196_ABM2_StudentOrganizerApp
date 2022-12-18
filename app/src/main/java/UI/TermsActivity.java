@@ -31,7 +31,7 @@ public class TermsActivity extends AppCompatActivity {
 
     public void pressedAddTermsBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.termsFragmentContainerView, new AddTermFragment());
+        fragmentTransaction.replace(R.id.termsFragmentContainerView, new TermDetailsFragment());
         fragmentTransaction.addToBackStack("allTermsListFragmentView");
         fragmentTransaction.commit();
     }

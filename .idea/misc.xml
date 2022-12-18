@@ -15,11 +15,12 @@
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_launcher_background.xml" value="0.168" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_launcher_foreground_foreground.xml" value="0.1" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/ic_white_menu.xml" value="0.1705" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/drawable/switch_tracker.xml" value="0.2185" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_assessments_list.xml" value="0.33" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_course_list.xml" value="0.33" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_all_terms_list.xml" value="0.19704433497536947" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_assessment_details.xml" value="0.18" />
-        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_assessments.xml" value="0.22" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_assessments.xml" value="0.16" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_course_details.xml" value="0.25" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_courses.xml" value="0.18" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/activity_main.xml" value="0.18" />
@@ -40,7 +41,9 @@
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_all_courses_list.xml" value="0.22" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_all_notes.xml" value="0.23228346456692914" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_all_terms_list.xml" value="0.22" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_assessment_details.xml" value="0.16" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_instructor.xml" value="0.2586575459598119" />
+        <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_note_details.xml" value="0.1115861479264643" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/fragment_notes.xml" value="0.18" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/list_item_layout.xml" value="0.1" />
         <entry key="..\:/Users/cyohn/AndroidStudioProjects/C196_ABM2_Charity_Yohn/app/src/main/res/layout/note_list_item.xml" value="0.41768579492003766" />

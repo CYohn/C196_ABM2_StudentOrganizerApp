@@ -31,8 +31,8 @@ public class AssessmentsActivity extends AppCompatActivity {
 
     public void pressedOpenAddAssessmentFragBtn(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.assessmentFragmentContainerView, new AddAssessmentFragment());
-        fragmentTransaction.addToBackStack("AddAssessmentFragmentView");
+        fragmentTransaction.replace(R.id.assessmentFragmentContainerView, new AssessmentDetailsFragment());
+        fragmentTransaction.addToBackStack("AssessmentDetailsFragmentView");
         fragmentTransaction.commit();
     }
 

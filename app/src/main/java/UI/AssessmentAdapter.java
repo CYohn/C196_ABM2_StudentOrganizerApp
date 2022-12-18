@@ -2,12 +2,16 @@ package UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
@@ -47,15 +51,18 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final Assessment selectedAssessment = mAssessments.get(position);
-                    Intent intent = new Intent(context,AssessmentDetailsActivity.class);
+                    Fragment assessmentDetails = new AssessmentDetailsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
 
-                    intent.putExtra("assessmentTitleTxtView", selectedAssessment.getAssessmentTitle());
-                    intent.putExtra("assessmentStartTxtView", selectedAssessment.getAssessmentStartDate());
-                    intent.putExtra("assessmentEndTxtView", selectedAssessment.getAssessmentEndDate());
-                    intent.putExtra("assessmentTypeTxtView", selectedAssessment.getAssessmentType());
-                    context.startActivity(intent);
-
-
+                    Bundle bundle = new Bundle();
+                    bundle.putString("assessmentTitleTxtView", selectedAssessment.getAssessmentTitle());
+                    bundle.putString("assessmentStartTxtView", selectedAssessment.getAssessmentStartDate());
+                    bundle.putString("assessmentEndTxtView", selectedAssessment.getAssessmentEndDate());
+                    bundle.putString("assessmentTypeTxtView", selectedAssessment.getAssessmentType());
+                    assessmentDetails.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.assessmentFragmentContainerView, assessmentDetails);
+                    fragmentTransaction.addToBackStack("AssessmentDetailsFragmentView");
+                    fragmentTransaction.commit();
                 }
             });
         }

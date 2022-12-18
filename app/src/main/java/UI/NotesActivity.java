@@ -63,8 +63,8 @@ public class NotesActivity extends AppCompatActivity {
     public void addNotePressed(View view) {
         setContentView(R.layout.activity_notes);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.notesActivityFragmentViewer, new AddNoteFragment());
-        fragmentTransaction.addToBackStack("AddNoteFragment");
+        fragmentTransaction.replace(R.id.notesActivityFragmentViewer, new NoteDetailsFragment());
+        fragmentTransaction.addToBackStack("NoteDetailsFragment");
         fragmentTransaction.commit();
     }
 }

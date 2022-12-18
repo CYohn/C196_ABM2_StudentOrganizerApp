@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
-public class AddTermFragment extends Fragment {
+public class TermDetailsFragment extends Fragment {
 
-    public AddTermFragment() {
+    public TermDetailsFragment() {
         // Required empty public constructor
     }
 
 
-    public static AddTermFragment newInstance(String param1, String param2) {
-        AddTermFragment fragment = new AddTermFragment();
+    public static TermDetailsFragment newInstance(String param1, String param2) {
+        TermDetailsFragment fragment = new TermDetailsFragment();
         return fragment;
     }
 
@@ -31,7 +31,7 @@ public class AddTermFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_term, container, false);;
+        View view = inflater.inflate(R.layout.fragment_term_details, container, false);;
 
 
         

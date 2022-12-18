@@ -20,17 +20,17 @@ import Database.RepositoryForStudentOrganizer;
 import Entities.Term;
 
 
-public class AddNewCourseFragment extends Fragment {
+public class CourseDetailsFragment extends Fragment {
 
 
 
-    public AddNewCourseFragment() {
+    public CourseDetailsFragment() {
         // Required empty public constructor
     }
 
 
-    public static AddNewCourseFragment newInstance(String param1, String param2) {
-        AddNewCourseFragment fragment = new AddNewCourseFragment();
+    public static CourseDetailsFragment newInstance(String param1, String param2) {
+        CourseDetailsFragment fragment = new CourseDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -50,7 +50,7 @@ public class AddNewCourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_new_course, container, false);
+        View view = inflater.inflate(R.layout.fragment_course_details, container, false);
         RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
         Spinner termsSelectionSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
@@ -70,7 +70,7 @@ public class AddNewCourseFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AddAssessmentFragment());
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AssessmentDetailsFragment());
                 fragmentTransaction.addToBackStack("addAssessmentView");
                 fragmentTransaction.commit();
             }

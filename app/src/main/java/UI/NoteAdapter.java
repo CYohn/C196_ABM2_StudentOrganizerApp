@@ -45,7 +45,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 public void onClick(View view) {
                     int position=getAdapterPosition();
                     final Note selectedNote= mNotes.get(position);
-                    Intent intent = new Intent(context,NotesDetailsActivity.class);
+                    Intent intent = new Intent(context,NoteDetailsFragment.class);
 
                     intent.putExtra("noteDateValue", selectedNote.getNoteDate());
                     intent.putExtra("noteTextValue", selectedNote.getNoteText());
