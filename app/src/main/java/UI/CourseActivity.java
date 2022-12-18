@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
@@ -21,7 +22,29 @@ public class CourseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int associatedTerm = getIntent().getIntExtra("associatedTerm", -1);
         setContentView(R.layout.activity_courses);
+
+        if (associatedTerm != -1){
+
+            Fragment addCourse = new CourseDetailsFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("associatedTerm", getIntent().getIntExtra("associatedTerm", -1));
+            addCourse.setArguments(bundle);
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerViewCourses, addCourse);
+            fragmentTransaction.addToBackStack("addCourseFragmentView");
+            fragmentTransaction.commit();
+        }
+
+        else{
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AllCoursesListFragment());
+            fragmentTransaction.addToBackStack("allCoursesListFragmentView");
+            fragmentTransaction.commit();
+        }
 
     }
 
