@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -33,7 +34,7 @@ EditText titleText;
 Button startDateBtn;
 Button endDateBtn;
 Spinner associatedCourseSpinner;
-Switch assessmentTypeSwitch;
+ToggleButton assessmentTypeToggle;
 Button closeBtn;
 Button alertsBtn;
 Button saveBtn;
@@ -44,23 +45,6 @@ Button saveBtn;
         // Required empty public constructor
     }
 
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment AssessmentDetailsFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static AssessmentDetailsFragment newInstance(String param1, String param2) {
-//        AssessmentDetailsFragment fragment = new AssessmentDetailsFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,8 +55,6 @@ Button saveBtn;
             assessmentStartDate = bundle.getString("assessmentStartTxtView");
             assessmentEndDate = bundle.getString("assessmentEndTxtView");
             assessmentType = bundle.getString("assessmentTypeTxtView");
-
-
         }
     }
 
@@ -92,19 +74,33 @@ Button saveBtn;
         startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
         endDateBtn = (Button) getView().findViewById(R.id.assessmentEndDateBtn);
         associatedCourseSpinner = (Spinner) getView().findViewById(R.id.assessmentAssociatedCourseSpinner);
-        //assessmentTypeSwitch = (Switch) getView().findViewById(assessmentTypeSwitch);
+        assessmentTypeToggle = (ToggleButton) getView().findViewById(R.id.assessmentTypeToggle);
 
         if(bundle != null) {
 
             titleText.setText(assessmentTitle, TextView.BufferType.EDITABLE);
             startDateBtn.setText("Start: " + assessmentStartDate);
             endDateBtn.setText("End: " + assessmentEndDate);
-            Spinner associatedCourseSpinner;
-            Chip assessmentTypeChip;
+            //Spinner associatedCourseSpinner;
+            String performance = "Performance";
+            String objective = "Objective";
+            if(assessmentType.equalsIgnoreCase(performance)){
+                assessmentTypeToggle.setText("Performance");
+                assessmentTypeToggle.setChecked(true);
+            }
+            if(assessmentType.equalsIgnoreCase(objective)){
+                assessmentTypeToggle.setText("Objective");
+                assessmentTypeToggle.setChecked(false);
+            }
         }
-
         else{
             titleText.setText("Please Enter Assessment Title");
+            startDateBtn.setText("Start Date");
+            endDateBtn.setText("End Date");
+            assessmentTypeToggle.setChecked(false);
+            assessmentTypeToggle.setText("Type");
+
         }
+
     }
 }
