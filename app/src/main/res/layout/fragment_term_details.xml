@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/termNameEditText">
 
         <Button
-            android:id="@+id/startBtn"
+            android:id="@+id/termStartBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/endBtn"
+            android:id="@+id/termEndBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,14 +69,14 @@
         tools:layout_editor_absoluteX="0dp">
 
         <ImageButton
-            android:id="@+id/saveBtn"
+            android:id="@+id/termSaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_save_24" />
 
         <ImageButton
-            android:id="@+id/addCourseBtn"
+            android:id="@+id/addTermNextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

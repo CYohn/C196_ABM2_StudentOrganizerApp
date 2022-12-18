@@ -51,6 +51,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final Assessment selectedAssessment = mAssessments.get(position);
+
                     Fragment assessmentDetails = new AssessmentDetailsFragment();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
 

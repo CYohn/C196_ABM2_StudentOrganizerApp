@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,14 +31,16 @@ private String assessmentTitle;
 private String assessmentStartDate;
 private String assessmentEndDate;
 private String assessmentType;
+private int courseIdNumber;
+
 EditText titleText;
 Button startDateBtn;
 Button endDateBtn;
 Spinner associatedCourseSpinner;
 ToggleButton assessmentTypeToggle;
-Button closeBtn;
-Button alertsBtn;
-Button saveBtn;
+ImageButton closeBtn;
+ImageButton alertsBtn;
+ImageButton saveBtn;
 
 
 
@@ -70,6 +73,7 @@ Button saveBtn;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         Bundle bundle = getArguments();
+
         titleText = (EditText) getView().findViewById(R.id.assessmentNameTxtinput);
         startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
         endDateBtn = (Button) getView().findViewById(R.id.assessmentEndDateBtn);

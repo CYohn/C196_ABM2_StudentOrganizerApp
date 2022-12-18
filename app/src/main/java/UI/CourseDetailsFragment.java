@@ -66,6 +66,8 @@ public class CourseDetailsFragment extends Fragment {
 
         Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
 
+
+        //TODO: SET THE COURSE INFO TO PASS
         addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +79,7 @@ public class CourseDetailsFragment extends Fragment {
         });
 
 
-
+        //TODO: SET THE COURSE INFO BUNDLE TO PASS
         ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
         addInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +92,7 @@ public class CourseDetailsFragment extends Fragment {
     });
 
 
-
+        //TODO: SET THE COURSE INFO BUNDLE TO PASS
         Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override

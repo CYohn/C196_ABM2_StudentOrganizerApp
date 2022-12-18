@@ -1,13 +1,16 @@
 package UI;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
@@ -21,6 +24,7 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
     private List<Term>mTerms;
     private final Context context;
     private final LayoutInflater mInflator;
+
     TermsAdapter(Context context){
         mInflator= LayoutInflater.from(context);
         this.context=context;
@@ -44,15 +48,19 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.TermsViewHol
                public void onClick(View view) {
                    int position=getAdapterPosition();
                    final Term selectedTerm = mTerms.get(position);
-                   Intent intent = new Intent(context,TermDetailsFragment.class);
 
-                   intent.putExtra("termTitleValue", selectedTerm.getTermTitle());
-                   intent.putExtra("termStartDateValue", selectedTerm.getTermStartDate());
-                   intent.putExtra("termEndDateValue", selectedTerm.getTermEndDate());
-                   intent.putExtra("termId", selectedTerm.getTermId());
-                   context.startActivity(intent);
+                   Fragment termDetails = new TermDetailsFragment();
+                   FragmentTransaction fragmentTransaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
 
-
+                   Bundle bundle = new Bundle();
+                   bundle.putString("termTitleValue", selectedTerm.getTermTitle());
+                   bundle.putString("termStartDateValue", selectedTerm.getTermStartDate());
+                   bundle.putString("termEndDateValue", selectedTerm.getTermEndDate());
+                   bundle.putInt("termId", (selectedTerm.getTermId()));
+                   termDetails.setArguments(bundle);
+                   fragmentTransaction.replace(R.id.termsFragmentContainerView, termDetails);
+                   fragmentTransaction.addToBackStack("TermDetailsFragmentView");
+                   fragmentTransaction.commit();
                }
            });
        }
