@@ -1,6 +1,10 @@
 package UI;
 
-import android.app.Application;
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,6 +24,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.zybooks.c196_abm2_charity_yohn.R;
 
 import org.jetbrains.annotations.Nullable;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Term;
@@ -32,12 +43,17 @@ public class TermDetailsFragment extends Fragment {
     private String termEnd;
     private int termId;
 
-    ImageButton closeBtn;
     EditText nameEditText;
-    Button startBtn;
-    Button endBtn;
+    ImageButton closeBtn;
     ImageButton saveBtn;
     ImageButton nextBtn;
+
+    Button startBtn;
+    Button endBtn;
+    final Calendar startDateCalendar = Calendar.getInstance();
+    final Calendar endDateCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener startDateDialog;
+    DatePickerDialog.OnDateSetListener endDateDialog;
 
     RepositoryForStudentOrganizer.Repository repo;
 
@@ -83,14 +99,14 @@ public class TermDetailsFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
-
-
         closeBtn = (ImageButton) getView().findViewById(R.id.closeAddTermsBtn);
         nameEditText = (EditText) getView().findViewById(R.id.termNameEditText);
         startBtn = (Button) getView().findViewById(R.id.termStartBtn);
         endBtn = (Button) getView().findViewById(R.id.termEndBtn);
         saveBtn = (ImageButton) getView().findViewById(R.id.termSaveBtn);
         nextBtn = (ImageButton) getView().findViewById(R.id.addTermNextBtn);
+
+
 
         if (bundle != null){
             termId = bundle.getInt("termId");
@@ -133,8 +149,8 @@ public class TermDetailsFragment extends Fragment {
                 int termID = termId;
                 String termName = ((EditText) getView().findViewById(R.id.termNameEditText)).getText().toString();
                 //TODO: GET THE OTHER INFO FROM THE VIEW
-                String startDate = "test start";
-                String endDate = "test end";
+                String startDate = startBtn.getText().toString();
+                String endDate = endBtn.getText().toString();
 
                 //Save info to DB
                 Term term;
@@ -155,13 +171,78 @@ public class TermDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String dateFormat = "MM/dd/YY";
+                String dateString = startBtn.getText().toString();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                try {
+                    startDateCalendar.setTime(simpleDateFormat.parse(dateString));
+                } catch (ParseException startDateParseException){
+                    startDateParseException.printStackTrace();
+                    startDateParseException.getMessage();
+                    startDateParseException.getCause();
+                }
+                new DatePickerDialog(getContext(), startDateDialog, startDateCalendar.get(YEAR),
+                    startDateCalendar.get(MONTH), startDateCalendar.get(DAY_OF_MONTH)).show();
+            }
+
+        });
+        startDateDialog = new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth ){
+                startDateCalendar.set(YEAR, year);
+                startDateCalendar.set(MONTH, monthOfYear);
+                startDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateStartDateLabel();
+            }
+        };
+
+        endBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String dateFormat = "MM/dd/YY";
+                String dateString = endBtn.getText().toString();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                try {
+                    endDateCalendar.setTime(simpleDateFormat.parse(dateString));
+                } catch (ParseException endDateParseException){
+                    endDateParseException.printStackTrace();
+                    endDateParseException.getMessage();
+                    endDateParseException.getCause();
+                }
+                new DatePickerDialog(getContext(), endDateDialog, endDateCalendar.get(YEAR),
+                        endDateCalendar.get(MONTH), endDateCalendar.get(DAY_OF_MONTH)).show();
+            }
+
+        });
+        endDateDialog = new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth ){
+                endDateCalendar.set(YEAR, year);
+                endDateCalendar.set(MONTH, monthOfYear);
+                endDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateEndDateLabel();
+            }
+        };
     }
 
-    
-//    //TODO: Make this button save the new Term, add it to the list of terms, and return to the All Terms fragment
-//    public void pressedSaveNewTermBtn(View view) {
-//
-//    }
+    private void updateStartDateLabel(){
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        startBtn.setText(simpleDateFormat.format(startDateCalendar.getTime()));
+    }
 
+    private void updateEndDateLabel(){
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        endBtn.setText(simpleDateFormat.format(endDateCalendar.getTime()));
+    }
 
 }
