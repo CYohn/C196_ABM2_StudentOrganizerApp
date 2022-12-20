@@ -1,5 +1,6 @@
 package UI;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ import com.zybooks.c196_abm2_charity_yohn.R;
 
 import org.jetbrains.annotations.Nullable;
 
+import Database.RepositoryForStudentOrganizer;
+import Entities.Term;
+
 public class TermDetailsFragment extends Fragment {
 
     //private final Context context;
@@ -35,11 +39,7 @@ public class TermDetailsFragment extends Fragment {
     ImageButton saveBtn;
     ImageButton nextBtn;
 
-
-
-
-
-
+    RepositoryForStudentOrganizer.Repository repo;
 
     public TermDetailsFragment() {
         // Required empty public constructor
@@ -59,7 +59,10 @@ public class TermDetailsFragment extends Fragment {
             termTitle = bundle.getString("termTitleValue");
             termStart = bundle.getString("termStartDateValue");
             termEnd = bundle.getString("termEndDateValue");
-            termId = bundle.getInt("termId");
+            termId = bundle.getInt("termId", -1);
+
+            repo=new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
+
         }
     }
 
@@ -74,7 +77,13 @@ public class TermDetailsFragment extends Fragment {
 
 
     public  void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
+
+//        Term termTest = new Term(2,"Testing Update Without UI", "Start", "End");
+//        repo.insert(termTest);
+
         Bundle bundle = getArguments();
+
+
 
         closeBtn = (ImageButton) getView().findViewById(R.id.closeAddTermsBtn);
         nameEditText = (EditText) getView().findViewById(R.id.termNameEditText);
@@ -84,11 +93,13 @@ public class TermDetailsFragment extends Fragment {
         nextBtn = (ImageButton) getView().findViewById(R.id.addTermNextBtn);
 
         if (bundle != null){
+            termId = bundle.getInt("termId");
             nameEditText.setText(termTitle, TextView.BufferType.EDITABLE);
             startBtn.setText("Start: " + termStart);
             endBtn.setText("End: " + termEnd);
         }
         else{
+            termId = -1;
             nameEditText.setText("Please Enter the Term Name(ex: Spring 2022)");
             startBtn.setText("Start Date");
             endBtn.setText("End Date");
@@ -119,15 +130,38 @@ public class TermDetailsFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int termID = termId;
+                String termName = ((EditText) getView().findViewById(R.id.termNameEditText)).getText().toString();
+                //TODO: GET THE OTHER INFO FROM THE VIEW
+                String startDate = "test start";
+                String endDate = "test end";
 
+                //Save info to DB
+                Term term;
+                if (termId == -1){
+                    repo=new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
+                    int newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//get the ID of the last term in the list
+                    term = new Term(newId, termName, startDate, endDate);
+                    repo.insert(term);
+                }
+                else{
+                    term = new Term(termID, termName, startDate, endDate);
+                    repo.update(term);
+                }
+                Fragment termList = new AllTermsListFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.termsFragmentContainerView, termList);
+                fragmentTransaction.addToBackStack("TermListFragmentView");
+                fragmentTransaction.commit();
             }
         });
     }
 
     
-    //TODO: Make this button save the new Term, add it to the list of terms, and return to the All Terms fragment
-    public void pressedSaveNewTermBtn(View view) {
-    }
+//    //TODO: Make this button save the new Term, add it to the list of terms, and return to the All Terms fragment
+//    public void pressedSaveNewTermBtn(View view) {
+//
+//    }
 
 
 }

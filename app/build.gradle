@@ -35,6 +35,7 @@ android {
             }
         }
     }
+    namespace 'com.zybooks.c196_abm2_charity_yohn'
 }
 
 dependencies {

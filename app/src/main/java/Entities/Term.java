@@ -24,7 +24,7 @@ public class Term {
                 '}';
     }
 
-    @Ignore
+
     public Term(int termId, String termTitle, String termStartDate, String termEndDate) {
         this.termId = termId;
         this.termTitle = termTitle;
@@ -32,9 +32,9 @@ public class Term {
         this.termEndDate = termEndDate;
     }
 
-    public Term(String termTitle){
-        this.termTitle = termTitle;
-    }
+    //public Term(String termTitle){
+//        this.termTitle = termTitle;
+//    }
 
     public int getTermId() {
         return termId;

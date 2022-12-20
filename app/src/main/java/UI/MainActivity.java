@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
         Instructor instructor =new Instructor(3,"Testing Instructor DB","email@test.com", "555-555-5555", 25);
         Note note =new Note(4,"11/17/22","testing note DB","Note Title Test",25);
         Term term =new Term(5,"Testing Term DB","11/16/22", "11/15/22");
+        Term term2 = new Term(1, "Testing Second Term", "Start", "End");
 
         repo.insert(assessment);
         repo.insert(course);
         repo.insert(instructor);
         repo.insert(note);
         repo.insert(term);
+        repo.insert(term2);
     }
 
     @Override

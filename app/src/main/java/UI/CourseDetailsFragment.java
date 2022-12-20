@@ -39,9 +39,6 @@ public class CourseDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
     }
 
 
@@ -56,17 +53,10 @@ public class CourseDetailsFragment extends Fragment {
         Spinner termsSelectionSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
 
         ArrayAdapter<Term> termArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, termArrayList);
-//        termArrayList.add(new Term("Term 1 Drop Down Test"));
-//        termArrayList.add(new Term("Term 2 Drop Down Test"));
-//        termArrayList.add(new Term("Term 3 Drop Down Test"));
-
-
         termsSelectionSpinner.setAdapter(termArrayAdapter);
 
 
         Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
-
-
         //TODO: SET THE COURSE INFO TO PASS
         addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
