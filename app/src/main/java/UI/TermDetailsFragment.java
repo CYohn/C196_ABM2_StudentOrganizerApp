@@ -111,8 +111,8 @@ public class TermDetailsFragment extends Fragment {
         if (bundle != null){
             termId = bundle.getInt("termId");
             nameEditText.setText(termTitle, TextView.BufferType.EDITABLE);
-            startBtn.setText("Start: " + termStart);
-            endBtn.setText("End: " + termEnd);
+            startBtn.setText(termStart);
+            endBtn.setText(termEnd);
         }
         else{
             termId = -1;
