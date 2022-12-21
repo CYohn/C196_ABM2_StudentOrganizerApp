@@ -152,7 +152,7 @@ ArrayList<Instructor>instructorArrayList;
 
 
 
-        
+
         addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,14 +184,22 @@ ArrayList<Instructor>instructorArrayList;
         addInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle1 = getArguments();
-                bundle1.putInt("courseId", bundle.getInt("courseId"));
-                Fragment instructorViewFragment = new InstructorFragment();
-                instructorViewFragment.setArguments(bundle1);
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
-                fragmentTransaction.addToBackStack("addInstructorView");
-                fragmentTransaction.commit();
+                if(bundle != null) {
+                    Bundle bundle1 = getArguments();
+                    bundle1.putInt("courseId", bundle.getInt("courseId"));
+                    Fragment instructorViewFragment = new InstructorFragment();
+                    instructorViewFragment.setArguments(bundle1);
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
+                    fragmentTransaction.addToBackStack("addInstructorView");
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Fragment instructorViewFragment = new InstructorFragment();
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
+                    fragmentTransaction.addToBackStack("addInstructorView");
+                    fragmentTransaction.commit();}
             }
         });
 
@@ -201,14 +209,23 @@ ArrayList<Instructor>instructorArrayList;
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle1 = getArguments();
-                bundle1.putInt("courseId", bundle.getInt("courseId"));
-                Fragment notesFragment = new NoteDetailsFragment();
-                notesFragment.setArguments(bundle1);
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
-                fragmentTransaction.addToBackStack("addNoteView");
-                fragmentTransaction.commit();
+                if(bundle != null) {
+                    Bundle bundle1 = getArguments();
+                    bundle1.putInt("courseId", bundle.getInt("courseId"));
+                    Fragment notesFragment = new NoteDetailsFragment();
+                    notesFragment.setArguments(bundle1);
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
+                    fragmentTransaction.addToBackStack("addNoteView");
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Fragment notesFragment = new NoteDetailsFragment();
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
+                    fragmentTransaction.addToBackStack("addNoteView");
+                    fragmentTransaction.commit();
+                }
             }
         });
 
