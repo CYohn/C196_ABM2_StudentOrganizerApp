@@ -14,6 +14,7 @@ public class Course {
     private String courseStatus;
     private String courseInstructor;
     private int associatedTermId;
+    private int instructorId;
 
 
     @Override
@@ -21,23 +22,30 @@ public class Course {
         return "Course{" +
                 "courseId=" + courseId +
                 ", courseTitle=" + courseTitle +
+                ", courseStartDate='" + courseStartDate +
                 ", courseEndDate=" + courseEndDate +
                 ", courseStatus=" + courseStatus +
                 ", courseInstructor=" + courseInstructor +
-                ", courseStartDate='" + courseStartDate + '\'' +
+                ", courseInstructor=" + instructorId +
                 ", associatedTerm='" + associatedTermId + '\'' +
                 '}';
     }
 
-    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor, int associatedTermId) {
+    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor, int instructorId, int associatedTermId) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
         this.courseInstructor = courseInstructor;
+        this.instructorId = instructorId;
         this.associatedTermId = associatedTermId;
     }
+
+
+    public int getInstructorId() {return instructorId;}
+
+    public void setInstructorId(int instructorId) {this.instructorId = instructorId;}
 
     public int getAssociatedTermId() {return associatedTermId;}
 

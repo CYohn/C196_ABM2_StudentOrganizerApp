@@ -18,6 +18,7 @@ import com.zybooks.c196_abm2_charity_yohn.R;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Instructor;
@@ -32,6 +33,7 @@ String courseTitle;
 String courseStart;
 String courseEnd;
 String courseInstructor;
+int insructorId;
 
 EditText editCourseTitle;
 Button setCourseStartBtn;
@@ -45,6 +47,9 @@ Button addNoteBtn;
 ImageButton saveBtn;
 
 RepositoryForStudentOrganizer.Repository repo;
+ArrayList<Term>termArrayList;
+ArrayList<Instructor>instructorArrayList;
+
 
 
     public CourseDetailsFragment() {
@@ -70,8 +75,11 @@ RepositoryForStudentOrganizer.Repository repo;
             courseStart = bundle.getString("courseStart");
             courseEnd = bundle.getString("courseEnd");
             courseInstructor = bundle.getString("courseInstructor");
+            insructorId = bundle.getInt("instructorId");
 
             repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
+            ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
+            ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
         }
     }
 
@@ -85,12 +93,15 @@ RepositoryForStudentOrganizer.Repository repo;
 
         //Set the terms spinner
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
+        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
         Spinner termsSelectionSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
         ArrayAdapter<Term> termArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, termArrayList);
         termsSelectionSpinner.setAdapter(termArrayAdapter);
+        int termPosition = getItemPosition(termId, termArrayList);
+        termsSelectionSpinner.setSelection(termPosition);
 
         //Set the instructor spinner
-        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
+
         Spinner instructorSelectionSpinner = (Spinner) view.findViewById(R.id.chooseInstructorSpinner);
         ArrayAdapter<Instructor> instructorArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, instructorArrayList);
         instructorSelectionSpinner.setAdapter(instructorArrayAdapter);
@@ -99,6 +110,8 @@ RepositoryForStudentOrganizer.Repository repo;
     }
 
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
+        ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
+        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
 
         EditText editCourseTitle = (EditText) view.findViewById(R.id.courseNameTxtInput);
         Button setCourseStartBtn= (Button) view.findViewById(R.id.courseStartDateBtn);
@@ -111,25 +124,35 @@ RepositoryForStudentOrganizer.Repository repo;
         Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
 
+
+
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null){
-            int associatetTerm = termId;
+            int associatedTerm = termId;
             int selectedCourseId = courseId;
+            int instructorId = insructorId;
             editCourseTitle.setText(courseTitle);
             setCourseStartBtn.setText(courseStart);
             setSetCourseEndBtn.setText(courseEnd);
-
-            //instructorSpinner.setSelection(courseInstructor);
-            //termSpinner.setSelection(termId);
+//            instructorSpinner.setSelection();
+//            termSpinner.setSelection(termId-1);
             //Spinners require array position*******************
+
+            int instructorPosition = getItemPosition(bundle.getInt("insructorId"), instructorArrayList);
+            instructorSpinner.setSelection(instructorPosition);
+
+            int termPosition = getItemPosition(bundle.getInt("termId"), termArrayList);
+            termSpinner.setSelection(termPosition);
+
+
 
         }
 
 
 
 
-        //TODO: SET THE COURSE INFO BUNDLE TO PASS
+        
         addAssessmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,35 +168,58 @@ RepositoryForStudentOrganizer.Repository repo;
                     fragmentTransaction.addToBackStack("addAssessmentView");
                     fragmentTransaction.commit();
                 }
+                else{
+                    Fragment assessmentDetails = new AssessmentDetailsFragment();
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, assessmentDetails);
+                    fragmentTransaction.addToBackStack("addAssessmentView");
+                    fragmentTransaction.commit();
+                }
             }
         });
 
 
-        //TODO: SET THE COURSE INFO BUNDLE TO PASS
-        //ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
+
+
         addInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle1 = getArguments();
+                bundle1.putInt("courseId", bundle.getInt("courseId"));
+                Fragment instructorViewFragment = new InstructorFragment();
+                instructorViewFragment.setArguments(bundle1);
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new InstructorFragment());
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                 fragmentTransaction.addToBackStack("addInstructorView");
                 fragmentTransaction.commit();
             }
         });
 
 
-        //TODO: SET THE COURSE INFO BUNDLE TO PASS
+
         //Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle1 = getArguments();
+                bundle1.putInt("courseId", bundle.getInt("courseId"));
+                Fragment notesFragment = new NoteDetailsFragment();
+                notesFragment.setArguments(bundle1);
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, new AllNotesFragment());
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
                 fragmentTransaction.addToBackStack("addNoteView");
                 fragmentTransaction.commit();
             }
         });
 
+    }
+
+    public int getItemPosition(int id, ArrayList arrayList)
+    {
+        for (int i=0; i<arrayList.size(); i++)
+            if (arrayList.get(i).equals(id))
+                return i;
+        return 0;
     }
 
 

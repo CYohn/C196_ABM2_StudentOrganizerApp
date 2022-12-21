@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Testing data
         Assessment assessment =new Assessment(1,"Performance","Testing Assessments DB", "11/21/22", "11/20/22", 25 );
-        Course course =new Course(2,"Testing Course DB","11/19/22", "11/19/22", "Testing", "Testing Instructor", 1);
-        Instructor instructor =new Instructor(3,"Testing Instructor DB","email@test.com", "555-555-5555", 25);
+        Course course =new Course(2,"Testing Course DB","11/19/22", "11/19/22", "Testing", "Testing Instructor", 1, 1);
+        Instructor instructor =new Instructor(1,"Testing Instructor DB","email@test.com", "555-555-5555", 25);
         Note note =new Note(4,"11/17/22","testing note DB","Note Title Test",25);
         Term term =new Term(5,"Testing Term DB","11/16/22", "11/15/22");
         Term term2 = new Term(1, "Testing Second Term", "Start", "End");
