@@ -2,12 +2,16 @@ package UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
@@ -43,16 +47,23 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position=getAdapterPosition();
-                    final Course selectedCourse=mCourses.get(position);
-                    Intent intent = new Intent(context,CourseDetailsFragment.class);
+                    int position = getAdapterPosition();
+                    final Course selectedCourse = mCourses.get(position);
 
-                    intent.putExtra("courseTitleValue", selectedCourse.getCourseTitle());
-                    intent.putExtra("courseStartValue", selectedCourse.getCourseStartDate());
-                    intent.putExtra("courseEndValue", selectedCourse.getCourseEndDate());
-                    intent.putExtra("courseInstructorValue", selectedCourse.getCourseInstructor());
-                    intent.putExtra("courseStatusValue", selectedCourse.getCourseStatus());
-                    context.startActivity(intent);
+                    Fragment courseDetails = new CourseDetailsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("associatedTerm", selectedCourse.getAssociatedTermId());
+                    bundle.putInt("courseId", selectedCourse.getCourseId());
+                    bundle.putString("courseTitle", selectedCourse.getCourseTitle());
+                    bundle.putString("courseStart", selectedCourse.getCourseStartDate());
+                    bundle.putString("courseEnd", (selectedCourse.getCourseEndDate()));
+                    bundle.putString("courseInstructor", selectedCourse.getCourseInstructor());
+                    courseDetails.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
+                    fragmentTransaction.addToBackStack("TermDetailsFragmentView");
+                    fragmentTransaction.commit();
                 }
             });
         }
