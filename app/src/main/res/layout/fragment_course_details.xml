@@ -8,9 +8,8 @@
 
     <EditText
         android:id="@+id/courseNameTxtInput"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/enterNameOfCourseInstruction"
         app:layout_constraintBottom_toTopOf="@id/startAndEndBtnHolder"
@@ -20,13 +19,14 @@
 
     <LinearLayout
         android:id="@+id/startAndEndBtnHolder"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="64dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseNameTxtInput"
-        app:layout_constraintBottom_toTopOf="@id/chooseInstructorInstruction">
+        app:layout_constraintBottom_toTopOf="@id/chooseInstructorInstruction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
 
         <Button
             android:id="@+id/courseStartDateBtn"
@@ -51,22 +51,19 @@
 
     <TextView
         android:id="@+id/chooseInstructorInstruction"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="18dp"
-        android:layout_marginTop="0dpdp"
-        android:layout_marginBottom="0dpdp"
         android:text="@string/chooseCourseInstructorInstruction"
+        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder"
         app:layout_constraintBottom_toTopOf="@+id/chooseInstructorWidgetHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder"
-        app:layout_constraintVertical_bias="0.244" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <LinearLayout
         android:id="@+id/chooseInstructorWidgetHolder"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/chooseTermInstruction"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +74,7 @@
         <Spinner
             android:id="@+id/chooseInstructorSpinner"
             android:layout_width="270dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_weight="1" />
 
         <ImageButton
@@ -85,28 +82,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/addInstructor"
             android:src="@android:drawable/ic_input_add" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/chooseTermInstruction"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="18dp"
-        android:layout_marginTop="0dp"
         android:text="@string/addAssociatedTermInstruction"
         app:layout_constraintBottom_toTopOf="@id/associatedTermContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseInstructorWidgetHolder" />
 
     <LinearLayout
         android:id="@+id/associatedTermContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="0dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/addNotesAndAssessmentsBtnHolder"
+        app:layout_constraintBottom_toTopOf="@id/courseStatusRadioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseTermInstruction">
@@ -127,18 +122,54 @@
 
     </LinearLayout>
 
+    <RadioGroup
+        android:id="@+id/courseStatusRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/addNotesAndAssessmentsBtnHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer">
+
+        <RadioButton
+            android:id="@+id/plannedRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/planned"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/inProgressRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inProgress"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/completedRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/completed"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/droppedRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dropped"
+            android:textSize="12sp" />
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/addNotesAndAssessmentsBtnHolder"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/saveCourseBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer"
-        app:layout_constraintVertical_bias="0.14">
+        app:layout_constraintTop_toBottomOf="@id/courseStatusRadioGroup">
 
         <Button
             android:id="@+id/addAssessmentBtn"
@@ -158,24 +189,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/addNoteBtnLabel" />
+
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/saveCourseBtn"
-        android:layout_width="64dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:layout_marginTop="0dp"
         android:src="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNotesAndAssessmentsBtnHolder"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <RadioGroup
-        android:layout_width="317dp"
-        android:layout_height="48dp"
-        tools:layout_editor_absoluteX="-7dp"
-        tools:layout_editor_absoluteY="322dp" />
+        tools:layout_editor_absoluteX="296dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

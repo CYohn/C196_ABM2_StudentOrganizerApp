@@ -159,4 +159,9 @@
     <string name="get_started">Get Started</string>
     <string name="setNotificationLabelText">Set Notification</string>
     <string name="genericSwitchLabel">Switch To Select</string>
+    <string name="planned">Planned</string>
+    <string name="inProgress">In Progress</string>
+    <string name="completed">Completed</string>
+    <string name="dropped">Dropped</string>
+    <string name="addInstructor">Add an instructor to the database</string>
 </resources>

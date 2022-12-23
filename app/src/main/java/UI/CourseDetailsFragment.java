@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +47,7 @@ public class CourseDetailsFragment extends Fragment {
     String courseStart;
     String courseEnd;
     String courseInstructor;
+    String courseProgress;
     int insructorId;
 
     EditText editCourseTitle;
@@ -57,6 +60,11 @@ public class CourseDetailsFragment extends Fragment {
     Button addAssessmentbtn;
     Button addNoteBtn;
     ImageButton saveBtn;
+    RadioGroup progressRadioGroup;
+    RadioButton inProgressRadioBtn;
+    RadioButton plannedRadioBtn;
+    RadioButton droppedRadioBtn;
+    RadioButton completedRadioBtn;
 
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Term>termArrayList;
@@ -141,6 +149,12 @@ public class CourseDetailsFragment extends Fragment {
         Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
         Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
+        RadioGroup progressRadioGroup = (RadioGroup) view.findViewById(R.id.courseStatusRadioGroup);
+        RadioButton inProgressRadioBtn = (RadioButton) view.findViewById(R.id.inProgressRadioBtn);
+        RadioButton plannedRadioBtn = (RadioButton) view.findViewById(R.id.plannedRadio);
+        RadioButton droppedRadioBtn = (RadioButton) view.findViewById(R.id.droppedRadioBtn);
+        RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
+
 
 
 
@@ -345,7 +359,6 @@ public class CourseDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
     }
 
     public int getItemPosition(int id, ArrayList arrayList)
