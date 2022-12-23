@@ -94,9 +94,6 @@ public class TermDetailsFragment extends Fragment {
 
     public  void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
 
-//        Term termTest = new Term(2,"Testing Update Without UI", "Start", "End");
-//        repo.insert(termTest);
-
         Bundle bundle = getArguments();
 
         closeBtn = (ImageButton) getView().findViewById(R.id.closeAddTermsBtn);
@@ -148,7 +145,6 @@ public class TermDetailsFragment extends Fragment {
             public void onClick(View view) {
                 int termID = termId;
                 String termName = ((EditText) getView().findViewById(R.id.termNameEditText)).getText().toString();
-                //TODO: GET THE OTHER INFO FROM THE VIEW
                 String startDate = startBtn.getText().toString();
                 String endDate = endBtn.getText().toString();
 

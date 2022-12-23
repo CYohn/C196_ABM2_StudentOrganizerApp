@@ -53,8 +53,8 @@
         android:id="@+id/chooseInstructorInstruction"
         android:layout_width="0dp"
         android:layout_height="18dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="0dpdp"
+        android:layout_marginBottom="0dpdp"
         android:text="@string/chooseCourseInstructorInstruction"
         app:layout_constraintBottom_toTopOf="@+id/chooseInstructorWidgetHolder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
     <LinearLayout
         android:id="@+id/chooseInstructorWidgetHolder"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/chooseTermInstruction"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
         android:id="@+id/chooseTermInstruction"
         android:layout_width="0dp"
         android:layout_height="18dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:text="@string/addAssociatedTermInstruction"
         app:layout_constraintBottom_toTopOf="@id/associatedTermContainer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +104,7 @@
         android:id="@+id/associatedTermContainer"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/addNotesAndAssessmentsBtnHolder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,11 +131,11 @@
         android:id="@+id/addNotesAndAssessmentsBtnHolder"
         android:layout_width="0dp"
         android:layout_height="53dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/saveCourseBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer"
         app:layout_constraintVertical_bias="0.14">
@@ -164,12 +164,18 @@
         android:id="@+id/saveCourseBtn"
         android:layout_width="64dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNotesAndAssessmentsBtnHolder"
         app:layout_constraintVertical_bias="0.0" />
+
+    <RadioGroup
+        android:layout_width="317dp"
+        android:layout_height="48dp"
+        tools:layout_editor_absoluteX="-7dp"
+        tools:layout_editor_absoluteY="322dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
