@@ -67,8 +67,8 @@ public class CourseDetailsFragment extends Fragment {
     RadioButton completedRadioBtn;
 
     RepositoryForStudentOrganizer.Repository repo;
-    ArrayList<Term>termArrayList;
-    ArrayList<Instructor>instructorArrayList;
+    ArrayList<Term> termArrayList;
+    ArrayList<Instructor> instructorArrayList;
 
     final Calendar startDateCalendar = Calendar.getInstance();
     final Calendar endDateCalendar = Calendar.getInstance();
@@ -99,6 +99,7 @@ public class CourseDetailsFragment extends Fragment {
             courseEnd = bundle.getString("courseEnd");
             courseInstructor = bundle.getString("courseInstructor");
             insructorId = bundle.getInt("instructorId");
+            courseProgress = bundle.getString("courseProgress");
 
             repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
             ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
@@ -133,15 +134,15 @@ public class CourseDetailsFragment extends Fragment {
         return view;
     }
 
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
 
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
         ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
 
         EditText editCourseTitle = (EditText) view.findViewById(R.id.courseNameTxtInput);
-        Button setCourseStartBtn= (Button) view.findViewById(R.id.courseStartDateBtn);
-        Button setCourseEndBtn= (Button) view.findViewById(R.id.courseEndDateBtn);
+        Button setCourseStartBtn = (Button) view.findViewById(R.id.courseStartDateBtn);
+        Button setCourseEndBtn = (Button) view.findViewById(R.id.courseEndDateBtn);
         Spinner instructorSpinner = (Spinner) view.findViewById(R.id.chooseInstructorSpinner);
         ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
         Spinner termSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
@@ -156,11 +157,9 @@ public class CourseDetailsFragment extends Fragment {
         RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
 
 
-
-
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
-        if (bundle != null){
+        if (bundle != null) {
             int associatedTerm = termId;
             int selectedCourseId = courseId;
             int instructorId = insructorId;
@@ -172,9 +171,11 @@ public class CourseDetailsFragment extends Fragment {
             instructorSpinner.setSelection(instructorPosition);
             int termPosition = getItemPosition(bundle.getInt("termId"), termArrayList);
             termSpinner.setSelection(termPosition);
+            //Set the radio buttons
+            courseProgress = bundle.getString("courseStatus", "Unchecked");
+            setCourseProgressBtn(courseProgress);
 
-        }
-        else{
+        } else {
             int associatedTerm = -1;
             int selectedCourseId = -1;
             int instructorId = -1;
@@ -184,6 +185,11 @@ public class CourseDetailsFragment extends Fragment {
             //Set the spinners
             instructorSpinner.setSelection(1);
             termSpinner.setSelection(1);
+            //Set the term progress
+            plannedRadioBtn.setChecked(false);
+            inProgressRadioBtn.setChecked(false);
+            completedRadioBtn.setChecked(false);
+            droppedRadioBtn.setChecked(false);
         }
 
 
@@ -196,7 +202,7 @@ public class CourseDetailsFragment extends Fragment {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
                 try {
                     startDateCalendar.setTime(simpleDateFormat.parse(dateString));
-                } catch (ParseException startDateParseException){
+                } catch (ParseException startDateParseException) {
                     startDateParseException.printStackTrace();
                     startDateParseException.getMessage();
                     startDateParseException.getCause();
@@ -206,9 +212,9 @@ public class CourseDetailsFragment extends Fragment {
             }
 
         });
-        startDateDialog = new DatePickerDialog.OnDateSetListener(){
+        startDateDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth ){
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                 startDateCalendar.set(YEAR, year);
                 startDateCalendar.set(MONTH, monthOfYear);
                 startDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
@@ -225,7 +231,7 @@ public class CourseDetailsFragment extends Fragment {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
                 try {
                     endDateCalendar.setTime(simpleDateFormat.parse(dateString));
-                } catch (ParseException endDateParseException){
+                } catch (ParseException endDateParseException) {
                     endDateParseException.printStackTrace();
                     endDateParseException.getMessage();
                     endDateParseException.getCause();
@@ -235,9 +241,9 @@ public class CourseDetailsFragment extends Fragment {
             }
 
         });
-        endDateDialog = new DatePickerDialog.OnDateSetListener(){
+        endDateDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth ){
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                 endDateCalendar.set(YEAR, year);
                 endDateCalendar.set(MONTH, monthOfYear);
                 endDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
@@ -260,8 +266,7 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, assessmentDetails);
                     fragmentTransaction.addToBackStack("addAssessmentView");
                     fragmentTransaction.commit();
-                }
-                else{
+                } else {
                     Fragment assessmentDetails = new AssessmentDetailsFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, assessmentDetails);
@@ -272,12 +277,10 @@ public class CourseDetailsFragment extends Fragment {
         });
 
 
-
-
         addInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bundle != null) {
+                if (bundle != null) {
                     Bundle bundle1 = getArguments();
                     bundle1.putInt("courseId", bundle.getInt("courseId"));
                     Fragment instructorViewFragment = new InstructorFragment();
@@ -286,23 +289,22 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                     fragmentTransaction.addToBackStack("addInstructorView");
                     fragmentTransaction.commit();
-                }
-                else{
+                } else {
                     Fragment instructorViewFragment = new InstructorFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                     fragmentTransaction.addToBackStack("addInstructorView");
-                    fragmentTransaction.commit();}
+                    fragmentTransaction.commit();
+                }
             }
         });
-
 
 
         //Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bundle != null) {
+                if (bundle != null) {
                     Bundle bundle1 = getArguments();
                     bundle1.putInt("courseId", bundle.getInt("courseId"));
                     Fragment notesFragment = new NoteDetailsFragment();
@@ -311,8 +313,7 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
                     fragmentTransaction.addToBackStack("addNoteView");
                     fragmentTransaction.commit();
-                }
-                else{
+                } else {
                     Fragment notesFragment = new NoteDetailsFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
@@ -330,7 +331,7 @@ public class CourseDetailsFragment extends Fragment {
                 String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
                 String startDate = setCourseStartBtn.getText().toString();
                 String endDate = setCourseEndBtn.getText().toString();
-                String courseStatus = "In Progress";
+                String courseStatus = getCourseProgress();
 
 
                 Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
@@ -342,18 +343,17 @@ public class CourseDetailsFragment extends Fragment {
 
                 //Save info to DB
                 Course course;
-                if (courseId == -1){
-                    repo=new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
+                if (courseId == -1) {
+                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
                     int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
-                    course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor,insructorId,termId );
+                    course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
                     repo.insert(course);
-                }
-                else{
-                    course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId,termId);
+                } else {
+                    course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
                     repo.update(course);
                 }
                 Fragment courseList = new AllCoursesListFragment();
-                FragmentTransaction fragmentTransaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseList);
                 fragmentTransaction.addToBackStack("CourseListFragmentView");
                 fragmentTransaction.commit();
@@ -361,15 +361,14 @@ public class CourseDetailsFragment extends Fragment {
         });
     }
 
-    public int getItemPosition(int id, ArrayList arrayList)
-    {
-        for (int i=0; i<arrayList.size(); i++)
+    public int getItemPosition(int id, ArrayList arrayList) {
+        for (int i = 0; i < arrayList.size(); i++)
             if (arrayList.get(i).equals(id))
                 return i;
         return 0;
     }
 
-    private void updateStartDateLabel(){
+    private void updateStartDateLabel() {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
@@ -377,7 +376,7 @@ public class CourseDetailsFragment extends Fragment {
         setCourseStartBtn.setText(simpleDateFormat.format(startDateCalendar.getTime()));
     }
 
-    private void updateEndDateLabel(){
+    private void updateEndDateLabel() {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
@@ -385,5 +384,56 @@ public class CourseDetailsFragment extends Fragment {
         setCourseEndBtn.setText(simpleDateFormat.format(endDateCalendar.getTime()));
     }
 
+    private String setCourseProgressBtn(String courseProgress) {
 
+        switch (courseProgress) {
+            case "Planned":
+                plannedRadioBtn = getView().findViewById(R.id.plannedRadio);
+                plannedRadioBtn.setChecked(true);
+                return "Planned";
+
+            case "In Progress":
+                inProgressRadioBtn = getView().findViewById(R.id.inProgressRadioBtn);
+                inProgressRadioBtn.setChecked(true);
+                return "In Progress";
+
+            case "Completed":
+                completedRadioBtn = getView().findViewById(R.id.completedRadioBtn);
+                completedRadioBtn.setChecked(true);
+                return "Completed";
+
+            case "Dropped":
+                droppedRadioBtn = getView().findViewById(R.id.droppedRadioBtn);
+                droppedRadioBtn.setChecked(true);
+                return "Dropped";
+
+            default:
+                return "Unchecked";
+        }
+    }
+
+    private String getCourseProgress(){
+        RadioGroup radioBtnGroup = getView().findViewById(R.id.courseStatusRadioGroup);
+        int selectedRadioBtnId = radioBtnGroup.getCheckedRadioButtonId();
+        View selectedRadioBtn = radioBtnGroup.findViewById(selectedRadioBtnId);
+        int selectedRadioBtnIndex = radioBtnGroup.indexOfChild(selectedRadioBtn);
+        switch (selectedRadioBtnIndex) {
+            case -1:
+                return "Unchecked";
+            case 0:
+                return "Planned";
+
+            case 1:
+                return "In Progress";
+
+            case 2:
+                return "Completed";
+
+            case 3:
+                return "Dropped";
+
+            default:
+                return "Unchecked";
+        }
+    }
 }
