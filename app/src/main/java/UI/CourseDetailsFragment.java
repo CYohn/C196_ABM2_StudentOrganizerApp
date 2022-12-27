@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Course;
@@ -98,7 +100,7 @@ public class CourseDetailsFragment extends Fragment {
             courseStart = bundle.getString("courseStart");
             courseEnd = bundle.getString("courseEnd");
             courseInstructor = bundle.getString("courseInstructor");
-            insructorId = bundle.getInt("instructorId");
+            insructorId = bundle.getInt("insructorId");
             courseProgress = bundle.getString("courseProgress");
 
             repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
@@ -117,11 +119,11 @@ public class CourseDetailsFragment extends Fragment {
 
         //Set the terms spinner
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
-
         Spinner termsSelectionSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
         ArrayAdapter<Term> termArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, termArrayList);
         termsSelectionSpinner.setAdapter(termArrayAdapter);
         int termPosition = getItemPosition(termId, termArrayList);
+        System.out.println("Term Position: " + termPosition);
         termsSelectionSpinner.setSelection(termPosition);
 
         //Set the instructor spinner
@@ -130,7 +132,7 @@ public class CourseDetailsFragment extends Fragment {
         ArrayAdapter<Instructor> instructorArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, instructorArrayList);
         instructorSelectionSpinner.setAdapter(instructorArrayAdapter);
         int instructorPosition = getItemPosition(insructorId, instructorArrayList);
-        termsSelectionSpinner.setSelection(instructorPosition);
+        instructorSelectionSpinner.setSelection(instructorPosition);
         return view;
     }
 
@@ -160,17 +162,17 @@ public class CourseDetailsFragment extends Fragment {
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null) {
-            int associatedTerm = termId;
+ //           int associatedTerm = termId;
             int selectedCourseId = courseId;
-            int instructorId = insructorId;
+   //         int instructorId = insructorId;
             editCourseTitle.setText(courseTitle);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
             //Set the spinners
-            int instructorPosition = getItemPosition(bundle.getInt("insructorId"), instructorArrayList);
-            instructorSpinner.setSelection(instructorPosition);
-            int termPosition = getItemPosition(bundle.getInt("termId"), termArrayList);
-            termSpinner.setSelection(termPosition);
+//            int instructorPosition = getItemPosition(bundle.getInt("insructorId"), instructorArrayList);
+//            instructorSpinner.setSelection(instructorPosition);
+//            int termPosition = getItemPosition(bundle.getInt("termId"), termArrayList);
+//            termSpinner.setSelection(termPosition);
             //Set the radio buttons
             courseProgress = bundle.getString("courseStatus", "Unchecked");
             setCourseProgressBtn(courseProgress);
@@ -362,11 +364,30 @@ public class CourseDetailsFragment extends Fragment {
     }
 
     public int getItemPosition(int id, ArrayList arrayList) {
-        for (int i = 0; i < arrayList.size(); i++)
-            if (arrayList.get(i).equals(id))
-                return i;
-        return 0;
-    }
+        if (arrayList.get(0) instanceof Term) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                Term term = (Term) arrayList.get(i);
+                if(term.getTermId() == id){
+                    int index = arrayList.indexOf(term);
+                    return index;
+                }
+            }
+        }
+        if (arrayList.get(0) instanceof Instructor) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                Instructor instructor = (Instructor) arrayList.get(i);
+                if (instructor.getInstructorId() == id){
+                    int index = arrayList.indexOf(instructor);
+                    return index;
+                }
+
+            }
+        }
+            return -1;
+        };
+
+
+
 
     private void updateStartDateLabel() {
         String dateFormat = "MM/dd/YY";
@@ -436,4 +457,5 @@ public class CourseDetailsFragment extends Fragment {
                 return "Unchecked";
         }
     }
+
 }
