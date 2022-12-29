@@ -92,6 +92,10 @@ public class CourseActivity extends AppCompatActivity {
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 startActivity(notesIntent);
                 return true;
+            case R.id.instructorMenuOption:
+                Intent instructorIntent = new Intent(this, InstructorActivity.class);
+                startActivity(instructorIntent);
+                return true;
 
             default:return super.onOptionsItemSelected(item);
         }
