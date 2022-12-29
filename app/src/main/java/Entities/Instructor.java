@@ -12,7 +12,7 @@ public class Instructor {
     private String instructorName;
     private String instructorEmail;
     private String instructorPhone;
-    private int associatedCourseId;
+
 
 
 
@@ -22,22 +22,18 @@ public class Instructor {
                 ", instructorId=" + instructorId +
                 ", instructorName=" + instructorName +
                 ", instructorPhone=" + instructorPhone +
-                ", instructorEmail='" + instructorEmail +
-                ", associatedCourseId='" + associatedCourseId + '\'' +
+                ", instructorEmail='" + instructorEmail +'\'' +
                 '}';
     }
 
-    public Instructor(int instructorId, String instructorName, String instructorEmail, String instructorPhone, int associatedCourseId) {
+    public Instructor(int instructorId, String instructorName, String instructorEmail, String instructorPhone) {
         this.instructorId = instructorId;
         this.instructorName = instructorName;
         this.instructorEmail = instructorEmail;
         this.instructorPhone = instructorPhone;
-        this.associatedCourseId = associatedCourseId;
+
     }
 
-    public int getAssociatedCourseId() {return associatedCourseId;}
-
-    public void setAssociatedCourseId(int associatedCourseId) {this.associatedCourseId = associatedCourseId;}
 
     public int getInstructorId() {
         return instructorId;

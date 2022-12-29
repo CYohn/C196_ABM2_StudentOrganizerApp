@@ -56,6 +56,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
                     bundle.putString("instructorNameValue", selectedInstructor.getInstructorName());
                     bundle.putString("instructorEmailValue", selectedInstructor.getInstructorEmail());
                     bundle.putString("instructorPhoneValue", selectedInstructor.getInstructorPhone());
+                    bundle.putInt("instructorIdValue", selectedInstructor.getInstructorId());
 
                     instructorDetails.setArguments(bundle);
                     fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorDetails);
