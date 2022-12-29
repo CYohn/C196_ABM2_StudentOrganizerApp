@@ -58,7 +58,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
                     bundle.putString("instructorPhoneValue", selectedInstructor.getInstructorPhone());
 
                     instructorDetails.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.notesActivityFragmentViewer, instructorDetails);
+                    fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorDetails);
                     fragmentTransaction.addToBackStack("NoteDetailFragment");
                     fragmentTransaction.commit();
                 }

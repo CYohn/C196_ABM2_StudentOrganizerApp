@@ -24,10 +24,6 @@ import Entities.Note;
 public class AllNotesFragment extends Fragment {
 
 
-
-
-
-
     public AllNotesFragment() {
         // Required empty public constructor
     }
@@ -44,7 +40,6 @@ public class AllNotesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -57,7 +52,8 @@ public class AllNotesFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RecyclerView recyclerView = getView().findViewById(R.id.notesRecyclerList);
-        RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
+        RepositoryForStudentOrganizer.Repository repo =
+                new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
         List<Note> notes=repo.getAllNotes();
         final NoteAdapter noteAdapter= new NoteAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

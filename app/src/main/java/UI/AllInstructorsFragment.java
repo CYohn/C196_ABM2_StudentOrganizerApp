@@ -5,9 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
+
+import java.util.List;
+
+import Database.RepositoryForStudentOrganizer;
+import Entities.Instructor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,33 +24,15 @@ import com.zybooks.c196_abm2_charity_yohn.R;
  */
 public class AllInstructorsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public AllInstructorsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllInstructorsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AllInstructorsFragment newInstance(String param1, String param2) {
+
+    public static AllInstructorsFragment newInstance() {
         AllInstructorsFragment fragment = new AllInstructorsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,8 +41,6 @@ public class AllInstructorsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -61,5 +49,17 @@ public class AllInstructorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_instructors, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+        RecyclerView recyclerView = getView().findViewById(R.id.allInstructorsRecyclerView);
+        RepositoryForStudentOrganizer.Repository repo =
+                new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
+        List<Instructor> instructors = repo.getmAllInstructors();
+        final InstructorAdapter instructorAdapter = new InstructorAdapter(getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(instructorAdapter);
+        instructorAdapter.setmInstructor(instructors);
     }
 }
