@@ -2,12 +2,16 @@ package UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
@@ -45,13 +49,22 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 public void onClick(View view) {
                     int position=getAdapterPosition();
                     final Note selectedNote= mNotes.get(position);
-                    Intent intent = new Intent(context,NoteDetailsFragment.class);
 
-                    intent.putExtra("noteDateValue", selectedNote.getNoteDate());
-                    intent.putExtra("noteTextValue", selectedNote.getNoteText());
-                    intent.putExtra("noteTitleValue", selectedNote.getNoteTitle());
+                    Fragment noteDetails = new NoteDetailsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
 
-                    context.startActivity(intent);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("noteDateValue", selectedNote.getNoteDate());
+                    bundle.putString("noteTextValue", selectedNote.getNoteText());
+                    bundle.putString("noteTitleValue", selectedNote.getNoteTitle());
+                    bundle.putInt("associatedCourse",selectedNote.getAssociatedCourseId());
+                    bundle.putInt("noteIdValue", selectedNote.getNoteId());
+
+                    noteDetails.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.notesActivityFragmentViewer, noteDetails);
+                    fragmentTransaction.addToBackStack("NoteDetailFragment");
+                    fragmentTransaction.commit();
                 }
             });
         }
