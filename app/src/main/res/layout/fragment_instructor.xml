@@ -12,11 +12,12 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/instructorNamrTxtinput"
+            android:id="@+id/instructorNameTxtInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             android:text="Name" />
 
         <EditText
@@ -25,6 +26,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:minHeight="48dp"
             android:text="@string/instructorEmail"
             tools:text="@string/instructorEmail" />
 
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
+            android:minHeight="48dp"
             android:text="@string/instructorPhone"
             tools:text="@string/instructorPhone" />
 
@@ -47,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/saveAndExitBtn"
                 android:src="@android:drawable/ic_menu_save" />
 
             <ImageButton
@@ -54,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/close"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
         </LinearLayout>
     </LinearLayout>
