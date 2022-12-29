@@ -48,7 +48,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
                     int position=getAdapterPosition();
                     final Instructor selectedInstructor= mInstructor.get(position);
 
-                    Fragment instructorDetails = new InstructorFragment();
+                    Fragment instructorDetails = new InstructorDetailsFragment();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
 
                     Bundle bundle = new Bundle();

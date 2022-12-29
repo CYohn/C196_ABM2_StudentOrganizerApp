@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.zybooks.c196_abm2_charity_yohn.R;
 
 
-public class InstructorFragment extends Fragment {
+public class InstructorDetailsFragment extends Fragment {
 
 
     String instructorName;
@@ -25,14 +25,14 @@ public class InstructorFragment extends Fragment {
     ImageButton saveInstructorBtn;
     ImageButton closeInstructorBtn;
 
-    public InstructorFragment() {
+    public InstructorDetailsFragment() {
         // Required empty public constructor
     }
 
 
 
-    public static InstructorFragment newInstance(String param1, String param2) {
-        InstructorFragment fragment = new InstructorFragment();
+    public static InstructorDetailsFragment newInstance(String param1, String param2) {
+        InstructorDetailsFragment fragment = new InstructorDetailsFragment();
         Bundle args = new Bundle();
         return fragment;
     }
@@ -50,6 +50,6 @@ public class InstructorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_instructor, container, false);
+        return inflater.inflate(R.layout.fragment_instructor_details, container, false);
     }
 }

@@ -32,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Course;
@@ -285,14 +283,14 @@ public class CourseDetailsFragment extends Fragment {
                 if (bundle != null) {
                     Bundle bundle1 = getArguments();
                     bundle1.putInt("courseId", bundle.getInt("courseId"));
-                    Fragment instructorViewFragment = new InstructorFragment();
+                    Fragment instructorViewFragment = new InstructorDetailsFragment();
                     instructorViewFragment.setArguments(bundle1);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                     fragmentTransaction.addToBackStack("addInstructorView");
                     fragmentTransaction.commit();
                 } else {
-                    Fragment instructorViewFragment = new InstructorFragment();
+                    Fragment instructorViewFragment = new InstructorDetailsFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                     fragmentTransaction.addToBackStack("addInstructorView");
