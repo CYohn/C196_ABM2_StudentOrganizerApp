@@ -19,5 +19,9 @@
         android:title="Assessments"
         app:showAsAction="never">
     </item>
+    <item android:id="@+id/instructorMenuOption"
+        android:title="Instructors"
+        app:showAsAction="never">
+    </item>
 
 </menu>

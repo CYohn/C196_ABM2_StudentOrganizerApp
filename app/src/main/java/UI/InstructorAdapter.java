@@ -18,7 +18,6 @@ import com.zybooks.c196_abm2_charity_yohn.R;
 import java.util.List;
 
 import Entities.Instructor;
-import Entities.Note;
 
 public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.InstructorViewHolder> {
 
@@ -37,7 +36,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
         private final TextView DBInstructorEmail;
 
 
-        private NoteViewHolder(View itemView){
+        private InstructorViewHolder(View itemView){
             super(itemView);
             DBInstructorName = itemView.findViewById(R.id.instructorNameCardView);
             DBInstructorEmail = itemView.findViewById(R.id.instructorEmailCardView);
@@ -78,7 +77,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
 
     //Put things on the text view
     @Override
-    public void onBindViewHolder(@NonNull NoteAdapter.NoteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InstructorAdapter.InstructorViewHolder holder, int position) {
         if(mInstructor !=null){
             Instructor selectedInstructor = mInstructor.get(position);
             String name = selectedInstructor.getInstructorName();
@@ -91,7 +90,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
 
         }
         else{
-            holder.DBInsructorName.setText("No Instructor Found");
+            holder.DBInstructorName.setText("No Instructor Found");
             holder.DBInstructorPhone.setText("Phone");
             holder.DBInstructorEmail.setText("Email");
         }
