@@ -192,12 +192,26 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/saveCourseBtn"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:src="@drawable/ic_baseline_save_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="296dp" />
+    <LinearLayout
+        android:layout_width="316dp"
+        android:layout_height="57dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="390dp">
+
+        <ImageButton
+            android:id="@+id/saveCourseBtn"
+            android:layout_width="163dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_save_24" />
+
+        <ImageButton
+            android:id="@+id/deleteCourseBtn"
+            android:layout_width="155dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_delete_forever_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

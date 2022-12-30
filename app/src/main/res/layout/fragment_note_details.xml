@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noteDetailConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="UI.NotesActivity">
@@ -42,22 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteTxtInput" />
 
-    <ImageButton
-        android:id="@+id/saveNoteBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="16dp"
-        android:src="@android:drawable/ic_menu_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/associatedCourse"
-        app:layout_constraintVertical_bias="0.006" />
-
     <Button
         android:id="@+id/noteDateBtn"
         android:layout_width="wrap_content"
@@ -69,5 +54,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteTitleTxt" />
+
+    <LinearLayout
+        android:layout_width="356dp"
+        android:layout_height="57dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/associatedCourse">
+
+        <ImageButton
+            android:id="@+id/saveNoteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/saveAndExitBtn"
+            android:minHeight="48dp"
+            app:srcCompat="@drawable/ic_baseline_save_24" />
+
+        <ImageButton
+            android:id="@+id/deleteNoteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/delete"
+            android:minHeight="48dp"
+            app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

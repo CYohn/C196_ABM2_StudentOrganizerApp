@@ -130,7 +130,6 @@ ArrayList<Course> courseArrayList;
             assessmentTypeToggle.setChecked(false);
             assessmentTypeToggle.setText("Type");
             associatedCourseSpinner.setSelection(0);
-
         }
 
     }

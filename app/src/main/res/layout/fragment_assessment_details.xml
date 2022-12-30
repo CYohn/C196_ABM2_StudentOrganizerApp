@@ -9,36 +9,46 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="75dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/assessmentTypeLabel"
-            android:layout_width="64dp"
-            android:layout_height="46dp"
-            android:layout_marginBottom="4dp"
-            android:text="@string/typeLabel" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008">
 
         <ToggleButton
             android:id="@+id/assessmentTypeToggle"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textOn="Performance"
-            android:textOff="Objective"/>
+            android:layout_marginTop="5dp"
+            android:gravity="left"
+            android:textOff="Objective"
+            android:textOn="Performance" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/addAssessmentFragmentCloseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_gravity="right"
+            android:baselineAlignBottom="true"
+            android:contentDescription="@string/addAssessmentFragmentCloseBtn"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:textAlignment="viewEnd" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/assessmentNameTxtinput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:ems="10"
+        android:layout_marginTop="5dp"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="@string/assessmentName"
@@ -50,8 +60,8 @@
 
     <LinearLayout
         android:id="@+id/assessmentStartAndEndHolder"
-        android:layout_width="357dp"
-        android:layout_height="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/assessmentAssociatedCourseLabel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,11 +102,11 @@
 
     <Spinner
         android:id="@+id/assessmentAssociatedCourseSpinner"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:contentDescription="@string/chooseAssociatedCourse"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationHolder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,19 +116,12 @@
 
     <LinearLayout
         android:id="@+id/bottomNavigationHolder"
-        android:layout_width="355dp"
-        android:layout_height="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/addAssessmentFragmentCloseBtn"
-            android:layout_width="122dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/addAssessmentFragmentCloseBtn"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
         <ImageButton
             android:id="@+id/assessmentAlarmBtn"
@@ -129,11 +132,19 @@
             android:src="@android:drawable/ic_lock_idle_alarm" />
 
         <ImageButton
+            android:id="@+id/deleteAssessmentBtn"
+            android:layout_width="104dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_delete_forever_24" />
+
+        <ImageButton
             android:id="@+id/assessmentSaveButton"
             android:layout_width="107dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/saveAndAddCourseBtn"
             android:src="@android:drawable/ic_menu_save" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

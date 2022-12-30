@@ -1,66 +1,89 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instructorDetailsConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:label="Add or Edit Instructor"
     tools:context="UI.InstructorDetailsFragment">
 
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/instructorNameTxtInput"
         android:layout_width="match_parent"
-        android:layout_height="194dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="42dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/instructorPhoneTxtinput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveInstructorBtn"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <EditText
-            android:id="@+id/instructorNameTxtInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:text="Name" />
+    <EditText
+        android:id="@+id/instructorEmailTxtInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:text="@string/instructorEmail"
+        app:layout_constraintBottom_toTopOf="@+id/deleteInstructorBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/instructorEmail" />
 
-        <EditText
-            android:id="@+id/instructorEmailTxtInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:text="@string/instructorEmail"
-            tools:text="@string/instructorEmail" />
+    <EditText
+        android:id="@+id/instructorPhoneTxtinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:text="@string/instructorPhone"
+        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/instructorPhone" />
 
-        <EditText
-            android:id="@+id/instructorPhoneTxtinput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            android:text="@string/instructorPhone"
-            tools:text="@string/instructorPhone" />
+    <ImageButton
+        android:id="@+id/saveInstructorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/saveAndExitBtn"
+        android:src="@android:drawable/ic_menu_save" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="225dp"
-            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/saveInstructorBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/saveAndExitBtn"
-                android:src="@android:drawable/ic_menu_save" />
+    <ImageButton
+        android:id="@+id/closeAddInstructorScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/close"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toTopOf="@+id/instructorNameTxtInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="@+id/saveInstructorBtn"
+        app:layout_constraintTop_toTopOf="@+id/saveInstructorBtn"
+        app:layout_constraintVertical_bias="0.0" />
 
-            <ImageButton
-                android:id="@+id/closeAddInstructorScreen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/close"
-                android:src="@android:drawable/ic_menu_close_clear_cancel" />
-        </LinearLayout>
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/deleteInstructorBtn"
+        android:layout_width="71dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
