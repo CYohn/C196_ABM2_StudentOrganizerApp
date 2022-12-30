@@ -4,8 +4,10 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,22 +18,26 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.zybooks.c196_abm2_charity_yohn.R;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import Database.RepositoryForStudentOrganizer;
+import Entities.Course;
 import Entities.Term;
 
 public class TermDetailsFragment extends Fragment {
@@ -47,6 +53,7 @@ public class TermDetailsFragment extends Fragment {
     ImageButton closeBtn;
     ImageButton saveBtn;
     ImageButton nextBtn;
+    ImageButton deleteBtn;
 
     Button startBtn;
     Button endBtn;
@@ -56,6 +63,7 @@ public class TermDetailsFragment extends Fragment {
     DatePickerDialog.OnDateSetListener endDateDialog;
 
     RepositoryForStudentOrganizer.Repository repo;
+    ArrayList<Course> courseArrayList;
 
     public TermDetailsFragment() {
         // Required empty public constructor
@@ -102,6 +110,7 @@ public class TermDetailsFragment extends Fragment {
         endBtn = (Button) getView().findViewById(R.id.termEndBtn);
         saveBtn = (ImageButton) getView().findViewById(R.id.termSaveBtn);
         nextBtn = (ImageButton) getView().findViewById(R.id.addTermNextBtn);
+        deleteBtn = (ImageButton) getView().findViewById(R.id.deleteTermBtn);
 
 
 
@@ -225,6 +234,73 @@ public class TermDetailsFragment extends Fragment {
                 updateEndDateLabel();
             }
         };
+
+        //Handling the delete button
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Term term;
+                Bundle bundle = getArguments();
+
+                if (bundle != null) {
+                    termId = bundle.getInt("termId", -1);
+                    if (termId != -1) {
+                        termId = bundle.getInt("termId");
+                        termStart = bundle.getString("termStartDateValue");
+                        termEnd = bundle.getString("termEndDateValue");
+                        termTitle = bundle.getString("termTitleValue");
+
+                        term = new Term(termId, termTitle, termStart,
+                                termEnd);
+
+                        //Set an alert to confirm the choice to delete
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setCancelable(true);
+                        builder.setTitle("Permanently Deleting Term");
+                        builder.setMessage("Are you sure you wish to permanently delete this Term?");
+                        builder.setPositiveButton("Confirm",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        boolean anyCourses = checkForAssociatedCourses(termId, courseArrayList);
+                                        if (anyCourses == false){
+                                            repo.delete(term);
+                                            Fragment allterms = new AllTermsListFragment();
+                                            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.termsFragmentContainerView, allterms);
+                                            fragmentTransaction.addToBackStack("AllTermsView");
+                                            fragmentTransaction.commit();
+                                        }
+                                    }
+                                });
+                        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                        //alert the user.
+                    } else {
+                        Context context = getContext();
+                        CharSequence text = "Assessment must be saved before deleting.";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }else{
+                    Context context = getContext();
+                    CharSequence text = "Assessment must be saved before deleting.";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
     }
 
     private void updateStartDateLabel(){
@@ -241,4 +317,30 @@ public class TermDetailsFragment extends Fragment {
         endBtn.setText(simpleDateFormat.format(endDateCalendar.getTime()));
     }
 
+    private boolean checkForAssociatedCourses(int termId, ArrayList courseArrayList){
+        courseArrayList = new ArrayList<Course>(repo.getmAllCourses());
+
+        for (int i=0; i < courseArrayList.size(); i++ ) {
+            Course course = (Course) courseArrayList.get(i);
+            int associatedTerm = course.getAssociatedTermId();
+            if(associatedTerm == termId){
+            //Show user the dialog informing them to delete associated courses first.
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setCancelable(false);
+            builder.setTitle("Associated Courses Found");
+            builder.setMessage("Please delete the courses associated with this term before deleting the term. Thank you.");
+            builder.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return true;
+        }
+        }
+        return false;
+    }
 }
