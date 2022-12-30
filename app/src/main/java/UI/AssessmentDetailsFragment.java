@@ -118,7 +118,6 @@ Bundle bundle;
             startDateBtn.setText("Start: " + assessmentStartDate);
             endDateBtn.setText("End: " + assessmentEndDate);
             //Spinner associatedCourseSpinner;
-
             String performance = "Performance";
             String objective = "Objective";
             if (assessmentType.equalsIgnoreCase(performance)) {
