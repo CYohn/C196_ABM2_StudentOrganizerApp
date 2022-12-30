@@ -42,6 +42,7 @@ public class NoteDetailsFragment extends Fragment {
     String noteDate;
     String noteText;
     int associatedCourse;
+
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Course> courseArrayList;
     final Calendar noteDateCalendar = Calendar.getInstance();
@@ -84,11 +85,13 @@ public class NoteDetailsFragment extends Fragment {
     }
 
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+
         editNoteTitleField = (EditText) getView().findViewById(R.id.noteTitleTxt);
         editNoteDateBtn = (Button) getView().findViewById(R.id.noteDateBtn);
         editNoteTextField = (EditText) getView().findViewById(R.id.noteTxtInput);
         saveNoteBtn = (ImageButton) getView().findViewById(R.id.saveNoteBtn);
 
+        repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
         courseArrayList = (ArrayList<Course>) repo.getmAllCourses();
 
         Bundle bundle = getArguments();
@@ -109,6 +112,11 @@ public class NoteDetailsFragment extends Fragment {
             editNoteTitleField.setText("Note Title", TextView.BufferType.EDITABLE);
             editNoteDateBtn.setText("Date");
             editNoteTextField.setText("Note Text", TextView.BufferType.EDITABLE);
+
+            Spinner associatedCourseSpinner = (Spinner) getView().findViewById(R.id.associatedCourse);
+            ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(),
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, courseArrayList);
+            associatedCourseSpinner.setAdapter(courseArrayAdapter);
             associatedCourseSpinner.setSelection(0);
         }
 
