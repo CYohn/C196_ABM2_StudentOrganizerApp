@@ -1,6 +1,5 @@
 package UI;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zybooks.c196_abm2_charity_yohn.R;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import Database.RepositoryForStudentOrganizer;
@@ -23,6 +23,7 @@ import Entities.Note;
 
 public class AllNotesFragment extends Fragment {
 
+    FloatingActionButton floatingActionButton;
 
     public AllNotesFragment() {
         // Required empty public constructor
@@ -59,5 +60,19 @@ public class AllNotesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(noteAdapter);
         noteAdapter.setmNotes(notes);
+
+
+        floatingActionButton = getView().findViewById(R.id.addInstructorFloatingAction);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment noteDetails = new NoteDetailsFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.notesActivityFragmentViewer, noteDetails);
+                fragmentTransaction.addToBackStack("NoteDetailsview");
+                fragmentTransaction.commit();
+            }
+        });
     }
 }

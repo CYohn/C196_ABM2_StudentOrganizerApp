@@ -105,6 +105,7 @@ public class NoteDetailsFragment extends Fragment {
             editNoteDateBtn.setText(bundle.getString("noteDateValue"));
             editNoteTextField.setText(bundle.getString("noteTextValue"), TextView.BufferType.EDITABLE);
         } else {
+            String dateToday = Calendar.getInstance().getTime().toString();
             editNoteTitleField.setText("Note Title", TextView.BufferType.EDITABLE);
             editNoteDateBtn.setText("Date");
             editNoteTextField.setText("Note Text", TextView.BufferType.EDITABLE);

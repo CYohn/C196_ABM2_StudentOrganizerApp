@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zybooks.c196_abm2_charity_yohn.R;
 
 import java.util.List;
@@ -20,6 +23,7 @@ import Entities.Term;
 
 public class AllTermsListFragment extends Fragment {
 
+FloatingActionButton floatingActionButton;
 
     public AllTermsListFragment() {
         // Required empty public constructor
@@ -48,7 +52,21 @@ public class AllTermsListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(termsAdapter);
         termsAdapter.setTerms(terms);
+
+        floatingActionButton = getView().findViewById(R.id.addTermFloatingAction);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment termDetails = new TermDetailsFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.termsFragmentContainerView, termDetails);
+                fragmentTransaction.addToBackStack("TermDetailsView");
+                fragmentTransaction.commit();
+            }
+        });
     }
+
 
 
     public void addTermPressed(View view) {
