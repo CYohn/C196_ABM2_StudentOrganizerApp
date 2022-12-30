@@ -126,8 +126,8 @@
     <string name="objectiveExamLabel">Objective</string>
     <string name="typeLabel">Type</string>
     <string name="assessmentName">Assessment Name (Ex: Math Midterm)</string>
-    <string name="startDate">Start Date</string>
-    <string name="endDateLabel">End Date</string>
+    <string name="startDate">Start Date:</string>
+    <string name="endDateLabel">End Date:</string>
     <string name="assessmentAssociatedCourseLabel">Associated Course</string>
     <string name="addAssessmentFragmentCloseBtn">Close the Add Assessment Screen</string>
     <string name="chooseAssociatedCourse">Choose the associated course</string>

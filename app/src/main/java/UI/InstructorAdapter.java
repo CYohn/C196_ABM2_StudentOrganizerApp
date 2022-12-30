@@ -60,7 +60,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.In
 
                     instructorDetails.setArguments(bundle);
                     fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorDetails);
-                    fragmentTransaction.addToBackStack("NoteDetailFragment");
+                    fragmentTransaction.addToBackStack("InstructorDetailFragment");
                     fragmentTransaction.commit();
                 }
             });
