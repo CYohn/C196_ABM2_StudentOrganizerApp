@@ -60,6 +60,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     bundle.putString("assessmentStartTxtView", selectedAssessment.getAssessmentStartDate());
                     bundle.putString("assessmentEndTxtView", selectedAssessment.getAssessmentEndDate());
                     bundle.putString("assessmentTypeTxtView", selectedAssessment.getAssessmentType());
+                    bundle.putInt("associatedCourse", selectedAssessment.getAssociatedCourseId());
                     assessmentDetails.setArguments(bundle);
                     fragmentTransaction.replace(R.id.assessmentFragmentContainerView, assessmentDetails);
                     fragmentTransaction.addToBackStack("AssessmentDetailsFragmentView");
