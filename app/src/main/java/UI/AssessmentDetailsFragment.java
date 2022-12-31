@@ -117,7 +117,7 @@ Bundle bundle;
         associatedCourseSpinner.setAdapter(courseArrayAdapter);
 
 
-        titleText = (EditText) getView().findViewById(R.id.assessmentNameTxtinput);
+        titleText = (EditText) getView().findViewById(R.id.assessmentNameTxtInput);
         startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
         endDateBtn = (Button) getView().findViewById(R.id.assessmentEndDateBtn);
         deleteBtn = (ImageButton) getView().findViewById(R.id.deleteAssessmentBtn);
@@ -132,8 +132,8 @@ Bundle bundle;
             associatedCourseSpinner.setSelection(coursePosition);
 
             titleText.setText(assessmentTitle, TextView.BufferType.EDITABLE);
-            startDateBtn.setText("Start: " + assessmentStartDate);
-            endDateBtn.setText("End: " + assessmentEndDate);
+            startDateBtn.setText(assessmentStartDate);
+            endDateBtn.setText(assessmentEndDate);
             //Spinner associatedCourseSpinner;
             String performance = "Performance";
             String objective = "Objective";
@@ -192,11 +192,25 @@ Bundle bundle;
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         repo.delete(assessment);
+                                        //Advise the user the assessment was deleted
+                                        Context context = getContext();
+                                        CharSequence text = "Assessment successfully deleted.";
+                                        int duration = Toast.LENGTH_LONG;
+
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                        //Send the user back to the All Assessments List
+                                        Fragment assessmentList = new AllAssessmentsListFragment();
+                                        FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                                        fragmentTransaction.replace(R.id.assessmentFragmentContainerView, assessmentList);
+                                        fragmentTransaction.addToBackStack("AssessmentListFragment");
+                                        fragmentTransaction.commit();
                                     }
                                 });
                         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Do nothing
                             }
                         });
 
@@ -232,7 +246,7 @@ Bundle bundle;
                 associatedCourseSpinner = view.findViewById(R.id.assessmentAssociatedCourseSpinner);
                 Course selectedCourse = (Course) associatedCourseSpinner.getSelectedItem();
                 int courseId = selectedCourse.getCourseId();
-                String title = ((EditText) getView().findViewById(R.id.assessmentNameTxtinput)).getText().toString();
+                String assessmentTitle = ((EditText) getView().findViewById(R.id.assessmentNameTxtInput)).getText().toString();
                 String endDate = endDateBtn.getText().toString();
                 String startDate = startDateBtn.getText().toString();
                 String assessmentType = assessmentTypeToggle.getText().toString();
@@ -243,11 +257,12 @@ Bundle bundle;
 
                 //Save info to DB
                 Assessment assessment;
-
-                if (assessmentId == -1) {
+                if(bundle == null || assessmentId == -1){
                     repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
                     int newId = repo.getAllAssessments().get(repo.getAllAssessments().size() - 1).getAssessmentId() + 1;//get the ID of the last term in the list
-                    assessment = new Assessment(newId, assessmentType, assessmentTitle, endDate, startDate, courseId);
+                    System.out.println("newId no: " + newId);
+                    assessment = new Assessment(newId, assessmentType,
+                            assessmentTitle, endDate, startDate, courseId);
                     repo.insert(assessment);
 
                     //Inform the user the assessment was saved
