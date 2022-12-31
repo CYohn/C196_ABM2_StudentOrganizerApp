@@ -4,7 +4,10 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,6 +36,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import Database.RepositoryForStudentOrganizer;
+import Entities.Assessment;
 import Entities.Course;
 import Entities.Note;
 
@@ -53,6 +58,8 @@ public class NoteDetailsFragment extends Fragment {
     EditText editNoteTextField;
     Spinner associatedCourseSpinner;
     ImageButton saveNoteBtn;
+    ImageButton deleteBtn;
+    private int noteId;
 
 
     public NoteDetailsFragment() {
@@ -90,12 +97,14 @@ public class NoteDetailsFragment extends Fragment {
         editNoteDateBtn = (Button) getView().findViewById(R.id.noteDateBtn);
         editNoteTextField = (EditText) getView().findViewById(R.id.noteTxtInput);
         saveNoteBtn = (ImageButton) getView().findViewById(R.id.saveNoteBtn);
+        deleteBtn = (ImageButton) getView().findViewById(R.id.deleteNoteBtn);
 
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
         courseArrayList = (ArrayList<Course>) repo.getmAllCourses();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
+            associatedCourse = bundle.getInt("associatedCourse", -1);
             Spinner associatedCourseSpinner = (Spinner) getView().findViewById(R.id.associatedCourse);
             ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(),
                     androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, courseArrayList);
@@ -107,11 +116,13 @@ public class NoteDetailsFragment extends Fragment {
             editNoteTitleField.setText(bundle.getString("noteTitleValue"), TextView.BufferType.EDITABLE);
             editNoteDateBtn.setText(bundle.getString("noteDateValue"));
             editNoteTextField.setText(bundle.getString("noteTextValue"), TextView.BufferType.EDITABLE);
+            noteId = bundle.getInt("noteIdValue", -1);
         } else {
             String dateToday = Calendar.getInstance().getTime().toString();
             editNoteTitleField.setText("Note Title", TextView.BufferType.EDITABLE);
             editNoteDateBtn.setText("Date");
             editNoteTextField.setText("Note Text", TextView.BufferType.EDITABLE);
+            noteId = -1;
 
             Spinner associatedCourseSpinner = (Spinner) getView().findViewById(R.id.associatedCourse);
             ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(),
@@ -160,9 +171,10 @@ public class NoteDetailsFragment extends Fragment {
 
                 //Save info to DB
                 Note note;
-                if (courseId == -1) {
+
+                if (noteId == -1) {
                     repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-                    int newId = repo.getmAllCourses().get(repo.getAllNotes().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
+                    int newId = repo.getAllNotes().get(repo.getAllNotes().size() - 1).getNoteId() + 1;//get the ID of the last term in the list
                     note = new Note(newId, noteDate, noteText, noteTitle, courseId);
                     repo.insert(note);
                 } else {
@@ -176,7 +188,86 @@ public class NoteDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        //Handling the delete button
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Note note;
+                Bundle bundle = getArguments();
+
+                if (bundle != null) {
+                    noteId = bundle.getInt("noteIdValue", -1);
+                    if (noteId != -1) {
+                        noteId = bundle.getInt("noteIdValue");
+                        noteDate = bundle.getString("noteDateValue");
+                        noteTitle = bundle.getString("noteTitleValue");
+                        noteText = bundle.getString("assessmentEndTxtView");
+                        associatedCourse = bundle.getInt("associatedCourse");
+
+                        note = new Note(noteId, noteDate, noteText,
+                                noteTitle, associatedCourse);
+
+                        //Set an alert to confirm the coice to delete
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setCancelable(true);
+                        builder.setTitle("Permanently Deleting Note");
+                        builder.setMessage("Are you sure you wish to permanently delete this note?");
+                        builder.setPositiveButton("Confirm",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //Delete note from DB
+                                        repo.delete(note);
+                                        //Advise user the note was deleted successfully
+                                        Context context = getContext();
+                                        CharSequence text = "Note was successfully deleted.";
+                                        int duration = Toast.LENGTH_LONG;
+
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                        //Send the user back to the all notes list
+                                        Fragment noteList = new AllNotesFragment();
+                                        FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                                        fragmentTransaction.replace(R.id.notesActivityFragmentViewer, noteList);
+                                        fragmentTransaction.addToBackStack("NotesListFragment");
+                                        fragmentTransaction.commit();
+                                    }
+                                });
+                        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Do nothing
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                        //alert the user.
+                    } else {
+                        Context context = getContext();
+                        CharSequence text = "Note must be saved before deleting.";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }else{
+
+                    Context context = getContext();
+                    CharSequence text = "Note must be saved before deleting.";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
     }
+
+
+
 
 
 
