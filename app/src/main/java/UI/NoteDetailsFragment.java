@@ -177,9 +177,23 @@ public class NoteDetailsFragment extends Fragment {
                     int newId = repo.getAllNotes().get(repo.getAllNotes().size() - 1).getNoteId() + 1;//get the ID of the last term in the list
                     note = new Note(newId, noteDate, noteText, noteTitle, courseId);
                     repo.insert(note);
+                    //Inform the user the note was saved
+                    Context context = getContext();
+                    CharSequence text = "Note saved successfully";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 } else {
                     note = new Note(bundle.getInt("noteIdValue", -1), noteDate, noteText, noteTitle, courseId);
                     repo.update(note);
+                    //Inform the user the note updated successfully
+                    Context context = getContext();
+                    CharSequence text = "Note updated successfully";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
                 Fragment noteList = new AllNotesFragment();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
