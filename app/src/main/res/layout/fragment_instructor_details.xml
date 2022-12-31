@@ -12,55 +12,48 @@
         android:id="@+id/instructorNameTxtInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/instructorPhoneTxtinput"
+        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveInstructorBtn"
+        app:layout_constraintTop_toBottomOf="@+id/closeAddInstructorScreen"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/instructorEmailTxtInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
-        android:ems="10"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:ems="10"
         android:text="@string/instructorEmail"
-        app:layout_constraintBottom_toTopOf="@+id/deleteInstructorBtn"
+        app:layout_constraintBottom_toTopOf="@+id/instructorPhoneTxtinput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructorNameTxtInput"
+        app:layout_constraintVertical_bias="0.052"
         tools:text="@string/instructorEmail" />
 
     <EditText
         android:id="@+id/instructorPhoneTxtinput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp"
         android:text="@string/instructorPhone"
-        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
+        app:layout_constraintBottom_toTopOf="@+id/saveAndDeleteBtnHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructorEmailTxtInput"
         tools:text="@string/instructorPhone" />
-
-    <ImageButton
-        android:id="@+id/saveInstructorBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/saveAndExitBtn"
-        android:src="@android:drawable/ic_menu_save" />
-
 
     <ImageButton
         android:id="@+id/closeAddInstructorScreen"
@@ -68,22 +61,35 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/close"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintBottom_toTopOf="@+id/instructorNameTxtInput"
+        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="@+id/saveInstructorBtn"
-        app:layout_constraintTop_toTopOf="@+id/saveInstructorBtn"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
 
-    <ImageButton
-        android:id="@+id/deleteInstructorBtn"
-        android:layout_width="71dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_baseline_delete_forever_24"
+    <LinearLayout
+        android:id="@+id/saveAndDeleteBtnHolder"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/saveInstructorBtn"
+            android:layout_width="180dp"
+            android:layout_height="69dp"
+            android:contentDescription="@string/saveAndExitBtn"
+            android:src="@android:drawable/ic_menu_save" />
+
+        <ImageButton
+            android:id="@+id/deleteInstructorBtn"
+            android:layout_width="179dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_baseline_delete_forever_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
