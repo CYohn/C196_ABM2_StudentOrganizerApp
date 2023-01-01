@@ -23,8 +23,11 @@ import Entities.Course;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder>{
 
     private List<Course>mCourses;
+    private List<Course>copyCourses;
+
     private final Context context;
     private final LayoutInflater mInflator;
+
     CourseAdapter(Context context){
         mInflator= LayoutInflater.from(context);
         this.context=context;

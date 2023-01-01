@@ -4,7 +4,10 @@ import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -34,8 +38,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import Database.RepositoryForStudentOrganizer;
+import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
+import Entities.Note;
 import Entities.Term;
 
 
@@ -69,11 +75,16 @@ public class CourseDetailsFragment extends Fragment {
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Term> termArrayList;
     ArrayList<Instructor> instructorArrayList;
+    private ArrayList <Note> assessmentArrayList;
+    private ArrayList <Assessment> assessmentsArrayList;
 
     final Calendar startDateCalendar = Calendar.getInstance();
     final Calendar endDateCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener endDateDialog;
     DatePickerDialog.OnDateSetListener startDateDialog;
+    private ImageButton deleteBtn;
+
+
 
     public CourseDetailsFragment() {
         // Required empty public constructor
@@ -114,7 +125,6 @@ public class CourseDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_course_details, container, false);
         RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
-
         //Set the terms spinner
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
         Spinner termsSelectionSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
@@ -137,32 +147,36 @@ public class CourseDetailsFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
 
-        ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
-        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
+        //Get entities from repo, add them to the corresponding list
+        ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms();
+        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors();
+        ArrayList<Note> noteArrayList = (ArrayList<Note>) repo.getAllNotes();
+        ArrayList<Assessment> assessmentArrayList = (ArrayList<Assessment>) repo.getAllAssessments();
 
         EditText editCourseTitle = (EditText) view.findViewById(R.id.courseNameTxtInput);
         Button setCourseStartBtn = (Button) view.findViewById(R.id.courseStartDateBtn);
         Button setCourseEndBtn = (Button) view.findViewById(R.id.courseEndDateBtn);
         Spinner instructorSpinner = (Spinner) view.findViewById(R.id.chooseInstructorSpinner);
-        ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
         Spinner termSpinner = (Spinner) view.findViewById(R.id.associatedTermSpinner);
-        ImageButton addTermBtn = (ImageButton) view.findViewById(R.id.addAssociatedTermBtn);
-        Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
-        Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
-        ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
         RadioGroup progressRadioGroup = (RadioGroup) view.findViewById(R.id.courseStatusRadioGroup);
         RadioButton inProgressRadioBtn = (RadioButton) view.findViewById(R.id.inProgressRadioBtn);
         RadioButton plannedRadioBtn = (RadioButton) view.findViewById(R.id.plannedRadio);
         RadioButton droppedRadioBtn = (RadioButton) view.findViewById(R.id.droppedRadioBtn);
         RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
 
+        ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteCourseBtn);
+        ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
+        ImageButton addTermBtn = (ImageButton) view.findViewById(R.id.addAssociatedTermBtn);
+        Button addAssessmentBtn = (Button) view.findViewById(R.id.addAssessmentBtn);
+        Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
+        ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
 
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null) {
- //           int associatedTerm = termId;
+            //           int associatedTerm = termId;
             int selectedCourseId = courseId;
-   //         int instructorId = insructorId;
+            //         int instructorId = insructorId;
             editCourseTitle.setText(courseTitle);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
@@ -183,8 +197,8 @@ public class CourseDetailsFragment extends Fragment {
             setCourseStartBtn.setText("Start");
             setCourseEndBtn.setText("End");
             //Set the spinners
-            instructorSpinner.setSelection(1);
-            termSpinner.setSelection(1);
+            instructorSpinner.setSelection(0);
+            termSpinner.setSelection(0);
             //Set the term progress
             plannedRadioBtn.setChecked(false);
             inProgressRadioBtn.setChecked(false);
@@ -258,7 +272,14 @@ public class CourseDetailsFragment extends Fragment {
                 Bundle bundle = getArguments();
                 if (bundle != null) {
                     Bundle bundle2 = new Bundle();
-                    bundle2.putInt("associatedCourse", bundle.getInt("courseId", -1));
+                    bundle2.putInt("associatedCourseId", bundle.getInt("courseId", -1));
+                    bundle2.putString("assessmentTitleTxtView", "Please enter assessment title");
+                    bundle2.putString("assessmentStartTxtView", "Start");
+                    bundle2.putString("assessmentEndTxtView", "End");
+                    bundle2.putString("assessmentTypeTxtView", "Type");
+                    bundle2.putInt("assessmentId", -1);
+
+                    saveCourse();
 
                     Fragment assessmentDetails = new AssessmentDetailsFragment();
                     assessmentDetails.setArguments(bundle2);
@@ -326,32 +347,34 @@ public class CourseDetailsFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int termID = bundle.getInt("associatedTerm");
-                int courseId = bundle.getInt("courseId");
-                String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
-                String startDate = setCourseStartBtn.getText().toString();
-                String endDate = setCourseEndBtn.getText().toString();
-                String courseStatus = getCourseProgress();
+                saveCourse();
 
-
-                Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
-                insructorId = selectedInstructor.getInstructorId();
-                courseInstructor = selectedInstructor.getInstructorName();
-
-                Term selectedTerm = (Term) termSpinner.getSelectedItem();
-                termId = selectedTerm.getTermId();
-
-                //Save info to DB
-                Course course;
-                if (courseId == -1) {
-                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-                    int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
-                    course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-                    repo.insert(course);
-                } else {
-                    course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-                    repo.update(course);
-                }
+//                String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
+//                String startDate = setCourseStartBtn.getText().toString();
+//                String endDate = setCourseEndBtn.getText().toString();
+//                String courseStatus = getCourseProgress();
+//
+//                Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
+//                insructorId = selectedInstructor.getInstructorId();
+//                courseInstructor = selectedInstructor.getInstructorName();
+//                Term selectedTerm = (Term) termSpinner.getSelectedItem();
+//                termId = selectedTerm.getTermId();
+//
+//                if (bundle != null){
+//                courseId = bundle.getInt("courseId");
+//                }else{courseId = -1;}
+//
+//                //Save info to DB
+//                Course course;
+//                if (courseId == -1) {
+//                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
+//                    int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
+//                    course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+//                    repo.insert(course);
+//                } else {
+//                    course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+//                    repo.update(course);
+//                }
                 Fragment courseList = new AllCoursesListFragment();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseList);
@@ -359,6 +382,145 @@ public class CourseDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Course course;
+                Bundle bundle = getArguments();
+
+                if (bundle != null) {
+                    courseId = bundle.getInt("courseId", -1);
+                    if (courseId != -1) {
+
+                        termId = bundle.getInt("associatedTerm", -1);
+                        courseId = bundle.getInt("courseId");
+                        courseTitle = bundle.getString("coursetitle");
+                        courseStart = bundle.getString("courseStart");
+                        courseEnd = bundle.getString("courseEnd");
+                        insructorId = bundle.getInt("instructorId", -1);
+                        courseProgress = bundle.getString("courseStatus");
+
+                        course = new Course(courseId, courseTitle, courseStart,
+                                courseEnd, courseProgress, courseInstructor,
+                                insructorId, termId);
+
+                        //Set an alert to confirm the choice to delete
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setCancelable(true);
+                        builder.setTitle("Permanently Deleting Course, Notes, and Assessments");
+                        builder.setMessage("Are you sure you wish to permanently delete this Course? All associated notes and assessments will also be deleted.");
+                        builder.setPositiveButton("Confirm",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteAssociatedNotes(courseId, CourseDetailsFragment.this.assessmentArrayList);
+                                        deleteAssociatedAssessments(courseId, assessmentsArrayList);
+                                        repo.delete(course);
+                                        CharSequence text = "Assessment must be saved before deleting.";
+                                        int duration = Toast.LENGTH_LONG;
+
+                                        Toast toast = Toast.makeText(getContext(), text, duration);
+                                        toast.show();
+
+                                    }
+                                });
+                        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Do nothing
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                        //alert the user.
+                    } else {
+                        Context context = getContext();
+                        CharSequence text = "Course must be saved before deleting.";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }else{
+                    Context context = getContext();
+                    CharSequence text = "Course must be saved before deleting.";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    private void deleteAssociatedNotes(int courseId, ArrayList<Note> notesArrayList) {
+        notesArrayList = new ArrayList<Note>(repo.getAllNotes());
+
+        for (int i=0; i < notesArrayList.size(); i++ ) {
+            Note note = (Note) notesArrayList.get(i);
+            int associatedCourseId = note.getAssociatedCourseId();
+            if(associatedCourseId == courseId){
+                repo.delete(note);
+            }
+        }
+    }
+
+private void saveCourse(){
+        Bundle bundle = getArguments();
+
+    EditText editCourseTitle = (EditText) getView().findViewById(R.id.courseNameTxtInput);
+    Button setCourseStartBtn = (Button) getView().findViewById(R.id.courseStartDateBtn);
+    Button setCourseEndBtn = (Button) getView().findViewById(R.id.courseEndDateBtn);
+    Spinner instructorSpinner = (Spinner) getView().findViewById(R.id.chooseInstructorSpinner);
+    Spinner termSpinner = (Spinner) getView().findViewById(R.id.associatedTermSpinner);
+    RadioGroup progressRadioGroup = (RadioGroup) getView().findViewById(R.id.courseStatusRadioGroup);
+    RadioButton inProgressRadioBtn = (RadioButton) getView().findViewById(R.id.inProgressRadioBtn);
+    RadioButton plannedRadioBtn = (RadioButton) getView().findViewById(R.id.plannedRadio);
+    RadioButton droppedRadioBtn = (RadioButton) getView().findViewById(R.id.droppedRadioBtn);
+    RadioButton completedRadioBtn = (RadioButton) getView().findViewById(R.id.completedRadioBtn);
+
+    String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
+    String startDate = setCourseStartBtn.getText().toString();
+    String endDate = setCourseEndBtn.getText().toString();
+    String courseStatus = getCourseProgress();
+
+    Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
+    insructorId = selectedInstructor.getInstructorId();
+    courseInstructor = selectedInstructor.getInstructorName();
+    Term selectedTerm = (Term) termSpinner.getSelectedItem();
+    termId = selectedTerm.getTermId();
+
+    if (bundle != null){
+        courseId = bundle.getInt("courseId");
+    }else{courseId = -1;}
+
+    //Save info to DB
+    Course course;
+    if (courseId == -1) {
+        repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
+        int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
+        course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+        repo.insert(course);
+    } else {
+        course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+        repo.update(course);
+    }
+}
+
+
+    private void deleteAssociatedAssessments(int courseId, ArrayList<Assessment> assessmentArrayList){
+        assessmentArrayList = new ArrayList<Assessment>(repo.getAllAssessments());
+
+        for (int i = 0; i < assessmentArrayList.size(); i++ ) {
+            Assessment assessment = (Assessment) assessmentArrayList.get(i);
+            int associatedCourseId = assessment.getAssociatedCourseId();
+            if(associatedCourseId == courseId){
+                repo.delete(assessment);
+            }
+        }
     }
 
     public int getItemPosition(int id, ArrayList arrayList) {
@@ -381,8 +543,8 @@ public class CourseDetailsFragment extends Fragment {
 
             }
         }
-            return -1;
-        };
+        return -1;
+    };
 
 
 

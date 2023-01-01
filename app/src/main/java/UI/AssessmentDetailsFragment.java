@@ -1,9 +1,11 @@
 package UI;
 
+import static androidx.core.app.ShareCompat.getCallingActivity;
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -40,6 +42,7 @@ import java.util.Locale;
 import Database.RepositoryForStudentOrganizer;
 import Entities.Assessment;
 import Entities.Course;
+import Entities.Term;
 
 //
 ///**
@@ -128,6 +131,13 @@ Bundle bundle;
 
         if (bundle != null) {
 
+            assessmentTitle = bundle.getString("assessmentTitleTxtView");
+            assessmentStartDate = bundle.getString("assessmentStartTxtView");
+            assessmentEndDate = bundle.getString("assessmentEndTxtView");
+            assessmentType = bundle.getString("assessmentTypeTxtView");
+            courseIdNumber = bundle.getInt("associatedCourseId", -1);
+            assessmentId = bundle.getInt("assessmentId", -1);
+
             int coursePosition = getItemPosition(courseIdNumber, courseArrayList);
             associatedCourseSpinner.setSelection(coursePosition);
 
@@ -144,7 +154,7 @@ Bundle bundle;
             if (assessmentType.equalsIgnoreCase(objective)) {
                 assessmentTypeToggle.setText("Objective");
                 assessmentTypeToggle.setChecked(false);
-            }
+            }else{assessmentTypeToggle.setText("Type");}
         } else {
             titleText.setText("Please Enter Assessment Title");
             startDateBtn.setText("Start Date");
@@ -273,7 +283,7 @@ Bundle bundle;
                     toast.show();
                 } else {
 
-                    if (bundle != null) {
+                    if (bundle != null && assessmentId != -1) {
                         assessmentId = bundle.getInt("assessmentId", -1);
                         assessment = new Assessment(assessmentId, assessmentType,
                                 assessmentTitle, endDate, startDate, courseId);
@@ -287,11 +297,58 @@ Bundle bundle;
                         toast.show();
                     }
                 }
-                Fragment assessmentList = new AllAssessmentsListFragment();
-                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.assessmentFragmentContainerView, assessmentList);
-                fragmentTransaction.addToBackStack("AssessmentListFragment");
-                fragmentTransaction.commit();
+
+                String activityName = getActivity().getClass().getCanonicalName();
+                System.out.println("Activity name =  " + activityName);
+
+                if (activityName.equals("UI.CourseActivity")) {
+                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
+                    courseId = bundle.getInt("associatedCourse");
+                    int termId;
+                    String courseTitle;
+                    String courseStart;
+                    String courseEnd;
+                    String courseInstructor;
+                    String courseProgress;
+                    int insructorId;
+                    for (int i = 0; i < courseList.size(); i++){
+                        Course course = (Course) courseList.get(i);
+                        if (course.getCourseId() == courseId){
+                            termId = course.getAssociatedTermId();
+                            courseTitle = course.getCourseTitle();
+                            courseStart = course.getCourseStartDate();
+                            courseEnd = course.getCourseEndDate();
+                            courseInstructor = course.getCourseInstructor();
+                            courseProgress = course.getCourseStatus();
+                            insructorId = course.getInstructorId();
+                        }
+                    }
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt("associatedTerm", selectedCourse.getAssociatedTermId());
+                    bundle1.putInt("courseId", selectedCourse.getCourseId());
+                    bundle1.putString("courseTitle", selectedCourse.getCourseTitle());
+                    bundle1.putString("courseStart", selectedCourse.getCourseStartDate());
+                    bundle1.putString("courseEnd", (selectedCourse.getCourseEndDate()));
+                    bundle1.putString("courseInstructor", selectedCourse.getCourseInstructor());
+                    bundle1.putInt("insructorId", selectedCourse.getInstructorId());
+                    bundle1.putString("courseStatus", selectedCourse.getCourseStatus());
+
+                    Fragment courseDetails = new CourseDetailsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    courseDetails.setArguments(bundle1);
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
+                    fragmentTransaction.addToBackStack("CourseDetailsView");
+                    fragmentTransaction.commit();
+
+                }else{ // The hosting activity is UI.AssessmentActivity
+                    Fragment assessmentList = new AllAssessmentsListFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.assessmentFragmentContainerView, assessmentList);
+                    fragmentTransaction.addToBackStack("AssessmentListFragment");
+                    fragmentTransaction.commit();
+                }
+
+
             }
         });
 
