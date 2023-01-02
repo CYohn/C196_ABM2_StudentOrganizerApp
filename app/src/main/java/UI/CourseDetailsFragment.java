@@ -151,7 +151,7 @@ public class CourseDetailsFragment extends Fragment {
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms();
         ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors();
         ArrayList<Note> noteArrayList = (ArrayList<Note>) repo.getAllNotes();
-        ArrayList<Assessment> assessmentArrayList = (ArrayList<Assessment>) repo.getAllAssessments();
+        ArrayList<Assessment> assessmentArrayList = (ArrayList<Assessment>) repo.getmAllAssessments();
 
         EditText editCourseTitle = (EditText) view.findViewById(R.id.courseNameTxtInput);
         Button setCourseStartBtn = (Button) view.findViewById(R.id.courseStartDateBtn);
@@ -512,7 +512,7 @@ private void saveCourse(){
 
 
     private void deleteAssociatedAssessments(int courseId, ArrayList<Assessment> assessmentArrayList){
-        assessmentArrayList = new ArrayList<Assessment>(repo.getAllAssessments());
+        assessmentArrayList = new ArrayList<Assessment>(repo.getmAllAssessments());
 
         for (int i = 0; i < assessmentArrayList.size(); i++ ) {
             Assessment assessment = (Assessment) assessmentArrayList.get(i);

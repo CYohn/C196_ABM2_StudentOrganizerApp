@@ -14,14 +14,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
-public class CourseActivity extends AppCompatActivity {
+import Database.RepositoryForStudentOrganizer;
 
+public class CourseActivity extends AppCompatActivity {
+    RepositoryForStudentOrganizer.Repository repo;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(getApplication());
         int associatedTerm = getIntent().getIntExtra("associatedTerm", -1);
         setContentView(R.layout.activity_courses);
 

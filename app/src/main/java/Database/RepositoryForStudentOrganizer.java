@@ -43,7 +43,7 @@ public class RepositoryForStudentOrganizer {
             mNoteDAO=db.noteDAO();
             mTermDAO=db.termDAO();
         }
-        public List<Assessment>getAllAssessments(){
+        public List<Assessment>getmAllAssessments(){
             databaseExecutor.execute(()->{
                 mAllAssessments=mAssessmentDAO.getAllAssessments();
             });
@@ -63,7 +63,7 @@ public class RepositoryForStudentOrganizer {
                 mAssessmentDAO.insert(assessment);
             });
             try{
-                Thread.sleep(1000);
+                Thread.sleep(1500);
             }catch(InterruptedException e){
                 e.printStackTrace();
                 e.getCause();

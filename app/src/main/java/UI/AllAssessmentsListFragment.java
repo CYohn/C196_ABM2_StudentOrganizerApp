@@ -56,7 +56,7 @@ public class AllAssessmentsListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
         RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
-        List<Assessment> assessments = repo.getAllAssessments();
+        List<Assessment> assessments = repo.getmAllAssessments();
         final AssessmentAdapter assessmentAdapter= new AssessmentAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(assessmentAdapter);
