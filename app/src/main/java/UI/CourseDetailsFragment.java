@@ -288,6 +288,17 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.addToBackStack("addAssessmentView");
                     fragmentTransaction.commit();
                 } else {
+                    Bundle bundle2 = new Bundle();
+                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
+                    bundle2.putInt("associatedCourseId", courseId);
+                    bundle2.putString("assessmentTitleTxtView", "Please enter assessment title");
+                    bundle2.putString("assessmentStartTxtView", "Start");
+                    bundle2.putString("assessmentEndTxtView", "End");
+                    bundle2.putString("assessmentTypeTxtView", "Type");
+                    bundle2.putInt("assessmentId", -1);
+
+                    saveCourse();
+
                     Fragment assessmentDetails = new AssessmentDetailsFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, assessmentDetails);
@@ -326,19 +337,38 @@ public class CourseDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (bundle != null) {
-                    Bundle bundle1 = getArguments();
-                    bundle1.putInt("courseId", bundle.getInt("courseId"));
-                    Fragment notesFragment = new NoteDetailsFragment();
-                    notesFragment.setArguments(bundle1);
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("associatedCourse", bundle.getInt("courseId", -1));
+                    bundle2.putString("noteDateValue", "Date");
+                    bundle2.putString("noteTextValue", "Please Enter Note Text Here");
+                    bundle2.putString("noteTitleValue", "Title");
+                    bundle2.putInt("noteIdValue", -1);
+
+                    saveCourse();
+
+                    Fragment noteDetails = new AssessmentDetailsFragment();
+                    noteDetails.setArguments(bundle2);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
-                    fragmentTransaction.addToBackStack("addNoteView");
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, noteDetails);
+                    fragmentTransaction.addToBackStack("noteDetailView");
                     fragmentTransaction.commit();
                 } else {
-                    Fragment notesFragment = new NoteDetailsFragment();
+                    Bundle bundle2 = new Bundle();
+
+                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
+                    bundle2.putInt("associatedCourseId", courseId);
+                    bundle2.putString("noteDateValue", "Date");
+                    bundle2.putString("noteTextValue", "Please Enter Note Text Here");
+                    bundle2.putString("noteTitleValue", "Title");
+                    bundle2.putInt("noteIdValue", -1);
+
+                    saveCourse();
+
+                    Fragment noteDetails = new AssessmentDetailsFragment();
+                    noteDetails.setArguments(bundle2);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, notesFragment);
-                    fragmentTransaction.addToBackStack("addNoteView");
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, noteDetails);
+                    fragmentTransaction.addToBackStack("noteDetailView");
                     fragmentTransaction.commit();
                 }
             }
@@ -349,32 +379,6 @@ public class CourseDetailsFragment extends Fragment {
             public void onClick(View v) {
                 saveCourse();
 
-//                String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
-//                String startDate = setCourseStartBtn.getText().toString();
-//                String endDate = setCourseEndBtn.getText().toString();
-//                String courseStatus = getCourseProgress();
-//
-//                Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
-//                insructorId = selectedInstructor.getInstructorId();
-//                courseInstructor = selectedInstructor.getInstructorName();
-//                Term selectedTerm = (Term) termSpinner.getSelectedItem();
-//                termId = selectedTerm.getTermId();
-//
-//                if (bundle != null){
-//                courseId = bundle.getInt("courseId");
-//                }else{courseId = -1;}
-//
-//                //Save info to DB
-//                Course course;
-//                if (courseId == -1) {
-//                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-//                    int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
-//                    course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-//                    repo.insert(course);
-//                } else {
-//                    course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-//                    repo.update(course);
-//                }
                 Fragment courseList = new AllCoursesListFragment();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseList);
@@ -417,7 +421,7 @@ public class CourseDetailsFragment extends Fragment {
                                         deleteAssociatedNotes(courseId, CourseDetailsFragment.this.assessmentArrayList);
                                         deleteAssociatedAssessments(courseId, assessmentsArrayList);
                                         repo.delete(course);
-                                        CharSequence text = "Assessment must be saved before deleting.";
+                                        CharSequence text = "Course successfully deleted";
                                         int duration = Toast.LENGTH_LONG;
 
                                         Toast toast = Toast.makeText(getContext(), text, duration);
@@ -436,22 +440,16 @@ public class CourseDetailsFragment extends Fragment {
                         dialog.show();
                         //Else if the assessmentId is the default -1, then no assessment exists to delete -
                         //alert the user.
-                    } else {
-                        Context context = getContext();
-                        CharSequence text = "Course must be saved before deleting.";
-                        int duration = Toast.LENGTH_LONG;
-
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
                     }
-                }else{
-                    Context context = getContext();
-                    CharSequence text = "Course must be saved before deleting.";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 }
+//                else{
+//                    Context context = getContext();
+//                    CharSequence text = "Course must be saved before deleting.";
+//                    int duration = Toast.LENGTH_LONG;
+//
+//                    Toast toast = Toast.makeText(context, text, duration);
+//                    toast.show();
+//                }
             }
         });
     }
@@ -501,7 +499,10 @@ private void saveCourse(){
     Course course;
     if (courseId == -1) {
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-        int newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//get the ID of the last term in the list
+        int idLastCourse = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId()) ;
+        System.out.println("ID of last course = " + idLastCourse);
+        int newId = idLastCourse + 1;
+        //get the ID of the last term in the list
         course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
         repo.insert(course);
     } else {

@@ -272,7 +272,7 @@ Bundle bundle;
                 if(assessmentId == -1){
                     //Without this line, the program was throwing a null pointer exception for the repo
                     repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
-                    int newId = repo.getmAllAssessments().size() + 1;
+                    int newId = repo.getmAllCourses().get(repo.getmAllCourses().size()).getCourseId() + 1;;
                     System.out.println("newId no: " + newId);
                     try {
                         assessment = new Assessment(newId, assessmentType,
