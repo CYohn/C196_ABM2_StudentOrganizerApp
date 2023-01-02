@@ -168,15 +168,21 @@ public class NoteDetailsFragment extends Fragment {
                 String noteTitle = ((EditText) getView().findViewById(R.id.noteTitleTxt)).getText().toString();
                 String noteDate = editNoteDateBtn.getText().toString();
                 String noteText = editNoteTextField.getText().toString();
+                int noteId;
+                if (bundle != null){
+                    noteId = bundle.getInt("noteIdValue", -1);
+                } else{noteId = -1;}
 
                 //Save info to DB
                 Note note;
 
                 if (noteId == -1) {
+
                     repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
                     int newId = repo.getAllNotes().get(repo.getAllNotes().size() - 1).getNoteId() + 1;//get the ID of the last term in the list
                     note = new Note(newId, noteDate, noteText, noteTitle, courseId);
                     repo.insert(note);
+
                     //Inform the user the note was saved
                     Context context = getContext();
                     CharSequence text = "Note saved successfully";
@@ -185,21 +191,68 @@ public class NoteDetailsFragment extends Fragment {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 } else {
-                    note = new Note(bundle.getInt("noteIdValue", -1), noteDate, noteText, noteTitle, courseId);
-                    repo.update(note);
-                    //Inform the user the note updated successfully
-                    Context context = getContext();
-                    CharSequence text = "Note updated successfully";
-                    int duration = Toast.LENGTH_LONG;
+                    if (noteId != -1) {
+                        note = new Note(bundle.getInt("noteIdValue", -1), noteDate, noteText, noteTitle, courseId);
+                        repo.update(note);
+                        //Inform the user the note updated successfully
+                        Context context = getContext();
+                        CharSequence text = "Note updated successfully";
+                        int duration = Toast.LENGTH_LONG;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                 }
-                Fragment noteList = new AllNotesFragment();
-                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.notesActivityFragmentViewer, noteList);
-                fragmentTransaction.addToBackStack("NotesListFragment");
-                fragmentTransaction.commit();
+
+                String activityName = getActivity().getClass().getCanonicalName();
+                System.out.println("Activity name =  " + activityName);
+
+                if (activityName.equals("UI.CourseActivity")) {
+                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
+                    courseId = bundle.getInt("associatedCourse");
+                    int termId;
+                    String courseTitle;
+                    String courseStart;
+                    String courseEnd;
+                    String courseInstructor;
+                    String courseProgress;
+                    int insructorId;
+                    for (int i = 0; i < courseList.size(); i++){
+                        Course course = (Course) courseList.get(i);
+                        if (course.getCourseId() == courseId){
+                            termId = course.getAssociatedTermId();
+                            courseTitle = course.getCourseTitle();
+                            courseStart = course.getCourseStartDate();
+                            courseEnd = course.getCourseEndDate();
+                            courseInstructor = course.getCourseInstructor();
+                            courseProgress = course.getCourseStatus();
+                            insructorId = course.getInstructorId();
+                        }
+                    }
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt("associatedTerm", selectedCourse.getAssociatedTermId());
+                    bundle1.putInt("courseId", selectedCourse.getCourseId());
+                    bundle1.putString("courseTitle", selectedCourse.getCourseTitle());
+                    bundle1.putString("courseStart", selectedCourse.getCourseStartDate());
+                    bundle1.putString("courseEnd", (selectedCourse.getCourseEndDate()));
+                    bundle1.putString("courseInstructor", selectedCourse.getCourseInstructor());
+                    bundle1.putInt("insructorId", selectedCourse.getInstructorId());
+                    bundle1.putString("courseStatus", selectedCourse.getCourseStatus());
+
+                    Fragment courseDetails = new CourseDetailsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    courseDetails.setArguments(bundle1);
+                    fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
+                    fragmentTransaction.addToBackStack("CourseDetailsView");
+                    fragmentTransaction.commit();
+
+                }else{ // The hosting activity is UI.NoteActivity
+                    Fragment noteList = new AllNotesFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.notesActivityFragmentViewer, noteList);
+                    fragmentTransaction.addToBackStack("NotesListFragment");
+                    fragmentTransaction.commit();
+                }
             }
         });
 

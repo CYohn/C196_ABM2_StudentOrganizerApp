@@ -346,7 +346,7 @@ public class CourseDetailsFragment extends Fragment {
 
                     saveCourse();
 
-                    Fragment noteDetails = new AssessmentDetailsFragment();
+                    Fragment noteDetails = new NoteDetailsFragment();
                     noteDetails.setArguments(bundle2);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, noteDetails);
@@ -364,7 +364,7 @@ public class CourseDetailsFragment extends Fragment {
 
                     saveCourse();
 
-                    Fragment noteDetails = new AssessmentDetailsFragment();
+                    Fragment noteDetails = new NoteDetailsFragment();
                     noteDetails.setArguments(bundle2);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, noteDetails);
