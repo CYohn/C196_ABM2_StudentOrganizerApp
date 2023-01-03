@@ -262,6 +262,7 @@ Bundle bundle;
                 String startDate = ((Button) getView().findViewById(R.id.assessmentEndDateBtn)).getText().toString();
                 String assessmentType = assessmentTypeToggle.getText().toString();
                 int assessmentId;
+                int assessmentRepoSize = repo.getmAllAssessments().size();;
                 if (bundle != null){
                     assessmentId = bundle.getInt("assessmentId", -1);
                 } else{assessmentId = -1;}
@@ -270,28 +271,36 @@ Bundle bundle;
                 //Save info to DB
                 Assessment assessment;
                 if(assessmentId == -1){
-                    //Without this line, the program was throwing a null pointer exception for the repo
-                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
-                    int newId = repo.getmAllCourses().get(repo.getmAllCourses().size()).getCourseId() + 1;;
-                    System.out.println("newId no: " + newId);
-                    try {
+                    if(assessmentRepoSize == 0){
+                        assessmentId = 1;
+                        assessment = new Assessment(assessmentId, assessmentType,
+                                assessmentTitle, endDate, startDate, courseId);
+                        repo.insert(assessment);
+
+                        //Inform the user the assessment was saved
+                        Context context = getContext();
+                        CharSequence text = "Assessment saved successfully";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                    }else{
+                        //Without this line, the program was throwing a null pointer exception for the repo
+                        repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
+                        int newId = repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId() + 1;
+                        System.out.println("newId no: " + newId);
                         assessment = new Assessment(newId, assessmentType,
                                 assessmentTitle, endDate, startDate, courseId);
                         repo.insert(assessment);
-                        //Thread.sleep(1000);
-                    } catch (Exception assessmentInsertException){
-                        assessmentInsertException.printStackTrace();
-                        assessmentInsertException.getCause();
-                        assessmentInsertException.getMessage();
+
+                        //Inform the user the assessment was saved
+                        Context context = getContext();
+                        CharSequence text = "Assessment saved successfully";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
                     }
-
-
-                    //Inform the user the assessment was saved
-                    Context context = getContext();
-                    CharSequence text = "Assessment saved successfully";
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
 
                     if (assessmentId != -1) {
@@ -358,8 +367,6 @@ Bundle bundle;
                     fragmentTransaction.addToBackStack("AssessmentListFragment");
                     fragmentTransaction.commit();
                 }
-
-
             }
         });
 
