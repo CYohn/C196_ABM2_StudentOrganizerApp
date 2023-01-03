@@ -139,36 +139,40 @@ public class TermDetailsFragment extends Fragment {
         });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                saveTerm();
+
                 Intent intent = new Intent(getContext(),CourseActivity.class);
+
+                if(termId <= 0){
+
+                    termId = repo.getmAllTerms().get(repo.getmAllTerms().size()).getTermId() + 1;
+                    intent.putExtra("associatedTerm", termId);
+                }
+                else{
                 intent.putExtra("associatedTerm", termId);
+                System.out.println("associatedTerm from TermDetailsFragment newtBtn method: " + termId);
+                }
+                intent.putExtra("courseId", -1);
+                intent.putExtra("courseTitle", "Course Title");
+                intent.putExtra("courseStart", "Start");
+                intent.putExtra("courseEnd", "End");
+                intent.putExtra("courseInstructor", -1);
+                intent.putExtra("insructorId", -1);
+                //intent.putExtra("courseStatus", 0);
+
                 Context context = getContext();
                 context.startActivity(intent);
             }
-
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int termID = termId;
-                String termName = ((EditText) getView().findViewById(R.id.termNameEditText)).getText().toString();
-                String startDate = startBtn.getText().toString();
-                String endDate = endBtn.getText().toString();
+                saveTerm();
 
-                //Save info to DB
-                Term term;
-                if (termId == -1){
-                    repo=new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-                    int newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//get the ID of the last term in the list
-                    term = new Term(newId, termName, startDate, endDate);
-                    repo.insert(term);
-                }
-                else{
-                    term = new Term(termID, termName, startDate, endDate);
-                    repo.update(term);
-                }
                 Fragment termList = new AllTermsListFragment();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.termsFragmentContainerView, termList);
@@ -301,6 +305,34 @@ public class TermDetailsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void saveTerm(){
+        int termID = termId;
+        String termName = ((EditText) getView().findViewById(R.id.termNameEditText)).getText().toString();
+        String startDate = startBtn.getText().toString();
+        String endDate = endBtn.getText().toString();
+
+        //Save info to DB
+        Term term;
+        if (termId == -1){
+            repo=new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
+            int termRepoSize = repo.getmAllTerms().size();
+            int newId;
+            if (termRepoSize == 0){
+                newId = 1;
+                term = new Term(newId, termName, startDate, endDate);
+                repo.insert(term);
+            }else{
+                newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
+                term = new Term(newId, termName, startDate, endDate);
+                repo.insert(term);
+            }
+
+        } else{
+            term = new Term(termID, termName, startDate, endDate);
+            repo.update(term);
+        }
     }
 
     private void updateStartDateLabel(){

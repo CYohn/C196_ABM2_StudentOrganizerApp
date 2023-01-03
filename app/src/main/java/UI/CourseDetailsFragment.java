@@ -1,13 +1,16 @@
 package UI;
 
+import static android.content.Intent.getIntent;
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,7 +135,10 @@ public class CourseDetailsFragment extends Fragment {
         termsSelectionSpinner.setAdapter(termArrayAdapter);
         int termPosition = getItemPosition(termId, termArrayList);
         System.out.println("Term Position: " + termPosition);
+
+        if (termPosition != -1){
         termsSelectionSpinner.setSelection(termPosition);
+        }else{termsSelectionSpinner.setSelection(0);}
 
         //Set the instructor spinner
         ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
@@ -171,6 +177,9 @@ public class CourseDetailsFragment extends Fragment {
         Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
 
+        // Get the extras (if there are any)
+        Bundle extras = getActivity().getIntent().getExtras();
+
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -189,7 +198,26 @@ public class CourseDetailsFragment extends Fragment {
             courseProgress = bundle.getString("courseStatus", "Unchecked");
             setCourseProgressBtn(courseProgress);
 
-        } else {
+        }
+
+        if (extras != null) {
+            int associatedTerm = extras.getInt("associatedTerm");
+            int selectedCourseId = extras.getInt("courseId");
+            int instructorId = extras.getInt("instructorId");
+            editCourseTitle.setText("Course Title");
+            setCourseStartBtn.setText("Start");
+            setCourseEndBtn.setText("End");
+            //Set the spinners
+            instructorSpinner.setSelection(0);
+            termSpinner.setSelection(0);
+            //Set the term progress
+            plannedRadioBtn.setChecked(false);
+            inProgressRadioBtn.setChecked(false);
+            completedRadioBtn.setChecked(false);
+            droppedRadioBtn.setChecked(false);
+            }
+
+        else {
             int associatedTerm = -1;
             int selectedCourseId = -1;
             int instructorId = -1;
@@ -314,7 +342,14 @@ public class CourseDetailsFragment extends Fragment {
             public void onClick(View view) {
                 if (bundle != null) {
                     Bundle bundle1 = getArguments();
-                    bundle1.putInt("courseId", bundle.getInt("courseId"));
+                    bundle1.putInt("courseId", bundle.getInt("courseId", -1));
+                    bundle1.putString("instructorNameValue", "Please Enter the Instructor Name");
+                    bundle1.putString("instructorEmailValue", "email@email.com");
+                    bundle1.putString("instructorPhoneValue", "555-555-5555");
+                    bundle1.putInt("instructorIdValue", -1);
+
+                    saveCourse();
+
                     Fragment instructorViewFragment = new InstructorDetailsFragment();
                     instructorViewFragment.setArguments(bundle1);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
@@ -322,7 +357,22 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.addToBackStack("addInstructorView");
                     fragmentTransaction.commit();
                 } else {
+                    Bundle bundle1 = new Bundle();
+                    int repoSize = repo.getmAllCourses().size();
+                    if(repoSize > 0){
+                        courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
+                    } else {courseId = 0;}
+
+                    bundle1.putInt("courseId", courseId);
+                    bundle1.putString("instructorNameValue", "Please Enter the Instructor Name");
+                    bundle1.putString("instructorEmailValue", "email@email.com");
+                    bundle1.putString("instructorPhoneValue", "555-555-5555");
+                    bundle1.putInt("instructorIdValue", -1);
+
+                    saveCourse();
+
                     Fragment instructorViewFragment = new InstructorDetailsFragment();
+                    instructorViewFragment.setArguments(bundle1);
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, instructorViewFragment);
                     fragmentTransaction.addToBackStack("addInstructorView");
@@ -438,33 +488,28 @@ public class CourseDetailsFragment extends Fragment {
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
-                        //Else if the assessmentId is the default -1, then no assessment exists to delete -
-                        //alert the user.
+
                     }
                 }
-//                else{
-//                    Context context = getContext();
-//                    CharSequence text = "Course must be saved before deleting.";
-//                    int duration = Toast.LENGTH_LONG;
-//
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
-//                }
+                else{ //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                    //alert the user.
+                    Context context = getContext();
+                    CharSequence text = "Course must be saved before deleting.";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                Fragment courseList = new AllCoursesListFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseList);
+                fragmentTransaction.addToBackStack("CourseListFragmentView");
+                fragmentTransaction.commit();
             }
         });
     }
 
-    private void deleteAssociatedNotes(int courseId, ArrayList<Note> notesArrayList) {
-        notesArrayList = new ArrayList<Note>(repo.getAllNotes());
 
-        for (int i=0; i < notesArrayList.size(); i++ ) {
-            Note note = (Note) notesArrayList.get(i);
-            int associatedCourseId = note.getAssociatedCourseId();
-            if(associatedCourseId == courseId){
-                repo.delete(note);
-            }
-        }
-    }
 
 private void saveCourse(){
         Bundle bundle = getArguments();
@@ -485,9 +530,16 @@ private void saveCourse(){
     String endDate = setCourseEndBtn.getText().toString();
     String courseStatus = getCourseProgress();
 
-    Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
-    insructorId = selectedInstructor.getInstructorId();
-    courseInstructor = selectedInstructor.getInstructorName();
+    int instructorRepoSize = repo.getmAllInstructors().size();
+    if(instructorRepoSize == 0) {
+        insructorId = 0;
+        courseInstructor = "None Assigned";
+    }else{
+        Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
+        insructorId = selectedInstructor.getInstructorId();
+        courseInstructor = selectedInstructor.getInstructorName();
+    }
+
     Term selectedTerm = (Term) termSpinner.getSelectedItem();
     termId = selectedTerm.getTermId();
 
@@ -497,19 +549,38 @@ private void saveCourse(){
 
     //Save info to DB
     Course course;
+    int courseRepoSize = repo.getmAllCourses().size();
+    int newId;
     if (courseId == -1) {
-        repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-        int idLastCourse = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId()) ;
-        System.out.println("ID of last course = " + idLastCourse);
-        int newId = idLastCourse + 1;
-        //get the ID of the last term in the list
-        course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-        repo.insert(course);
+        if(courseRepoSize == 0){
+            newId = 1;
+            course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+            repo.insert(course);
+        }else{
+            repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
+            newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
+            System.out.println("Course Repo Size = " + courseRepoSize + ", " + "New Id No = " + newId);
+            course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+            repo.insert(course);
+        }
     } else {
         course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
         repo.update(course);
     }
 }
+
+
+    private void deleteAssociatedNotes(int courseId, ArrayList<Note> notesArrayList) {
+        notesArrayList = new ArrayList<Note>(repo.getAllNotes());
+
+        for (int i=0; i < notesArrayList.size(); i++ ) {
+            Note note = (Note) notesArrayList.get(i);
+            int associatedCourseId = note.getAssociatedCourseId();
+            if(associatedCourseId == courseId){
+                repo.delete(note);
+            }
+        }
+    }
 
 
     private void deleteAssociatedAssessments(int courseId, ArrayList<Assessment> assessmentArrayList){
@@ -525,26 +596,28 @@ private void saveCourse(){
     }
 
     public int getItemPosition(int id, ArrayList arrayList) {
-        if (arrayList.get(0) instanceof Term) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                Term term = (Term) arrayList.get(i);
-                if(term.getTermId() == id){
-                    int index = arrayList.indexOf(term);
-                    return index;
+        if(arrayList.isEmpty() != true) {
+            if (arrayList.get(0) instanceof Term) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Term term = (Term) arrayList.get(i);
+                    if (term.getTermId() == id) {
+                        int index = arrayList.indexOf(term);
+                        return index;
+                    }
                 }
             }
-        }
-        if (arrayList.get(0) instanceof Instructor) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                Instructor instructor = (Instructor) arrayList.get(i);
-                if (instructor.getInstructorId() == id){
-                    int index = arrayList.indexOf(instructor);
-                    return index;
-                }
+            if (arrayList.get(0) instanceof Instructor) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Instructor instructor = (Instructor) arrayList.get(i);
+                    if (instructor.getInstructorId() == id) {
+                        int index = arrayList.indexOf(instructor);
+                        return index;
+                    }
 
+                }
             }
         }
-        return -1;
+        return 0;
     };
 
 
@@ -618,5 +691,4 @@ private void saveCourse(){
                 return "Unchecked";
         }
     }
-
 }

@@ -19,8 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.zybooks.c196_abm2_charity_yohn.R;
 
+import java.util.ArrayList;
+
 import Database.RepositoryForStudentOrganizer;
 import Entities.Assessment;
+import Entities.Course;
 import Entities.Instructor;
 
 
@@ -97,9 +100,11 @@ public class InstructorDetailsFragment extends Fragment {
         saveInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
                 Bundle bundle = getArguments();
                 Instructor instructor;
+
                 editName = (EditText) getView().findViewById(R.id.instructorNameTxtInput);
                 editEmail = (EditText) getView().findViewById(R.id.instructorEmailTxtInput);
                 editPhone = (EditText) getView().findViewById(R.id.instructorPhoneTxtinput);
@@ -107,25 +112,103 @@ public class InstructorDetailsFragment extends Fragment {
                 String email = editEmail.getText().toString();
                 String phone = editPhone.getText().toString();
                 int instructorId;
-                if(bundle != null) {
-                    instructorId = bundle.getInt("instructorIdvalue", -1);
-                }else{instructorId = -1;}
+                int instructorRepoSize = repo.getmAllInstructors().size();
+                int newId;
+                if (bundle != null) {
+                    instructorId = bundle.getInt("instructorIdValue", -1);
+                } else {
+                    instructorId = -1;
+                }
+                if (instructorId == -1) {
+                    if(instructorRepoSize == 0){
+                        newId = 1;
+                        instructor = new Instructor(newId, name, email, phone);
+                        repo.insert(instructor);
+                        //Inform the user the instructor was saved
+                        Context context = getContext();
+                        CharSequence text = "Instructor successfully saved";
+                        int duration = Toast.LENGTH_LONG;
 
-                if(instructorId == -1){
-                    int newId = repo.getmAllInstructors()
-                            .get(repo.getmAllInstructors().size() - 1).getInstructorId() + 1;
-                    instructor = new Instructor(newId, name, email, phone );
-                    repo.insert(instructor);
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }else{
+                        newId = repo.getmAllInstructors().get(repo.getmAllInstructors().size() - 1).getInstructorId() + 1;
+                        System.out.println("newId for instructor =  " + newId);
+                        instructor = new Instructor(newId, name, email, phone);
+                        repo.insert(instructor);
+
+                        //Inform the user the instructor was saved
+                        Context context = getContext();
+                        CharSequence text = "Instructor successfully saved";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+
                 } else {
                     instructor = new Instructor(bundle.getInt("instructorIdValue"),
                             name, email, phone);
                     repo.update(instructor);
+
+                    //Inform the user the note updated successfully
+                    Context context = getContext();
+                    CharSequence text = "Instructor sucessfully saved";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
-                Fragment instructorList = new AllInstructorsFragment();
-                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorList);
-                fragmentTransaction.addToBackStack("InstructorListFragment");
-                fragmentTransaction.commit();
+
+                String activityName = getActivity().getClass().getCanonicalName();
+                System.out.println("Activity name =  " + activityName);
+
+                if (activityName.equals("UI.CourseActivity")) {
+                    ArrayList<Course> courseList = (ArrayList<Course>) repo.getmAllCourses();
+                    int courseId = bundle.getInt("courseId");
+                    int termId;
+                    String courseTitle;
+                    String courseStart;
+                    String courseEnd;
+                    String courseInstructor;
+                    String courseProgress;
+                    int insructorId;
+                    for (int i = 0; i < courseList.size(); i++) {
+                        Course course = (Course) courseList.get(i);
+                        if (course.getCourseId() == courseId) {
+                            termId = course.getAssociatedTermId();
+                            courseTitle = course.getCourseTitle();
+                            courseStart = course.getCourseStartDate();
+                            courseEnd = course.getCourseEndDate();
+                            courseInstructor = course.getCourseInstructor();
+                            courseProgress = course.getCourseStatus();
+                            insructorId = course.getInstructorId();
+
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putInt("associatedTerm", termId);
+                            bundle1.putInt("courseId", courseId);
+                            bundle1.putString("courseTitle", courseTitle);
+                            bundle1.putString("courseStart", courseStart);
+                            bundle1.putString("courseEnd", courseEnd);
+                            bundle1.putString("courseInstructor", courseInstructor);
+                            bundle1.putInt("insructorId", insructorId);
+                            bundle1.putString("courseStatus", courseProgress);
+
+                            Fragment courseDetails = new CourseDetailsFragment();
+                            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                            courseDetails.setArguments(bundle1);
+                            fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
+                            fragmentTransaction.addToBackStack("CourseDetailsView");
+                            fragmentTransaction.commit();
+                        }
+                    }
+                } else {
+                    Fragment instructorList = new AllInstructorsFragment();
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorList);
+                    fragmentTransaction.addToBackStack("InstructorListFragment");
+                    fragmentTransaction.commit();
+                }
             }
         });
 
