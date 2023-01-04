@@ -16,13 +16,9 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" +
-                "noteId=" + noteId +
-                ", noteDate=" + noteDate +
-                ", noteText='" + noteText +
-                ", noteTitle='" + noteTitle +
-                ", associatedCourseId='" + associatedCourseId + '\'' +
-                '}';
+        return noteTitle +
+                " | Date " + noteDate +
+                " | Id: " + noteId;
     }
 
     public Note(int noteId, String noteDate, String noteText, String noteTitle, int associatedCourseId) {

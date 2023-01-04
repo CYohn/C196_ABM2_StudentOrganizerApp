@@ -19,14 +19,9 @@ public class Assessment implements Serializable {
 
     @Override
     public String toString() {
-        return "Assessment{" +
-                ", assessmentId=" + assessmentId +
-                ", assessmentType=" + assessmentType +
-                ", assessmentTitle=" + assessmentTitle +
-                ", assessmentStartDate=" + assessmentStartDate +
-                ", assessmentEndDate='" + assessmentEndDate +
-                ", associatedCourseId='" + associatedCourseId + '\'' +
-                '}';
+        return assessmentTitle +
+                " | Start " + assessmentStartDate +
+                " Id " + assessmentId;
     }
 
     public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate, int associatedCourseId) {

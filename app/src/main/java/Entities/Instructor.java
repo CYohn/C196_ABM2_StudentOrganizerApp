@@ -18,12 +18,9 @@ public class Instructor {
 
     @Override
     public String toString() {
-        return "Instructor{" +
-                ", instructorId=" + instructorId +
-                ", instructorName=" + instructorName +
-                ", instructorPhone=" + instructorPhone +
-                ", instructorEmail='" + instructorEmail +'\'' +
-                '}';
+        return instructorName +
+                " | Email" + instructorEmail +
+                " | Phone " + instructorPhone;
     }
 
     public Instructor(int instructorId, String instructorName, String instructorEmail, String instructorPhone) {

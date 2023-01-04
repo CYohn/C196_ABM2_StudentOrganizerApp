@@ -72,11 +72,14 @@ public class AllAssessmentsListFragment extends Fragment {
 
         //Set the filter spinner
         ArrayList<Course> courseArrayList = (ArrayList<Course>) repo.getmAllCourses(); //Get terms from repo, add them to the list
+        //Add a choice at index 0 to show all courses
+        Course indexZeroChoice = new Course(-1, "Show All (Or Choose a Course to Filter)", "", "", "", "", -1, -1);
+        courseArrayList.add(0, indexZeroChoice);
         Spinner filterAssessmentsSpinner = (Spinner) getView().findViewById(R.id.filterAssessmentsSpinner);
         ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, courseArrayList);
         filterAssessmentsSpinner.setAdapter(courseArrayAdapter);
         int coursePosition = getItemPosition(courseId, courseArrayList);
-        System.out.println("Term Position: " + coursePosition);
+        System.out.println("Course Position: " + coursePosition);
 
         if (coursePosition != -1){
             filterAssessmentsSpinner.setSelection(coursePosition);
@@ -102,6 +105,7 @@ public class AllAssessmentsListFragment extends Fragment {
                 Course selectedCourse = (Course) filterAssessmentsSpinner.getSelectedItem();
                 int courseId = selectedCourse.getCourseId();
                 ArrayList<Assessment> assessments = (ArrayList<Assessment>) repo.getmAllAssessments();
+
 
                 //Set the recyclerView to hold the new array
                 RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
@@ -159,4 +163,7 @@ public class AllAssessmentsListFragment extends Fragment {
         }
         return filteredAssessments;
     }
-}
+
+
+
+    }
