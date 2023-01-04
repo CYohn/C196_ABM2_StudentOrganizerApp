@@ -19,7 +19,7 @@ import Entities.Note;
 import Entities.Term;
 
 
-@Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class}, version=9, exportSchema = false)
+@Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class}, version=10, exportSchema = false)
 
     public abstract class StudentOrganizerDatabaseBuilder extends RoomDatabase {
         public abstract AssessmentDAO assessmentDAO();

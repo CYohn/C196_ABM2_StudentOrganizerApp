@@ -164,7 +164,10 @@ public class NoteDetailsFragment extends Fragment {
             public void onClick(View v) {
                 associatedCourseSpinner = view.findViewById(R.id.associatedCourse);
                 Course selectedCourse = (Course) associatedCourseSpinner.getSelectedItem();
-                int courseId = selectedCourse.getCourseId();
+                int courseId;
+                if(selectedCourse != null){
+                courseId = selectedCourse.getCourseId();
+                }else{courseId = -1;}
                 String noteTitle = ((EditText) getView().findViewById(R.id.noteTitleTxt)).getText().toString();
                 String noteDate = editNoteDateBtn.getText().toString();
                 String noteText = editNoteTextField.getText().toString();
@@ -175,21 +178,44 @@ public class NoteDetailsFragment extends Fragment {
 
                 //Save info to DB
                 Note note;
-
+                int noteRepoSize = repo.getAllNotes().size();
                 if (noteId == -1) {
+                    int newId;
 
-                    repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication()); //Without this line, the program was throwing a null pointer exception for the repo
-                    int newId = repo.getAllNotes().get(repo.getAllNotes().size() - 1).getNoteId() + 1;//get the ID of the last term in the list
-                    note = new Note(newId, noteDate, noteText, noteTitle, courseId);
-                    repo.insert(note);
+                    if(noteRepoSize == 0){
+                        newId = 1;
+                        note = new Note(newId, noteDate, noteText, noteTitle, courseId);
+                        repo.insert(note);
 
-                    //Inform the user the note was saved
-                    Context context = getContext();
-                    CharSequence text = "Note saved successfully";
-                    int duration = Toast.LENGTH_LONG;
+                        //Inform the user the note was saved
+                        Context context = getContext();
+                        CharSequence text = "Note saved successfully";
+                        int duration = Toast.LENGTH_LONG;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                    } else{
+                        newId = repo.getAllNotes().get(noteRepoSize - 1).getNoteId() + 1;
+
+                        System.out.println("newId in Note Repo = " + newId);
+                        //get the ID of the last note in the list
+//                        Note lastNote = repo.getAllNotes().get(noteRepoSize);
+//                        int lastNoteId = lastNote.getNoteId();
+//                        int newId2 = lastNoteId + 1;
+
+                        note = new Note(newId, noteDate, noteText, noteTitle, courseId);
+                        repo.insert(note);
+
+                        //Inform the user the note was saved
+                        Context context = getContext();
+                        CharSequence text = "Note saved successfully";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+
                 } else {
                     if (noteId != -1) {
                         note = new Note(bundle.getInt("noteIdValue", -1), noteDate, noteText, noteTitle, courseId);
@@ -339,6 +365,7 @@ public class NoteDetailsFragment extends Fragment {
 
 
         public int getItemPosition ( int id, ArrayList arrayList){
+        if(arrayList.size() != 0) {
             if (arrayList.get(0) instanceof Course) {
                 for (int i = 0; i < arrayList.size(); i++) {
                     Course course = (Course) arrayList.get(i);
@@ -348,6 +375,7 @@ public class NoteDetailsFragment extends Fragment {
                     }
                 }
             }
+        }
             return -1;
         };
 

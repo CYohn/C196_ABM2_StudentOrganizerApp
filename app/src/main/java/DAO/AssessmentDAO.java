@@ -25,6 +25,7 @@ public interface AssessmentDAO {
     void delete(Assessment assessment);
 
     @Query("SELECT * FROM assessments ORDER BY assessmentStartDate ASC")
+    //Do not change the order of the query to Descending order, it messes up the Id numbering function to save.
 
     List<Assessment> getAllAssessments();
 

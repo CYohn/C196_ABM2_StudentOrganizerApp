@@ -24,7 +24,9 @@ public interface CourseDAO {
     @Delete
     void delete(Course course);
 
-    @Query("SELECT * FROM COURSES ORDER BY courseStartDate DESC")
+    @Query("SELECT * FROM COURSES ORDER BY courseStartDate ASC")
+        //Do not change the order of the query to Descending order, it messes up the Id numbering function to save.
+
     List<Course> getAllCourses();
 
     //@Query("SELECT * FROM COURSES WHERE TERMID = termId ORDER BY courseStartDate DESC")
