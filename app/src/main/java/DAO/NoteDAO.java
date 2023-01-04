@@ -23,7 +23,7 @@ public interface NoteDAO {
     @Delete
     void delete(Note note);
 
-    @Query("SELECT * FROM NOTES ORDER BY noteDate ASC")
+    @Query("SELECT * FROM NOTES ORDER BY noteId ASC")
         //Do not change the order of the query to Descending order, it messes up the Id numbering function to save.
 
     List<Note> getAllNotes();

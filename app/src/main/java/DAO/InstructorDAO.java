@@ -22,7 +22,7 @@ public interface InstructorDAO {
     @Delete
     void delete(Instructor instructor);
 
-    @Query("SELECT * FROM INSTRUCTORS ORDER BY instructorName ASC")
+    @Query("SELECT * FROM INSTRUCTORS ORDER BY instructorId ASC")
         //Do not change the order of the query to Descending order, it messes up the Id numbering function to save.
 
     List<Instructor> getAllInstructors();

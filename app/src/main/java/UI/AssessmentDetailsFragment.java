@@ -255,7 +255,11 @@ Bundle bundle;
                 Bundle bundle = getArguments();
                 associatedCourseSpinner = view.findViewById(R.id.assessmentAssociatedCourseSpinner);
                 Course selectedCourse = (Course) associatedCourseSpinner.getSelectedItem();
-                int courseId = selectedCourse.getCourseId();
+
+                int courseId;
+                if(selectedCourse != null){
+                    courseId = selectedCourse.getCourseId();
+                }else{courseId = -1;}
 
                 String assessmentTitle = ((EditText) getView().findViewById(R.id.assessmentNameTxtInput)).getText().toString();
                 String endDate = ((Button) getView().findViewById(R.id.assessmentStartDateBtn)).getText().toString();
@@ -266,7 +270,6 @@ Bundle bundle;
                 if (bundle != null){
                     assessmentId = bundle.getInt("assessmentId", -1);
                 } else{assessmentId = -1;}
-
 
                 //Save info to DB
                 Assessment assessment;
@@ -428,12 +431,14 @@ Bundle bundle;
 
 
     public int getItemPosition ( int id, ArrayList arrayList){
-        if (arrayList.get(0) instanceof Course) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                Course course = (Course) arrayList.get(i);
-                if (course.getCourseId() == id) {
-                    int index = arrayList.indexOf(course);
-                    return index;
+        if(arrayList.size() != 0) {
+            if (arrayList.get(0) instanceof Course) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Course course = (Course) arrayList.get(i);
+                    if (course.getCourseId() == id) {
+                        int index = arrayList.indexOf(course);
+                        return index;
+                    }
                 }
             }
         }
