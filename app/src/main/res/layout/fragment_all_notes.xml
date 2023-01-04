@@ -7,19 +7,14 @@
     android:label="@string/all_notes"
     tools:context="UI.AllNotesFragment" >
 
-    <FrameLayout
-        android:id="@+id/allNotesMenuHolder"
-        android:layout_width="359dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@id/notesRecyclerList"
+    <Spinner
+        android:id="@+id/filterNotesSpinner"
+        android:layout_width="352dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/notesRecyclerList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addInstructorFloatingAction"
@@ -45,7 +40,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addInstructorFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allNotesMenuHolder">
+        app:layout_constraintTop_toBottomOf="@id/filterNotesSpinner">
 
     </androidx.recyclerview.widget.RecyclerView>
 

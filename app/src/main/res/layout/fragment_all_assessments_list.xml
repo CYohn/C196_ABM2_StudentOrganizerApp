@@ -2,53 +2,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout8"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="UI.AllAssessmentsListFragment">
 
-    <FrameLayout
-        android:id="@+id/allAssessmentMenuHolder"
-        android:layout_width="307dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+    <Spinner
+        android:id="@+id/filterAssessmentsSpinner"
+        android:layout_width="355dp"
+        android:layout_height="71dp"
+        android:contentDescription="@string/filterSpeakableText"
         app:layout_constraintBottom_toTopOf="@+id/assessmentsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentsRecyclerView"
-        android:layout_width="311dp"
-        android:layout_height="303dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/addAssessmentFloatingAction"
+        android:layout_width="355dp"
+        android:layout_height="366dp"
+        app:layout_constraintBottom_toTopOf="@id/addAssessmentFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/allAssessmentMenuHolder">
+        app:layout_constraintTop_toBottomOf="@id/filterAssessmentsSpinner">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addAssessmentFloatingAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="288dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="57dp"
+        android:layout_height="63dp"
         android:clickable="true"
         android:contentDescription="@string/addAssesmentsBtnLabel"
         android:onClick="pressedOpenAddAssessmentFragBtn"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assessmentsRecyclerView"
         app:rippleColor="@color/teal_700"
