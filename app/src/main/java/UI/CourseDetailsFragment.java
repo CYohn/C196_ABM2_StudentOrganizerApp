@@ -541,11 +541,14 @@ private void saveCourse(){
     }
 
     Term selectedTerm = (Term) termSpinner.getSelectedItem();
-    termId = selectedTerm.getTermId();
+    if(selectedTerm != null) {
+        termId = selectedTerm.getTermId();
+    }else{termId = -1;}
 
     if (bundle != null){
         courseId = bundle.getInt("courseId");
     }else{courseId = -1;}
+
 
     //Save info to DB
     Course course;

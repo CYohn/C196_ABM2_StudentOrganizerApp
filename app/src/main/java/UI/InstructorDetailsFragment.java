@@ -124,11 +124,11 @@ public class InstructorDetailsFragment extends Fragment {
                         newId = 1;
                         instructor = new Instructor(newId, name, email, phone);
                         repo.insert(instructor);
+
                         //Inform the user the instructor was saved
                         Context context = getContext();
                         CharSequence text = "Instructor successfully saved";
                         int duration = Toast.LENGTH_LONG;
-
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                     }else{
@@ -153,7 +153,7 @@ public class InstructorDetailsFragment extends Fragment {
 
                     //Inform the user the note updated successfully
                     Context context = getContext();
-                    CharSequence text = "Instructor sucessfully saved";
+                    CharSequence text = "Instructor sucessfully updated";
                     int duration = Toast.LENGTH_LONG;
 
                     Toast toast = Toast.makeText(context, text, duration);

@@ -146,9 +146,9 @@ public class TermDetailsFragment extends Fragment {
 
                 Intent intent = new Intent(getContext(),CourseActivity.class);
 
-                if(termId <= 0){
+                if(repo.getmAllTerms().size() == 0){
 
-                    termId = repo.getmAllTerms().get(repo.getmAllTerms().size()).getTermId() + 1;
+                    termId = 1;
                     intent.putExtra("associatedTerm", termId);
                 }
                 else{
