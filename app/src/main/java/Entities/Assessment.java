@@ -4,8 +4,10 @@ package Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity (tableName = "assessments")
-public class Assessment {
+public class Assessment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int assessmentId;
