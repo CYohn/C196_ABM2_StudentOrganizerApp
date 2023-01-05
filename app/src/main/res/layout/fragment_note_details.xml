@@ -81,6 +81,14 @@
             android:contentDescription="@string/delete"
             android:minHeight="48dp"
             app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
+
+        <ImageButton
+            android:id="@+id/shareNoteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_share_24" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

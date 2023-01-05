@@ -17,47 +17,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <TableLayout
         android:id="@+id/startAndEndBtnHolder"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/courseNameTxtInput"
+        android:layout_height="107dp"
+        android:layout_marginStart="2dp"
         app:layout_constraintBottom_toTopOf="@id/chooseInstructorInstruction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/courseNameTxtInput">
 
 
-        <Button
-            android:id="@+id/courseStartDateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/courseStartLabel" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <Button
+                android:id="@+id/courseStartDateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="@string/courseStartLabel" />
 
-        <Button
-            android:id="@+id/courseEndDateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/endDateLabel" />
+            <Space
+                android:layout_width="91dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/courseEndDateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/endDateLabel" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/notifyStartCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center|left"
+                android:text="@string/notifyStart" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <CheckBox
+                android:id="@+id/endNotificationCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:gravity="center|right"
+                android:text="@string/notifyEnd" />
+        </TableRow>
+
+    </TableLayout>
 
     <TextView
         android:id="@+id/chooseInstructorInstruction"
         android:layout_width="match_parent"
         android:layout_height="18dp"
         android:text="@string/chooseCourseInstructorInstruction"
-        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder"
         app:layout_constraintBottom_toTopOf="@+id/chooseInstructorWidgetHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder" />
 
 
     <LinearLayout

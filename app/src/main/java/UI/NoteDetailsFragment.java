@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class NoteDetailsFragment extends Fragment {
     Spinner associatedCourseSpinner;
     ImageButton saveNoteBtn;
     ImageButton deleteBtn;
+    ImageButton shareNoteBtn;
     private int noteId;
 
 
@@ -98,6 +100,7 @@ public class NoteDetailsFragment extends Fragment {
         editNoteTextField = (EditText) getView().findViewById(R.id.noteTxtInput);
         saveNoteBtn = (ImageButton) getView().findViewById(R.id.saveNoteBtn);
         deleteBtn = (ImageButton) getView().findViewById(R.id.deleteNoteBtn);
+        shareNoteBtn = (ImageButton) getView().findViewById(R.id.shareNoteBtn);
 
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
         courseArrayList = (ArrayList<Course>) repo.getmAllCourses();
@@ -158,6 +161,19 @@ public class NoteDetailsFragment extends Fragment {
                 updateNoteDateLabel();
             }
         };
+
+        shareNoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent=new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,editNoteTextField.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TITLE,editNoteTitleField.getText().toString());
+                sendIntent.setType("text/plain");
+                Intent shareIntent=Intent.createChooser(sendIntent,null);
+                startActivity(shareIntent);
+            }
+        });
 
         saveNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,6 +373,10 @@ public class NoteDetailsFragment extends Fragment {
                 }
             }
         });
+
+
+
+
     }
 
 

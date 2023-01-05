@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -58,6 +59,8 @@ public class CourseDetailsFragment extends Fragment {
     String courseInstructor;
     String courseProgress;
     int insructorId;
+    boolean isStartNotifyChecked;
+    boolean isEndNotifyChecked;
 
     EditText editCourseTitle;
     Button setCourseStartBtn;
@@ -74,6 +77,8 @@ public class CourseDetailsFragment extends Fragment {
     RadioButton plannedRadioBtn;
     RadioButton droppedRadioBtn;
     RadioButton completedRadioBtn;
+    CheckBox startNotification;
+    CheckBox endNotification;
 
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Term> termArrayList;
@@ -169,6 +174,8 @@ public class CourseDetailsFragment extends Fragment {
         RadioButton plannedRadioBtn = (RadioButton) view.findViewById(R.id.plannedRadio);
         RadioButton droppedRadioBtn = (RadioButton) view.findViewById(R.id.droppedRadioBtn);
         RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
+        CheckBox startNotification = (CheckBox) view.findViewById(R.id.notifyStartCheckbox);
+        CheckBox endNotification = (CheckBox) view.findViewById(R.id.endNotificationCheckbox);
 
         ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteCourseBtn);
         ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
@@ -507,6 +514,21 @@ public class CourseDetailsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+
+        startNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(startNotification.isChecked() == true){
+                    startNotification.setChecked(true);
+                    isStartNotifyChecked = true;
+                }
+                else{
+                    startNotification.setChecked(false);
+                    isStartNotifyChecked = false;
+                }
+            }
+        });
     }
 
 
@@ -693,5 +715,9 @@ private void saveCourse(){
             default:
                 return "Unchecked";
         }
+    }
+
+    private void setCheckbox(){
+
     }
 }

@@ -167,4 +167,6 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="filterSpeakableText">"Select and item to filter "</string>
+    <string name="notifyStart">Start Notification</string>
+    <string name="notifyEnd">End Notification</string>
 </resources>

@@ -21,6 +21,8 @@ import Entities.Term;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int alertId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
