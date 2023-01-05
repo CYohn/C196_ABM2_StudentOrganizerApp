@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Database.RepositoryForStudentOrganizer;
+import Entities.Assessment;
 import Entities.Course;
-import Entities.Instructor;
 import Entities.Term;
 
 
@@ -68,6 +69,10 @@ public class AllCoursesListFragment extends Fragment {
 
         //Set the filter spinner
         ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
+        //Add a choice at index 0 to show all courses
+        Term indexZeroChoice = new Term(-1, "Show All (Or Choose a Term to Filter)", "", "");
+        termArrayList.add(0, indexZeroChoice);
+
         Spinner filterCoursesSpinner = (Spinner) getView().findViewById(R.id.filterCoursesSpinner);
         ArrayAdapter<Term> termArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, termArrayList);
         filterCoursesSpinner.setAdapter(termArrayAdapter);
@@ -90,6 +95,56 @@ public class AllCoursesListFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        filterCoursesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Term selectedTerm = (Term) filterCoursesSpinner.getSelectedItem();
+                int termId = selectedTerm.getTermId();
+                ArrayList<Course> courses = (ArrayList<Course>) repo.getmAllCourses();
+
+                if(termId == -1){//No need to run the filter, just load all courses
+                    RecyclerView recyclerView = getView().findViewById(R.id.courseRecyclerView);
+                    final CourseAdapter courseAdapter= new CourseAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(courseAdapter);
+                    courseAdapter.setmCourses(courses);
+                }else{
+                    //Set the recyclerView to hold the new array
+                    RecyclerView recyclerView = getView().findViewById(R.id.courseRecyclerView);
+                    ArrayList<Course> filteredCourses = filterCourses(termId, courses);
+                    final CourseAdapter courseAdapter = new CourseAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(courseAdapter);
+                    courseAdapter.setmCourses(filteredCourses);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { // Just load all assessment
+                //set the recyclerView to hold an array of all Assessments
+                RecyclerView recyclerView = getView().findViewById(R.id.courseRecyclerView);
+                List<Course> courses = repo.getmAllCourses();
+                final CourseAdapter courseAdapter= new CourseAdapter(getContext());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(courseAdapter);
+                courseAdapter.setmCourses(courses);
+            }
+        });
+
+    }
+
+    private ArrayList<Course> filterCourses(int termId, ArrayList<Course> courses) {
+        ArrayList<Course> filteredCourses = new ArrayList<>();
+
+        for(int i = 0; i < courses.size(); i++){
+            Course course = (Course) courses.get(i);
+            if(course.getAssociatedTermId() == termId){
+                filteredCourses.add(course);
+                return filteredCourses;
+            }
+        }
+        return filteredCourses;
     }
 
     public int getItemPosition(int id, ArrayList arrayList) {
