@@ -106,19 +106,26 @@ public class AllAssessmentsListFragment extends Fragment {
                 int courseId = selectedCourse.getCourseId();
                 ArrayList<Assessment> assessments = (ArrayList<Assessment>) repo.getmAllAssessments();
 
-
-                //Set the recyclerView to hold the new array
-                RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
-                ArrayList<Assessment> filteredAssessments = filterAssessments(courseId, assessments);
-                final AssessmentAdapter assessmentAdapter= new AssessmentAdapter(getContext());
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setAdapter(assessmentAdapter);
-                assessmentAdapter.setmAssessments(filteredAssessments);
-
+                if(courseId == -1){//No need to run the filter, just load all assessments
+                    RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
+                    //RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
+                    final AssessmentAdapter assessmentAdapter= new AssessmentAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(assessmentAdapter);
+                    assessmentAdapter.setmAssessments(assessments);
+                }else{
+                    //Set the recyclerView to hold the new array
+                    RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
+                    ArrayList<Assessment> filteredAssessments = filterAssessments(courseId, assessments);
+                    final AssessmentAdapter assessmentAdapter= new AssessmentAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(assessmentAdapter);
+                    assessmentAdapter.setmAssessments(filteredAssessments);
+                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent) { // Just load all assessment
                 //set the recyclerView to hold an array of all Assessments
                 RecyclerView recyclerView = getView().findViewById(R.id.assessmentsRecyclerView);
                 RepositoryForStudentOrganizer.Repository repo = new RepositoryForStudentOrganizer.Repository(requireActivity().getApplication());
@@ -136,6 +143,7 @@ public class AllAssessmentsListFragment extends Fragment {
 
     public void addAssessmentPressed(View view) {
     }
+
 
     public int getItemPosition(int id, ArrayList arrayList) {
         if(arrayList.isEmpty() != true) {
@@ -159,6 +167,7 @@ public class AllAssessmentsListFragment extends Fragment {
             Assessment assessment = (Assessment) arrayList.get(i);
             if(assessment.getAssociatedCourseId() == courseId){
                 filteredAssessments.add(assessment);
+                return filteredAssessments;
             }
         }
         return filteredAssessments;
@@ -166,4 +175,4 @@ public class AllAssessmentsListFragment extends Fragment {
 
 
 
-    }
+}
