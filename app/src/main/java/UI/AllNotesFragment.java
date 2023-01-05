@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Database.RepositoryForStudentOrganizer;
+import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
 import Entities.Note;
@@ -71,6 +73,9 @@ public class AllNotesFragment extends Fragment {
 
         //Set the filter spinner
         ArrayList<Course> courseArrayList = (ArrayList<Course>) repo.getmAllCourses(); //Get terms from repo, add them to the list
+        //Add a choice at index 0 to show all courses
+        Course indexZeroChoice = new Course(-1, "Show All (Or Choose a Course to Filter)", "", "", "", "", -1, -1);
+        courseArrayList.add(0, indexZeroChoice);
         Spinner filterNotesSpinner = (Spinner) getView().findViewById(R.id.filterNotesSpinner);
         ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, courseArrayList);
         filterNotesSpinner.setAdapter(courseArrayAdapter);
@@ -94,7 +99,44 @@ public class AllNotesFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        filterNotesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Course selectedCourse = (Course) filterNotesSpinner.getSelectedItem();
+                int courseId = selectedCourse.getCourseId();
+                ArrayList<Note> notes = (ArrayList<Note>) repo.getAllNotes();
+
+                if(courseId == -1){//No need to run the filter, just load all notes
+                    RecyclerView recyclerView = getView().findViewById(R.id.notesRecyclerList);
+                    final NoteAdapter noteAdapter= new NoteAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(noteAdapter);
+                    noteAdapter.setmNotes(notes);
+                }else{
+                    //Set the recyclerView to hold the new array
+                    RecyclerView recyclerView = getView().findViewById(R.id.notesRecyclerList);
+                    ArrayList<Note> filteredNotes = filterNotes(courseId, notes);
+                    final NoteAdapter noteAdapter= new NoteAdapter(getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(noteAdapter);
+                    noteAdapter.setmNotes(filteredNotes);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { // Just load all notes
+                //set the recyclerView to hold an array of all notes
+                RecyclerView recyclerView = getView().findViewById(R.id.notesRecyclerList);
+                final NoteAdapter noteAdapter= new NoteAdapter(getContext());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(noteAdapter);
+                noteAdapter.setmNotes(notes);
+            }
+        });
     }
+
+
 
     public int getItemPosition(int id, ArrayList arrayList) {
         if(arrayList.isEmpty() != true) {
@@ -111,4 +153,19 @@ public class AllNotesFragment extends Fragment {
         }
         return 0;
     };
+
+
+    private ArrayList<Note> filterNotes(int courseId, ArrayList<Note> notes) {
+        ArrayList<Note> filteredNotes = new ArrayList<>();
+
+        for(int i = 0; i < notes.size(); i++){
+            Note note = (Note) notes.get(i);
+            if(note.getAssociatedCourseId() == courseId){
+                filteredNotes.add(note);
+                return filteredNotes;
+            }
+        }
+        return filteredNotes;
+    }
 }
+
