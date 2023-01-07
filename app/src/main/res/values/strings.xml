@@ -141,8 +141,8 @@
     <string name="termEndDateLabel">Term End Date</string>
     <string name="coursesThisTermLabel">Courses This Term</string>
     <string name="courseTitleLabel">Course Title</string>
-    <string name="courseStartLabel">Start Date</string>
-    <string name="courseEndLabel">End Date</string>
+    <string name="courseStartLabel">Course Start Date</string>
+    <string name="courseEndLabel">Course End Date</string>
     <string name="courseStatusLabel">Status</string>
     <string name="courseInstructorLabel">Instructor</string>
     <string name="noteBtnLabel">Notes Button</string>
@@ -167,6 +167,12 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="filterSpeakableText">"Select and item to filter "</string>
-    <string name="notifyStart">Start Notification</string>
-    <string name="notifyEnd">End Notification</string>
+    <string name="notifyStart">Set Date to Notify of Course Start</string>
+    <string name="notifyEnd">Set Date to Notify of Course End</string>
+    <string name="channel_name">StudentOrganizerChannel</string>
+    <string name="channel_description">Notifications for Student Organizer App</string>
+    <string name="alertStartDate">Please set the date you wish to be alerted</string>
+    <string name="alertStartTime">Please set the time you wish to be alerted</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
 </resources>

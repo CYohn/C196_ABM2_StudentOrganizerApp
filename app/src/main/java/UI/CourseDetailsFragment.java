@@ -1,13 +1,13 @@
 package UI;
 
-import static android.content.Intent.getIntent;
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -40,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Set;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Assessment;
@@ -77,21 +77,24 @@ public class CourseDetailsFragment extends Fragment {
     RadioButton plannedRadioBtn;
     RadioButton droppedRadioBtn;
     RadioButton completedRadioBtn;
-    CheckBox startNotification;
-    CheckBox endNotification;
+    Button startNotification;
+    Button endNotification;
 
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Term> termArrayList;
     ArrayList<Instructor> instructorArrayList;
-    private ArrayList <Note> assessmentArrayList;
-    private ArrayList <Assessment> assessmentsArrayList;
+    private ArrayList<Note> assessmentArrayList;
+    private ArrayList<Assessment> assessmentsArrayList;
 
     final Calendar startDateCalendar = Calendar.getInstance();
     final Calendar endDateCalendar = Calendar.getInstance();
+    final Calendar notifyStartDateCalendar = Calendar.getInstance();
+    final Calendar notifyEndDateCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener endDateDialog;
     DatePickerDialog.OnDateSetListener startDateDialog;
+    DatePickerDialog.OnDateSetListener notifyStartDateDialog;
+    DatePickerDialog.OnDateSetListener notifyEndDateDialog;
     private ImageButton deleteBtn;
-
 
 
     public CourseDetailsFragment() {
@@ -141,9 +144,11 @@ public class CourseDetailsFragment extends Fragment {
         int termPosition = getItemPosition(termId, termArrayList);
         System.out.println("Term Position: " + termPosition);
 
-        if (termPosition != -1){
-        termsSelectionSpinner.setSelection(termPosition);
-        }else{termsSelectionSpinner.setSelection(0);}
+        if (termPosition != -1) {
+            termsSelectionSpinner.setSelection(termPosition);
+        } else {
+            termsSelectionSpinner.setSelection(0);
+        }
 
         //Set the instructor spinner
         ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
@@ -174,8 +179,8 @@ public class CourseDetailsFragment extends Fragment {
         RadioButton plannedRadioBtn = (RadioButton) view.findViewById(R.id.plannedRadio);
         RadioButton droppedRadioBtn = (RadioButton) view.findViewById(R.id.droppedRadioBtn);
         RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
-        CheckBox startNotification = (CheckBox) view.findViewById(R.id.notifyStartCheckbox);
-        CheckBox endNotification = (CheckBox) view.findViewById(R.id.endNotificationCheckbox);
+        Button startNotification = (Button) view.findViewById(R.id.notifyStartBtn);
+        Button endNotification = (Button) view.findViewById(R.id.notifyEndBtn);
 
         ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteCourseBtn);
         ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
@@ -222,9 +227,7 @@ public class CourseDetailsFragment extends Fragment {
             inProgressRadioBtn.setChecked(false);
             completedRadioBtn.setChecked(false);
             droppedRadioBtn.setChecked(false);
-            }
-
-        else {
+        } else {
             int associatedTerm = -1;
             int selectedCourseId = -1;
             int instructorId = -1;
@@ -324,7 +327,7 @@ public class CourseDetailsFragment extends Fragment {
                     fragmentTransaction.commit();
                 } else {
                     Bundle bundle2 = new Bundle();
-                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
+                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId()) + 1;
                     bundle2.putInt("associatedCourseId", courseId);
                     bundle2.putString("assessmentTitleTxtView", "Please enter assessment title");
                     bundle2.putString("assessmentStartTxtView", "Start");
@@ -366,9 +369,11 @@ public class CourseDetailsFragment extends Fragment {
                 } else {
                     Bundle bundle1 = new Bundle();
                     int repoSize = repo.getmAllCourses().size();
-                    if(repoSize > 0){
-                        courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
-                    } else {courseId = 0;}
+                    if (repoSize > 0) {
+                        courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId()) + 1;
+                    } else {
+                        courseId = 0;
+                    }
 
                     bundle1.putInt("courseId", courseId);
                     bundle1.putString("instructorNameValue", "Please Enter the Instructor Name");
@@ -412,7 +417,7 @@ public class CourseDetailsFragment extends Fragment {
                 } else {
                     Bundle bundle2 = new Bundle();
 
-                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size()-1).getCourseId())+1;
+                    int courseId = (repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId()) + 1;
                     bundle2.putInt("associatedCourseId", courseId);
                     bundle2.putString("noteDateValue", "Date");
                     bundle2.putString("noteTextValue", "Please Enter Note Text Here");
@@ -497,8 +502,7 @@ public class CourseDetailsFragment extends Fragment {
                         dialog.show();
 
                     }
-                }
-                else{ //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                } else { //Else if the assessmentId is the default -1, then no assessment exists to delete -
                     //alert the user.
                     Context context = getContext();
                     CharSequence text = "Course must be saved before deleting.";
@@ -519,109 +523,193 @@ public class CourseDetailsFragment extends Fragment {
         startNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(startNotification.isChecked() == true){
-                    startNotification.setChecked(true);
-                    isStartNotifyChecked = true;
+
+                String courseTitle = editCourseTitle.getText().toString();
+                String dateFromScreen = startNotification.getText().toString();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                Date date = null;
+                try {
+                    date = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    e.getCause();
+                    e.getMessage();
                 }
-                else{
-                    startNotification.setChecked(false);
-                    isStartNotifyChecked = false;
+
+                new DatePickerDialog(getContext(), notifyStartDateDialog, notifyStartDateCalendar.get(YEAR),
+                        notifyStartDateCalendar.get(MONTH), notifyStartDateCalendar.get(DAY_OF_MONTH)).show();
+
+                updateNotifyStartLabel();
+
+
+            }
+
+
+        });
+
+        notifyStartDateDialog = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                notifyStartDateCalendar.set(YEAR, year);
+                notifyStartDateCalendar.set(MONTH, monthOfYear);
+                notifyStartDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateNotifyStartLabel();
+            }
+        };
+
+        endNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dateFromScreen = endNotification.getText().toString();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                Date date = null;
+                try {
+                    date = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    e.getCause();
+                    e.getMessage();
                 }
+
+                new DatePickerDialog(getContext(), notifyEndDateDialog, notifyEndDateCalendar.get(YEAR),
+                        notifyEndDateCalendar.get(MONTH), notifyEndDateCalendar.get(DAY_OF_MONTH)).show();
             }
         });
+
+        notifyEndDateDialog = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                notifyEndDateCalendar.set(YEAR, year);
+                notifyEndDateCalendar.set(MONTH, monthOfYear);
+                notifyEndDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateNotifyEndLabel();
+            }
+        };
+
+
+    }
+
+    private Date getStartNotificationDate(){
+        String dateFromScreen = startNotification.getText().toString();
+        String dateFormat = "MM/dd/yy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
+        }
+        return date;
     }
 
 
-
-private void saveCourse(){
+    private void saveCourse() {
         Bundle bundle = getArguments();
 
-    EditText editCourseTitle = (EditText) getView().findViewById(R.id.courseNameTxtInput);
-    Button setCourseStartBtn = (Button) getView().findViewById(R.id.courseStartDateBtn);
-    Button setCourseEndBtn = (Button) getView().findViewById(R.id.courseEndDateBtn);
-    Spinner instructorSpinner = (Spinner) getView().findViewById(R.id.chooseInstructorSpinner);
-    Spinner termSpinner = (Spinner) getView().findViewById(R.id.associatedTermSpinner);
-    RadioGroup progressRadioGroup = (RadioGroup) getView().findViewById(R.id.courseStatusRadioGroup);
-    RadioButton inProgressRadioBtn = (RadioButton) getView().findViewById(R.id.inProgressRadioBtn);
-    RadioButton plannedRadioBtn = (RadioButton) getView().findViewById(R.id.plannedRadio);
-    RadioButton droppedRadioBtn = (RadioButton) getView().findViewById(R.id.droppedRadioBtn);
-    RadioButton completedRadioBtn = (RadioButton) getView().findViewById(R.id.completedRadioBtn);
+        EditText editCourseTitle = (EditText) getView().findViewById(R.id.courseNameTxtInput);
+        Button setCourseStartBtn = (Button) getView().findViewById(R.id.courseStartDateBtn);
+        Button setCourseEndBtn = (Button) getView().findViewById(R.id.courseEndDateBtn);
+        Spinner instructorSpinner = (Spinner) getView().findViewById(R.id.chooseInstructorSpinner);
+        Spinner termSpinner = (Spinner) getView().findViewById(R.id.associatedTermSpinner);
+        RadioGroup progressRadioGroup = (RadioGroup) getView().findViewById(R.id.courseStatusRadioGroup);
+        RadioButton inProgressRadioBtn = (RadioButton) getView().findViewById(R.id.inProgressRadioBtn);
+        RadioButton plannedRadioBtn = (RadioButton) getView().findViewById(R.id.plannedRadio);
+        RadioButton droppedRadioBtn = (RadioButton) getView().findViewById(R.id.droppedRadioBtn);
+        RadioButton completedRadioBtn = (RadioButton) getView().findViewById(R.id.completedRadioBtn);
 
-    String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
-    String startDate = setCourseStartBtn.getText().toString();
-    String endDate = setCourseEndBtn.getText().toString();
-    String courseStatus = getCourseProgress();
+        String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
+        String startDate = setCourseStartBtn.getText().toString();
+        String endDate = setCourseEndBtn.getText().toString();
+        String courseStatus = getCourseProgress();
 
-    int instructorRepoSize = repo.getmAllInstructors().size();
-    if(instructorRepoSize == 0) {
-        insructorId = 0;
-        courseInstructor = "None Assigned";
-    }else{
-        Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
-        insructorId = selectedInstructor.getInstructorId();
-        courseInstructor = selectedInstructor.getInstructorName();
-    }
-
-    Term selectedTerm = (Term) termSpinner.getSelectedItem();
-    if(selectedTerm != null) {
-        termId = selectedTerm.getTermId();
-    }else{termId = -1;}
-
-    if (bundle != null){
-        courseId = bundle.getInt("courseId");
-    }else{courseId = -1;}
-
-
-    //Save info to DB
-    Course course;
-    int courseRepoSize = repo.getmAllCourses().size();
-    int newId;
-    if (courseId == -1) {
-        if(courseRepoSize == 0){
-            newId = 1;
-            course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-            repo.insert(course);
-        }else{
-            repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
-            newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
-            System.out.println("Course Repo Size = " + courseRepoSize + ", " + "New Id No = " + newId);
-            course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-            repo.insert(course);
+        int instructorRepoSize = repo.getmAllInstructors().size();
+        if (instructorRepoSize == 0) {
+            insructorId = 0;
+            courseInstructor = "None Assigned";
+        } else {
+            Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
+            insructorId = selectedInstructor.getInstructorId();
+            courseInstructor = selectedInstructor.getInstructorName();
         }
-    } else {
-        course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
-        repo.update(course);
+
+        Term selectedTerm = (Term) termSpinner.getSelectedItem();
+        if (selectedTerm != null) {
+            termId = selectedTerm.getTermId();
+        } else {
+            termId = -1;
+        }
+
+        if (bundle != null) {
+            courseId = bundle.getInt("courseId");
+        } else {
+            courseId = -1;
+        }
+
+
+        //Save info to DB
+        Course course;
+        int courseRepoSize = repo.getmAllCourses().size();
+        int newId;
+        if (courseId == -1) {
+            if (courseRepoSize == 0) {
+                newId = 1;
+                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+                repo.insert(course);
+            } else {
+                repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
+                newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
+                System.out.println("Course Repo Size = " + courseRepoSize + ", " + "New Id No = " + newId);
+                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+                repo.insert(course);
+            }
+        } else {
+            course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+            repo.update(course);
+        }
+
+        Date startNotification = getStartNotificationDate();
+        if(startNotification != null){
+            triggerAlertBroadcastReciever(startNotification);
+        }
+
+        Date endNotification = getEndNotificationDate();
+        if(endNotification != null){
+            triggerAlertBroadcastReciever(endNotification);
+        }
     }
-}
 
 
     private void deleteAssociatedNotes(int courseId, ArrayList<Note> notesArrayList) {
         notesArrayList = new ArrayList<Note>(repo.getAllNotes());
 
-        for (int i=0; i < notesArrayList.size(); i++ ) {
+        for (int i = 0; i < notesArrayList.size(); i++) {
             Note note = (Note) notesArrayList.get(i);
             int associatedCourseId = note.getAssociatedCourseId();
-            if(associatedCourseId == courseId){
+            if (associatedCourseId == courseId) {
                 repo.delete(note);
             }
         }
     }
 
 
-    private void deleteAssociatedAssessments(int courseId, ArrayList<Assessment> assessmentArrayList){
+    private void deleteAssociatedAssessments(int courseId, ArrayList<Assessment> assessmentArrayList) {
         assessmentArrayList = new ArrayList<Assessment>(repo.getmAllAssessments());
 
-        for (int i = 0; i < assessmentArrayList.size(); i++ ) {
+        for (int i = 0; i < assessmentArrayList.size(); i++) {
             Assessment assessment = (Assessment) assessmentArrayList.get(i);
             int associatedCourseId = assessment.getAssociatedCourseId();
-            if(associatedCourseId == courseId){
+            if (associatedCourseId == courseId) {
                 repo.delete(assessment);
             }
         }
     }
 
     public int getItemPosition(int id, ArrayList arrayList) {
-        if(arrayList.isEmpty() != true) {
+        if (arrayList.isEmpty() != true) {
             if (arrayList.get(0) instanceof Term) {
                 for (int i = 0; i < arrayList.size(); i++) {
                     Term term = (Term) arrayList.get(i);
@@ -643,10 +731,18 @@ private void saveCourse(){
             }
         }
         return 0;
-    };
+    }
+
+    ;
 
 
-
+    private void updateNotifyEndLabel() {
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        endNotification = (Button) getView().findViewById(R.id.notifyEndBtn);
+        endNotification.setText(simpleDateFormat.format(notifyEndDateCalendar.getTime()));
+    }
 
     private void updateStartDateLabel() {
         String dateFormat = "MM/dd/YY";
@@ -662,6 +758,14 @@ private void saveCourse(){
         String currentDate = simpleDateFormat.format(new Date());
         setCourseEndBtn = (Button) getView().findViewById(R.id.courseEndDateBtn);
         setCourseEndBtn.setText(simpleDateFormat.format(endDateCalendar.getTime()));
+    }
+
+    private void updateNotifyStartLabel() {
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        startNotification = (Button) getView().findViewById(R.id.notifyStartBtn);
+        startNotification.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
     }
 
     private String setCourseProgressBtn(String courseProgress) {
@@ -692,7 +796,7 @@ private void saveCourse(){
         }
     }
 
-    private String getCourseProgress(){
+    private String getCourseProgress() {
         RadioGroup radioBtnGroup = getView().findViewById(R.id.courseStatusRadioGroup);
         int selectedRadioBtnId = radioBtnGroup.getCheckedRadioButtonId();
         View selectedRadioBtn = radioBtnGroup.findViewById(selectedRadioBtnId);
@@ -717,7 +821,37 @@ private void saveCourse(){
         }
     }
 
-    private void setCheckbox(){
+    private Date getEndNotificationDate() {
+        String dateFromScreen = endNotification.getText().toString();
+        String dateFormat = "MM/dd/yy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
+        }
+        return date;
+    }
+
+
+        private void triggerAlertBroadcastReciever (Date dateFromScreen){
+
+            //Set the trigger to the Broadcast receiver
+            Long trigger = dateFromScreen.getTime();
+            Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);
+            System.out.println("Course title: " + courseTitle.toString());
+            System.out.println("Date for course Start: " + dateFromScreen);
+            //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
+            intent.putExtra("alertMessage ", "Course: " + courseTitle.toString() + " Starting On " + dateFromScreen);
+            intent.putExtra("alertCreatedToast", "Alert Number: " + ++MainActivity.alertId + " Saved");
+            PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
+            AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+        }
+
 
     }
-}

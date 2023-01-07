@@ -29,7 +29,6 @@ import Entities.Instructor;
 
 public class InstructorDetailsFragment extends Fragment {
 
-
     String instructorName;
     String insrtuctorEmail;
     String instructorPhone;
@@ -114,11 +113,13 @@ public class InstructorDetailsFragment extends Fragment {
                 int instructorId;
                 int instructorRepoSize = repo.getmAllInstructors().size();
                 int newId;
+
                 if (bundle != null) {
                     instructorId = bundle.getInt("instructorIdValue", -1);
                 } else {
                     instructorId = -1;
                 }
+
                 if (instructorId == -1) {
                     if(instructorRepoSize == 0){
                         newId = 1;
@@ -131,6 +132,7 @@ public class InstructorDetailsFragment extends Fragment {
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+
                     }else{
                         newId = repo.getmAllInstructors().get(repo.getmAllInstructors().size() - 1).getInstructorId() + 1;
                         System.out.println("newId for instructor =  " + newId);
@@ -164,50 +166,10 @@ public class InstructorDetailsFragment extends Fragment {
                 System.out.println("Activity name =  " + activityName);
 
                 if (activityName.equals("UI.CourseActivity")) {
-                    ArrayList<Course> courseList = (ArrayList<Course>) repo.getmAllCourses();
-                    int courseId = bundle.getInt("courseId");
-                    int termId;
-                    String courseTitle;
-                    String courseStart;
-                    String courseEnd;
-                    String courseInstructor;
-                    String courseProgress;
-                    int insructorId;
-                    for (int i = 0; i < courseList.size(); i++) {
-                        Course course = (Course) courseList.get(i);
-                        if (course.getCourseId() == courseId) {
-                            termId = course.getAssociatedTermId();
-                            courseTitle = course.getCourseTitle();
-                            courseStart = course.getCourseStartDate();
-                            courseEnd = course.getCourseEndDate();
-                            courseInstructor = course.getCourseInstructor();
-                            courseProgress = course.getCourseStatus();
-                            insructorId = course.getInstructorId();
+                    sendToCourseDetails();
 
-                            Bundle bundle1 = new Bundle();
-                            bundle1.putInt("associatedTerm", termId);
-                            bundle1.putInt("courseId", courseId);
-                            bundle1.putString("courseTitle", courseTitle);
-                            bundle1.putString("courseStart", courseStart);
-                            bundle1.putString("courseEnd", courseEnd);
-                            bundle1.putString("courseInstructor", courseInstructor);
-                            bundle1.putInt("insructorId", insructorId);
-                            bundle1.putString("courseStatus", courseProgress);
-
-                            Fragment courseDetails = new CourseDetailsFragment();
-                            FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                            courseDetails.setArguments(bundle1);
-                            fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
-                            fragmentTransaction.addToBackStack("CourseDetailsView");
-                            fragmentTransaction.commit();
-                        }
-                    }
                 } else {
-                    Fragment instructorList = new AllInstructorsFragment();
-                    FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorList);
-                    fragmentTransaction.addToBackStack("InstructorListFragment");
-                    fragmentTransaction.commit();
+                    sendToAllInstructorsList();
                 }
             }
         });
@@ -215,11 +177,7 @@ public class InstructorDetailsFragment extends Fragment {
         closeInstructorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment instructorList = new AllInstructorsFragment();
-                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorList);
-                fragmentTransaction.addToBackStack("NotesListFragment");
-                fragmentTransaction.commit();
+                sendToAllInstructorsList();
             }
         });
 
@@ -297,5 +255,54 @@ public class InstructorDetailsFragment extends Fragment {
         });
     }
 
+    public void sendToAllInstructorsList(){
+        Fragment instructorList = new AllInstructorsFragment();
+        FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.instructorActivityFragmentViewer, instructorList);
+        fragmentTransaction.addToBackStack("InstructorListFragment");
+        fragmentTransaction.commit();
+    }
+
+    public void sendToCourseDetails(){
+        ArrayList<Course> courseList = (ArrayList<Course>) repo.getmAllCourses();
+        Bundle bundle = getArguments();
+        int courseId = bundle.getInt("courseId");
+        int termId;
+        String courseTitle;
+        String courseStart;
+        String courseEnd;
+        String courseInstructor;
+        String courseProgress;
+        int insructorId;
+        for (int i = 0; i < courseList.size(); i++) {
+            Course course = (Course) courseList.get(i);
+            if (course.getCourseId() == courseId) {
+                termId = course.getAssociatedTermId();
+                courseTitle = course.getCourseTitle();
+                courseStart = course.getCourseStartDate();
+                courseEnd = course.getCourseEndDate();
+                courseInstructor = course.getCourseInstructor();
+                courseProgress = course.getCourseStatus();
+                insructorId = course.getInstructorId();
+
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("associatedTerm", termId);
+                bundle1.putInt("courseId", courseId);
+                bundle1.putString("courseTitle", courseTitle);
+                bundle1.putString("courseStart", courseStart);
+                bundle1.putString("courseEnd", courseEnd);
+                bundle1.putString("courseInstructor", courseInstructor);
+                bundle1.putInt("insructorId", insructorId);
+                bundle1.putString("courseStatus", courseProgress);
+
+                Fragment courseDetails = new CourseDetailsFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
+                courseDetails.setArguments(bundle1);
+                fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
+                fragmentTransaction.addToBackStack("CourseDetailsView");
+                fragmentTransaction.commit();
+            }
+        }
+    }
 
 }

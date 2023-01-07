@@ -28,19 +28,28 @@ public class CourseActivity extends AppCompatActivity {
         int associatedTerm = getIntent().getIntExtra("associatedTerm", -1);
         setContentView(R.layout.activity_courses);
 
-        if (associatedTerm != -1){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(bundle != null){
+            Bundle bundle1 = new Bundle();
+
+            bundle1.putInt("associatedTerm", getIntent().getIntExtra("associatedTerm", -1));
+            bundle1.putInt("courseId", -1);
+            bundle1.putString("courseTitle", "Course Title");
+            bundle1.putString("courseStart", "Start");
+            bundle1.putString("courseEnd", "End");
+            bundle1.putString("courseInstructor", "None");
+            bundle1.putInt("insructorId", -1);
 
             Fragment addCourse = new CourseDetailsFragment();
-
-            Bundle bundle = new Bundle();
-            bundle.putInt("associatedTerm", getIntent().getIntExtra("associatedTerm", -1));
-            addCourse.setArguments(bundle);
-
+            addCourse.setArguments(bundle1);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerViewCourses, addCourse);
             fragmentTransaction.addToBackStack("addCourseFragmentView");
             fragmentTransaction.commit();
         }
+
 
         else{
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
