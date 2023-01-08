@@ -167,8 +167,8 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="filterSpeakableText">"Select and item to filter "</string>
-    <string name="notifyStart">Set Date to Notify of Course Start</string>
-    <string name="notifyEnd">Set Date to Notify of Course End</string>
+    <string name="notifyStart">Notify of Start</string>
+    <string name="notifyEnd">Notify of End</string>
     <string name="channel_name">StudentOrganizerChannel</string>
     <string name="channel_description">Notifications for Student Organizer App</string>
     <string name="alertStartDate">Please set the date you wish to be alerted</string>

@@ -6,10 +6,13 @@ import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +35,7 @@ import com.zybooks.c196_abm2_charity_yohn.R;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.text.BreakIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +72,8 @@ ImageButton closeBtn;
 ImageButton alertsBtn;
 ImageButton saveBtn;
 ImageButton deleteBtn;
+Button endNotification;
+Button startNotification;
 
 RepositoryForStudentOrganizer.Repository repo;
 ArrayList<Course> courseArrayList;
@@ -75,9 +81,12 @@ final Calendar startDateCalendar = Calendar.getInstance();
 DatePickerDialog.OnDateSetListener startDateDialog;
 final Calendar endDateCalendar = Calendar.getInstance();
 DatePickerDialog.OnDateSetListener endDateDialog;
+final Calendar notifyStartDateCalendar = Calendar.getInstance();
+final Calendar notifyEndDateCalendar = Calendar.getInstance();
+DatePickerDialog.OnDateSetListener notifyStartDateDialog;
+DatePickerDialog.OnDateSetListener notifyEndDateDialog;
 
 Bundle bundle;
-
 
 
     public AssessmentDetailsFragment() {
@@ -126,6 +135,8 @@ Bundle bundle;
         deleteBtn = (ImageButton) getView().findViewById(R.id.deleteAssessmentBtn);
         alertsBtn = (ImageButton) getView().findViewById(R.id.assessmentAlarmBtn);
         saveBtn = (ImageButton) getView().findViewById(R.id.assessmentSaveButton);
+        startNotification = (Button) getView().findViewById(R.id.startNotificationBtn);
+        endNotification = (Button) getView().findViewById(R.id.endNotificationBtn);
 
         assessmentTypeToggle = (ToggleButton) getView().findViewById(R.id.assessmentTypeToggle);
 
@@ -427,6 +438,78 @@ Bundle bundle;
                 updateEndDateLabel();
             }
         };
+
+        startNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button startNotification = (Button) getView().findViewById(R.id.startNotificationBtn);
+                String courseTitle = titleText.getText().toString();
+                String dateFromScreen = startNotification.getText().toString();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                Date date = null;
+                try {
+                    date = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    e.getCause();
+                    e.getMessage();
+                }
+
+                new DatePickerDialog(getContext(), notifyStartDateDialog, notifyStartDateCalendar.get(YEAR),
+                        notifyStartDateCalendar.get(MONTH), notifyStartDateCalendar.get(DAY_OF_MONTH)).show();
+
+                updateNotifyStartLabel();
+
+
+            }
+
+
+        });
+
+        notifyStartDateDialog = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                notifyStartDateCalendar.set(YEAR, year);
+                notifyStartDateCalendar.set(MONTH, monthOfYear);
+                notifyStartDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateNotifyStartLabel();
+            }
+        };
+
+        endNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dateFromScreen = endNotification.getText().toString();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                Date date = null;
+                try {
+                    date = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    e.getCause();
+                    e.getMessage();
+                }
+
+                new DatePickerDialog(getContext(), notifyEndDateDialog, notifyEndDateCalendar.get(YEAR),
+                        notifyEndDateCalendar.get(MONTH), notifyEndDateCalendar.get(DAY_OF_MONTH)).show();
+            }
+        });
+
+        notifyEndDateDialog = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                notifyEndDateCalendar.set(YEAR, year);
+                notifyEndDateCalendar.set(MONTH, monthOfYear);
+                notifyEndDateCalendar.set(DAY_OF_MONTH, dayOfMonth);
+                updateNotifyEndLabel();
+            }
+        };
+
+
+
+
     }
 
 
@@ -445,13 +528,6 @@ Bundle bundle;
         return -1;
     };
 
-    private void updateStartDateLabel() {
-        String dateFormat = "MM/dd/YY";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-        String currentDate = simpleDateFormat.format(new Date());
-        startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
-        startDateBtn.setText(simpleDateFormat.format(startDateCalendar.getTime()));
-    }
 
     private void updateEndDateLabel() {
         String dateFormat = "MM/dd/YY";
@@ -459,5 +535,70 @@ Bundle bundle;
         String currentDate = simpleDateFormat.format(new Date());
         endDateBtn = (Button) getView().findViewById(R.id.assessmentEndDateBtn);
         endDateBtn.setText(simpleDateFormat.format(endDateCalendar.getTime()));
+
+
     }
+
+    private void updateStartDateLabel() {
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        startDateBtn = (Button) getView().findViewById(R.id.courseStartDateBtn);
+        startDateBtn.setText(simpleDateFormat.format(startDateCalendar.getTime()));
+    }
+
+    private Date getEndNotificationDate() {
+        String dateFromScreen = endNotification.getText().toString();
+        String dateFormat = "MM/dd/yy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
+        }
+        return date;
+    }
+
+
+    private void triggerAlertBroadcastReciever (Date dateFromScreen){
+
+        //Set the trigger to the Broadcast receiver
+        Long trigger = dateFromScreen.getTime();
+        Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);
+        System.out.println("Course title: " + assessmentTitle.toString());
+        System.out.println("Date for course Start: " + dateFromScreen);
+        //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
+        intent.putExtra("alertMessage ", "Course: " + assessmentTitle.toString() + " Starting On " + dateFromScreen);
+        intent.putExtra("alertCreatedToast", "Alert Number: " + ++MainActivity.alertId + " Saved");
+        PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+    }
+
+    private void updateNotifyEndLabel() {
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        endNotification = (Button) getView().findViewById(R.id.endNotificationBtn);
+        endNotification.setText(simpleDateFormat.format(notifyEndDateCalendar.getTime()));
+        TextView notifyEndLabel = (TextView) getView().findViewById(R.id.endNotifyLabel);
+        notifyEndLabel.setText("Notify End");
+    }
+
+    private void updateNotifyStartLabel() {
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String currentDate = simpleDateFormat.format(new Date());
+        startNotification = (Button) getView().findViewById(R.id.startNotificationBtn);
+        startNotification.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
+        TextView notifyStartLabel = (TextView) getView().findViewById(R.id.startNotifyLabel);
+        notifyStartLabel.setText("Notify Start");
+    }
+
+
+
 }
