@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:contentDescription="@string/todo"
-        android:onClick="addInstructorPressed"
+
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

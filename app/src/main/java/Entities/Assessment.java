@@ -16,6 +16,8 @@ public class Assessment implements Serializable {
     private String assessmentEndDate;
     private String assessmentStartDate;
     private int associatedCourseId;
+    private String notifyStartDate;
+    private String notifyEndDate;
 
     @Override
     public String toString() {
@@ -24,13 +26,31 @@ public class Assessment implements Serializable {
                 " Id " + assessmentId;
     }
 
-    public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate, int associatedCourseId) {
+    public Assessment(int assessmentId, String assessmentType, String assessmentTitle, String assessmentEndDate, String assessmentStartDate, int associatedCourseId, String notifyStartDate, String notifyEndDate) {
         this.assessmentId = assessmentId;
         this.assessmentType = assessmentType;
         this.assessmentTitle = assessmentTitle;
         this.assessmentEndDate = assessmentEndDate;
         this.assessmentStartDate = assessmentStartDate;
         this.associatedCourseId = associatedCourseId;
+        this.notifyStartDate = notifyStartDate;
+        this.notifyEndDate = notifyEndDate;
+    }
+
+    public String getNotifyStartDate() {
+        return notifyStartDate;
+    }
+
+    public void setNotifyStartDate(String notifyStartDate) {
+        this.notifyStartDate = notifyStartDate;
+    }
+
+    public String getNotifyEndDate() {
+        return notifyEndDate;
+    }
+
+    public void setNotifyEndDate(String notifyEndDate) {
+        this.notifyEndDate = notifyEndDate;
     }
 
     public int getAssociatedCourseId() {

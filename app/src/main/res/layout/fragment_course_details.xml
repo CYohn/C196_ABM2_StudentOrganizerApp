@@ -250,7 +250,7 @@
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/saveCourseBtn"
+        app:layout_constraintBottom_toTopOf="@id/saveCourseBtnHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/courseStatusRadioGroup">
@@ -277,6 +277,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/saveCourseBtnHolder"
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:layout_weight="1"

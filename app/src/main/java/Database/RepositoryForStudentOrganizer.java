@@ -2,6 +2,7 @@ package Database;
 
 import android.app.Application;
 
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,13 +11,11 @@ import DAO.AssessmentDAO;
 import DAO.CourseDAO;
 import DAO.InstructorDAO;
 import DAO.NoteDAO;
-import DAO.NotificationDAO;
 import DAO.TermDAO;
 import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
 import Entities.Note;
-import Entities.Notification;
 import Entities.Term;
 
 public class RepositoryForStudentOrganizer {
@@ -29,14 +28,14 @@ public class RepositoryForStudentOrganizer {
         private InstructorDAO mInstructorDAO;
         private NoteDAO mNoteDAO;
         private TermDAO mTermDAO;
-        private NotificationDAO mNotificationDAO;
+
 
         private List<Assessment> mAllAssessments;
         private List<Course> mAllCourses;
         private List<Instructor> mAllInstructors;
         private List<Note> mAllNotes;
         private List<Term> mAllTerms;
-        private List<Notification>mAllNotifications;
+
 
         private final int NUMBER_OF_THREADS=6;
         final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -312,57 +311,7 @@ public class RepositoryForStudentOrganizer {
         }
 
 
-        /*************************************************************/
-        public List<Notification>getmAllNotifications(){
-            databaseExecutor.execute(()->{
-                mAllNotifications=mNotificationDAO.getmAllNotifications();
-            });
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                e.getCause();
-                e.getMessage();
-            }
-            return mAllNotifications;
-        }
-        public void insert(Notification notification){
-            databaseExecutor.execute(()->{
-                mNotificationDAO.insert(notification);
-            });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                e.getCause();
-                e.getMessage();
-            }
-        }
-        public void update(Notification notification){
-            databaseExecutor.execute(()->{
-                mNotificationDAO.update(notification);
-            });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                e.getCause();
-                e.getMessage();
-            }
-        }
-        public void delete(Notification notification){
-            databaseExecutor.execute(()->{
-                mNotificationDAO.delete(notification);
-            });
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                e.getCause();
-                e.getMessage();
-            }
-        }
     }
 
 

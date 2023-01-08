@@ -198,10 +198,12 @@ Bundle bundle;
                         assessmentEndDate = bundle.getString("assessmentEndTxtView");
                         assessmentTitle = bundle.getString("assessmentTitleTxtView");
                         courseIdNumber = bundle.getInt("associatedCourse");
+                        String notifyStart = getStartNotificationDate().toString();
+                        String notifyEnd = getEndNotificationDate().toString();
 
                         assessment = new Assessment(assessmentId, assessmentType,
                                 assessmentTitle, assessmentEndDate,
-                                assessmentStartDate, courseIdNumber);
+                                assessmentStartDate, courseIdNumber, notifyStart,notifyEnd);
 
                         //Set an alert to confirm the coice to delete
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -277,7 +279,11 @@ Bundle bundle;
                 String startDate = ((Button) getView().findViewById(R.id.assessmentEndDateBtn)).getText().toString();
                 String assessmentType = assessmentTypeToggle.getText().toString();
                 int assessmentId;
-                int assessmentRepoSize = repo.getmAllAssessments().size();;
+                int assessmentRepoSize = repo.getmAllAssessments().size();
+                String notifyStartDate = getStartNotificationDate().toString();
+                String notifyEndDate = getEndNotificationDate().toString();
+
+
                 if (bundle != null){
                     assessmentId = bundle.getInt("assessmentId", -1);
                 } else{assessmentId = -1;}
@@ -288,7 +294,7 @@ Bundle bundle;
                     if(assessmentRepoSize == 0){
                         assessmentId = 1;
                         assessment = new Assessment(assessmentId, assessmentType,
-                                assessmentTitle, endDate, startDate, courseId);
+                                assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
                         repo.insert(assessment);
 
                         //Inform the user the assessment was saved
@@ -303,7 +309,7 @@ Bundle bundle;
                         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
                         int newId = repo.getmAllAssessments().get(repo.getmAllAssessments().size()-1).getAssessmentId() + 1;
                         assessment = new Assessment(newId, assessmentType,
-                                assessmentTitle, endDate, startDate, courseId);
+                                assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
                         repo.insert(assessment);
 
                         //Inform the user the assessment was saved
@@ -319,7 +325,7 @@ Bundle bundle;
                     if (assessmentId != -1) {
                         assessmentId = bundle.getInt("assessmentId", -1);
                         assessment = new Assessment(assessmentId, assessmentType,
-                                assessmentTitle, endDate, startDate, courseId);
+                                assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
                         repo.update(assessment);
 
                         //Inform the user the assessment updated successfully
@@ -549,6 +555,21 @@ Bundle bundle;
 
     private Date getEndNotificationDate() {
         String dateFromScreen = endNotification.getText().toString();
+        String dateFormat = "MM/dd/yy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
+        }
+        return date;
+    }
+
+    private Date getStartNotificationDate() {
+        String dateFromScreen = startNotification.getText().toString();
         String dateFormat = "MM/dd/yy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         Date date = null;

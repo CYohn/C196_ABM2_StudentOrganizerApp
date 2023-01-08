@@ -15,6 +15,8 @@ public class Course {
     private String courseInstructor;
     private int associatedTermId;
     private int instructorId;
+    private String notifyStartDate;
+    private String notifyEndDate;
 
 
     @Override
@@ -24,7 +26,9 @@ public class Course {
                 " | Id " + courseId;
     }
 
-    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate, String courseStatus, String courseInstructor, int instructorId, int associatedTermId) {
+    public Course(int courseId,  String courseTitle, String courseStartDate, String courseEndDate,
+                  String courseStatus, String courseInstructor, int instructorId, int associatedTermId,
+                    String notifyStartDate, String notifyEndDate) {
         this.courseId = courseId;
         this.courseTitle = courseTitle;
         this.courseStartDate = courseStartDate;
@@ -33,8 +37,26 @@ public class Course {
         this.courseInstructor = courseInstructor;
         this.instructorId = instructorId;
         this.associatedTermId = associatedTermId;
+        this.notifyStartDate = notifyStartDate;
+        this.notifyEndDate = notifyEndDate;
     }
 
+
+    public String getNotifyStartDate() {
+        return notifyStartDate;
+    }
+
+    public void setNotifyStartDate(String notifyStartDate) {
+        this.notifyStartDate = notifyStartDate;
+    }
+
+    public String getNotifyEndDate() {
+        return notifyEndDate;
+    }
+
+    public void setNotifyEndDate(String notifyEndDate) {
+        this.notifyEndDate = notifyEndDate;
+    }
 
     public int getInstructorId() {return instructorId;}
 

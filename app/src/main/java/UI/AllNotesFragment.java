@@ -74,7 +74,8 @@ public class AllNotesFragment extends Fragment {
         //Set the filter spinner
         ArrayList<Course> courseArrayList = (ArrayList<Course>) repo.getmAllCourses(); //Get terms from repo, add them to the list
         //Add a choice at index 0 to show all notes
-        Course indexZeroChoice = new Course(-1, "Show All (Or Choose a Course to Filter)", "", "", "", "", -1, -1);
+        Course indexZeroChoice = new Course(-1, "Show All (Or Choose a Course to Filter)",
+                "", "", "", "", -1, -1,"","");
         courseArrayList.add(0, indexZeroChoice);
         Spinner filterNotesSpinner = (Spinner) getView().findViewById(R.id.filterNotesSpinner);
         ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, courseArrayList);

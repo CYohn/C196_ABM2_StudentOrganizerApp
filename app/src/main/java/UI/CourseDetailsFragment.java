@@ -45,7 +45,6 @@ import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
 import Entities.Note;
-import Entities.Notification;
 import Entities.Term;
 
 
@@ -77,7 +76,7 @@ public class CourseDetailsFragment extends Fragment {
     RadioButton plannedRadioBtn;
     RadioButton droppedRadioBtn;
     RadioButton completedRadioBtn;
-    Button startNotification;
+    Button startNotificationString;
     Button endNotification;
 
     RepositoryForStudentOrganizer.Repository repo;
@@ -452,10 +451,12 @@ public class CourseDetailsFragment extends Fragment {
                         courseEnd = bundle.getString("courseEnd");
                         insructorId = bundle.getInt("instructorId", -1);
                         courseProgress = bundle.getString("courseStatus");
+                        String startNotification = getStartNotificationDate().toString();
+                        String endNotification = getEndNotificationDate().toString();
 
                         course = new Course(courseId, courseTitle, courseStart,
                                 courseEnd, courseProgress, courseInstructor,
-                                insructorId, termId);
+                                insructorId, termId, startNotification, endNotification);
 
                         //Set an alert to confirm the choice to delete
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -619,20 +620,22 @@ public class CourseDetailsFragment extends Fragment {
         Course course;
         int courseRepoSize = repo.getmAllCourses().size();
         int newId;
+        String startNotificationString = getStartNotificationDate().toString();
+        String endNotificationString = getEndNotificationDate().toString();
         if (courseId == -1) {
             if (courseRepoSize == 0) {
                 newId = 1;
-                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId, startNotificationString, endNotificationString);
                 repo.insert(course);
             } else {
                 repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
                 newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
                 System.out.println("Course Repo Size = " + courseRepoSize + ", " + "New Id No = " + newId);
-                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+                course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId, startNotificationString, endNotificationString);
                 repo.insert(course);
             }
         } else {
-            course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId);
+            course = new Course(courseId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId, startNotificationString, endNotificationString);
             repo.update(course);
         }
 
@@ -728,8 +731,8 @@ public class CourseDetailsFragment extends Fragment {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
-        startNotification = (Button) getView().findViewById(R.id.notifyStartBtn);
-        startNotification.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
+        startNotificationString = (Button) getView().findViewById(R.id.notifyStartBtn);
+        startNotificationString.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
     }
 
     //Send information to and from radios
@@ -789,7 +792,7 @@ public class CourseDetailsFragment extends Fragment {
 
     //Get dates for the notification Broadcast reciever / and the trigger
     private Date getStartNotificationDate() {
-        String dateFromScreen = startNotification.getText().toString();
+        String dateFromScreen = startNotificationString.getText().toString();
         String dateFormat = "MM/dd/yy";
         isStartNotify = true;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
