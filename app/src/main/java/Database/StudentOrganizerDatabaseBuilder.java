@@ -11,15 +11,17 @@ import DAO.AssessmentDAO;
 import DAO.CourseDAO;
 import DAO.InstructorDAO;
 import DAO.NoteDAO;
+import DAO.NotificationDAO;
 import DAO.TermDAO;
 import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
 import Entities.Note;
+import Entities.Notification;
 import Entities.Term;
 
 
-@Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class}, version=10, exportSchema = false)
+@Database(entities={Assessment.class, Course.class, Instructor.class, Note.class, Term.class, Notification.class}, version=11, exportSchema = false)
 
     public abstract class StudentOrganizerDatabaseBuilder extends RoomDatabase {
         public abstract AssessmentDAO assessmentDAO();
@@ -27,6 +29,7 @@ import Entities.Term;
         public abstract InstructorDAO instructorDAO();
         public abstract NoteDAO noteDAO();
         public abstract TermDAO termDAO();
+        public abstract NotificationDAO notificationDAO();
 
         private static volatile StudentOrganizerDatabaseBuilder INSTANCE;
 

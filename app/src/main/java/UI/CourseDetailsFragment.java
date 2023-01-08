@@ -39,13 +39,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Set;
 
 import Database.RepositoryForStudentOrganizer;
 import Entities.Assessment;
 import Entities.Course;
 import Entities.Instructor;
 import Entities.Note;
+import Entities.Notification;
 import Entities.Term;
 
 
@@ -59,8 +59,8 @@ public class CourseDetailsFragment extends Fragment {
     String courseInstructor;
     String courseProgress;
     int insructorId;
-    boolean isStartNotifyChecked;
-    boolean isEndNotifyChecked;
+    boolean isStartNotify;
+    boolean isEndNotify;
 
     EditText editCourseTitle;
     Button setCourseStartBtn;
@@ -101,13 +101,6 @@ public class CourseDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-//    public static CourseDetailsFragment newInstance(String param1, String param2) {
-//        CourseDetailsFragment fragment = new CourseDetailsFragment();
-//        Bundle args = new Bundle();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -160,6 +153,7 @@ public class CourseDetailsFragment extends Fragment {
         return view;
     }
 
+
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
 
@@ -195,18 +189,10 @@ public class CourseDetailsFragment extends Fragment {
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null) {
-            //           int associatedTerm = termId;
             int selectedCourseId = courseId;
-            //         int instructorId = insructorId;
             editCourseTitle.setText(courseTitle);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
-            //Set the spinners
-//            int instructorPosition = getItemPosition(bundle.getInt("insructorId"), instructorArrayList);
-//            instructorSpinner.setSelection(instructorPosition);
-//            int termPosition = getItemPosition(bundle.getInt("termId"), termArrayList);
-//            termSpinner.setSelection(termPosition);
-            //Set the radio buttons
             courseProgress = bundle.getString("courseStatus", "Unchecked");
             setCourseProgressBtn(courseProgress);
 
@@ -542,12 +528,8 @@ public class CourseDetailsFragment extends Fragment {
 
                 updateNotifyStartLabel();
 
-
             }
-
-
         });
-
         notifyStartDateDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -577,7 +559,6 @@ public class CourseDetailsFragment extends Fragment {
                         notifyEndDateCalendar.get(MONTH), notifyEndDateCalendar.get(DAY_OF_MONTH)).show();
             }
         });
-
         notifyEndDateDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -588,22 +569,6 @@ public class CourseDetailsFragment extends Fragment {
             }
         };
 
-
-    }
-
-    private Date getStartNotificationDate(){
-        String dateFromScreen = startNotification.getText().toString();
-        String dateFormat = "MM/dd/yy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(dateFromScreen);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            e.getCause();
-            e.getMessage();
-        }
-        return date;
     }
 
 
@@ -672,12 +637,12 @@ public class CourseDetailsFragment extends Fragment {
         }
 
         Date startNotification = getStartNotificationDate();
-        if(startNotification != null){
+        if (startNotification != null) {
             triggerAlertBroadcastReciever(startNotification);
         }
 
         Date endNotification = getEndNotificationDate();
-        if(endNotification != null){
+        if (endNotification != null) {
             triggerAlertBroadcastReciever(endNotification);
         }
     }
@@ -733,9 +698,8 @@ public class CourseDetailsFragment extends Fragment {
         return 0;
     }
 
-    ;
 
-
+    //Update date buttons
     private void updateNotifyEndLabel() {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
@@ -768,6 +732,7 @@ public class CourseDetailsFragment extends Fragment {
         startNotification.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
     }
 
+    //Send information to and from radios
     private String setCourseProgressBtn(String courseProgress) {
 
         switch (courseProgress) {
@@ -821,9 +786,12 @@ public class CourseDetailsFragment extends Fragment {
         }
     }
 
-    private Date getEndNotificationDate() {
-        String dateFromScreen = endNotification.getText().toString();
+
+    //Get dates for the notification Broadcast reciever / and the trigger
+    private Date getStartNotificationDate() {
+        String dateFromScreen = startNotification.getText().toString();
         String dateFormat = "MM/dd/yy";
+        isStartNotify = true;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         Date date = null;
         try {
@@ -836,22 +804,87 @@ public class CourseDetailsFragment extends Fragment {
         return date;
     }
 
-
-        private void triggerAlertBroadcastReciever (Date dateFromScreen){
-
-            //Set the trigger to the Broadcast receiver
-            Long trigger = dateFromScreen.getTime();
-            Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);
-            System.out.println("Course title: " + courseTitle.toString());
-            System.out.println("Date for course Start: " + dateFromScreen);
-            //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
-            intent.putExtra("alertMessage ", "Course: " + courseTitle.toString() + " Starting On " + dateFromScreen);
-            intent.putExtra("alertCreatedToast", "Alert Number: " + ++MainActivity.alertId + " Saved");
-            PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
-            AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
-
+    private Date getEndNotificationDate() {
+        String dateFromScreen = endNotification.getText().toString();
+        String dateFormat = "MM/dd/yy";
+        isEndNotify = false;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            e.getCause();
+            e.getMessage();
         }
+        return date;
+    }
+
+    private void triggerAlertBroadcastReciever(Date dateFromScreen) {
+
+        //Set the trigger to the Broadcast receiver
+        Long alertId = Long.valueOf(++MainActivity.alertId);
+        Long trigger = dateFromScreen.getTime();
+        Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);
+        System.out.println("Course title: " + courseTitle.toString());
+        System.out.println("Date for course Start: " + dateFromScreen);
+        //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
+        intent.putExtra("alertMessage ", "Course: " + courseTitle.toString() + " Starting On " + dateFromScreen);
+        intent.putExtra("alertCreatedToast", "Alert Number: " + alertId + " Saved");
+        PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+//            String startOrEnd = getStartOrEnd(isStartNotify,isEndNotify);
+//            int notificationId = getNotificationId(courseId, startOrEnd);
+//            
+//        Notification newNotification = new Notification(notificationId, "Course", courseId, startOrEnd, dateFromScreen.toString(), alertId);
+
+    }
+
+
+//    public int getNotificationId(int courseId) {
+//            ArrayList<Notification> notificationArrayList = (ArrayList<Notification>) repo.getmAllNotifications();
+//            if (notificationArrayList.size() != 0) {
+//                for (int i = 0; i < notificationArrayList.size(); i++) {
+//
+//                    Notification notification = notificationArrayList.get(i);
+//                    if (notification.getEntityType().equals("Course") && notification.getStartOrEnd() == startOrEnd
+//                    &&(notification.getEntityIdNo() == courseId){
+//                        return notification.getNotificationId();
+//                    }
+//                }
+//            }
+//            return -1;
+//        }
+
+//    public int assignNotificationId(int courseId, int notificationId) {
+//        ArrayList<Notification> notificationArrayList = (ArrayList<Notification>) repo.getmAllNotifications();
+//        if (notificationArrayList.size() == 0) {
+//            notificationId = 1;
+//            return notificationId;
+//        }
+//        if (notificationArrayList.size() > 0) {
+//
+//            if (notificationId == -1) {
+//                //increment the highest Id number
+//                notificationId = repo.getmAllNotifications().get(repo.getmAllNotifications().size() - 1).getNotificationId() + 1;
+//                return notificationId;
+//            } else {
+//
+//
+//                for (Notification notification :
+//                        notificationArrayList) {
+//                    int entityId = notification.getEntityIdNo();
+//                    String entityType = notification.getEntityType();
+//                    if (entityId == courseId && entityType.equals("Course"))
+//                }
+//            }
+//            return 0;
+//        }
 
 
     }
+
+
+
