@@ -601,7 +601,7 @@ Bundle bundle;
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
-        startDateBtn = (Button) getView().findViewById(R.id.courseStartDateBtn);
+        startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
         startDateBtn.setText(simpleDateFormat.format(startDateCalendar.getTime()));
     }
 

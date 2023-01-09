@@ -58,8 +58,8 @@ public class CourseDetailsFragment extends Fragment {
     String courseInstructor;
     String courseProgress;
     int insructorId;
-    boolean isStartNotify;
-    boolean isEndNotify;
+    String notifyStart;
+    String notifyEnd;
 
     EditText editCourseTitle;
     Button setCourseStartBtn;
@@ -76,8 +76,8 @@ public class CourseDetailsFragment extends Fragment {
     RadioButton plannedRadioBtn;
     RadioButton droppedRadioBtn;
     RadioButton completedRadioBtn;
-    Button startNotificationString;
-    Button endNotification;
+    Button startNotificationBtn;
+    Button endNotificationBtn;
 
     RepositoryForStudentOrganizer.Repository repo;
     ArrayList<Term> termArrayList;
@@ -114,10 +114,25 @@ public class CourseDetailsFragment extends Fragment {
             courseInstructor = bundle.getString("courseInstructor");
             insructorId = bundle.getInt("insructorId");
             courseProgress = bundle.getString("courseProgress");
+            notifyStart = bundle.getString("notifyStart", "Start");
+            notifyEnd = bundle.getString("notifyEnd", "End");
 
             repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
             ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
             ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
+        }
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras != null){
+            termId = extras.getInt("associatedTerm", -1);
+            courseId = extras.getInt("courseId", -1);
+            courseTitle = extras.getString("courseTitle");
+            courseStart = extras.getString("courseStart");
+            courseEnd = extras.getString("courseEnd");
+            courseInstructor = extras.getString("courseInstructor");
+            insructorId = extras.getInt("insructorId");
+            courseProgress = extras.getString("courseProgress");
+            notifyStart = extras.getString("notifyStart", "Start");
+            notifyEnd = extras.getString("notifyEnd", "End");
         }
     }
 
@@ -172,8 +187,8 @@ public class CourseDetailsFragment extends Fragment {
         RadioButton plannedRadioBtn = (RadioButton) view.findViewById(R.id.plannedRadio);
         RadioButton droppedRadioBtn = (RadioButton) view.findViewById(R.id.droppedRadioBtn);
         RadioButton completedRadioBtn = (RadioButton) view.findViewById(R.id.completedRadioBtn);
-        Button startNotification = (Button) view.findViewById(R.id.notifyStartBtn);
-        Button endNotification = (Button) view.findViewById(R.id.notifyEndBtn);
+        Button startNotificationBtn = (Button) view.findViewById(R.id.notifyStartBtn);
+        Button endNotificationBtn = (Button) view.findViewById(R.id.notifyEndBtn);
 
         ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteCourseBtn);
         ImageButton addInstructorBtn = (ImageButton) view.findViewById(R.id.addInstructorBtn);
@@ -182,51 +197,65 @@ public class CourseDetailsFragment extends Fragment {
         Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         ImageButton saveBtn = (ImageButton) view.findViewById(R.id.saveCourseBtn);
 
-        // Get the extras (if there are any)
-        Bundle extras = getActivity().getIntent().getExtras();
+
+
 
         //Set course details to the details of the selected course
         Bundle bundle = getArguments();
         if (bundle != null) {
+            int instructorId = insructorId;
+            int associatedTerm = termId;
             int selectedCourseId = courseId;
             editCourseTitle.setText(courseTitle);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
+            String formattedNotifyStart = formatDate(notifyStart);
+            String formattedNotifyEnd = formatDate(notifyEnd);
+            startNotificationBtn.setText(formattedNotifyStart);
+            endNotificationBtn.setText(formattedNotifyEnd);
             courseProgress = bundle.getString("courseStatus", "Unchecked");
+            //Set the progress radio
             setCourseProgressBtn(courseProgress);
+            //Set the spinners
+            setInstructorSpinner(instructorId);
+            setTermSpinner(associatedTerm);
+
 
         }
-
+        // Get the extras (if there are any)
+        Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
             int associatedTerm = extras.getInt("associatedTerm");
             int selectedCourseId = extras.getInt("courseId");
             int instructorId = extras.getInt("instructorId");
-            editCourseTitle.setText("Course Title");
-            setCourseStartBtn.setText("Start");
-            setCourseEndBtn.setText("End");
+
+            editCourseTitle.setText(extras.getString(courseTitle));
+            setCourseStartBtn.setText(extras.getString("courseStart"));
+            setCourseEndBtn.setText(extras.getString("courseEnd"));
+            String formattedNotifyStart = formatDate(extras.getString("notifyStart"));
+            String formattedNotifyEnd = formatDate(extras.getString("notifyEnd"));
+            startNotificationBtn.setText(formattedNotifyStart);
+            endNotificationBtn.setText(formattedNotifyEnd);
             //Set the spinners
-            instructorSpinner.setSelection(0);
-            termSpinner.setSelection(0);
+            setInstructorSpinner(instructorId);
+            setTermSpinner(associatedTerm);
             //Set the term progress
-            plannedRadioBtn.setChecked(false);
-            inProgressRadioBtn.setChecked(false);
-            completedRadioBtn.setChecked(false);
-            droppedRadioBtn.setChecked(false);
-        } else {
+            setCourseProgressBtn(courseProgress);
+
+        } else if((bundle == null) && (extras == null)) { //Bundle and extras are null
             int associatedTerm = -1;
             int selectedCourseId = -1;
             int instructorId = -1;
             editCourseTitle.setText("Course Title");
             setCourseStartBtn.setText("Start");
             setCourseEndBtn.setText("End");
+            startNotificationBtn.setText("Start");
+            endNotificationBtn.setText("End");
             //Set the spinners
-            instructorSpinner.setSelection(0);
-            termSpinner.setSelection(0);
+            setTermSpinner(associatedTerm);
+            setInstructorSpinner(instructorId);
             //Set the term progress
-            plannedRadioBtn.setChecked(false);
-            inProgressRadioBtn.setChecked(false);
-            completedRadioBtn.setChecked(false);
-            droppedRadioBtn.setChecked(false);
+            setCourseProgressBtn(courseProgress);
         }
 
 
@@ -507,12 +536,12 @@ public class CourseDetailsFragment extends Fragment {
         });
 
 
-        startNotification.setOnClickListener(new View.OnClickListener() {
+        startNotificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String courseTitle = editCourseTitle.getText().toString();
-                String dateFromScreen = startNotification.getText().toString();
+                String dateFromScreen = startNotificationBtn.getText().toString();
                 String dateFormat = "MM/dd/yy";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
                 Date date = null;
@@ -541,10 +570,10 @@ public class CourseDetailsFragment extends Fragment {
             }
         };
 
-        endNotification.setOnClickListener(new View.OnClickListener() {
+        endNotificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dateFromScreen = endNotification.getText().toString();
+                String dateFromScreen = endNotificationBtn.getText().toString();
                 String dateFormat = "MM/dd/yy";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
                 Date date = null;
@@ -570,6 +599,7 @@ public class CourseDetailsFragment extends Fragment {
             }
         };
 
+
     }
 
 
@@ -586,7 +616,7 @@ public class CourseDetailsFragment extends Fragment {
         RadioButton plannedRadioBtn = (RadioButton) getView().findViewById(R.id.plannedRadio);
         RadioButton droppedRadioBtn = (RadioButton) getView().findViewById(R.id.droppedRadioBtn);
         RadioButton completedRadioBtn = (RadioButton) getView().findViewById(R.id.completedRadioBtn);
-
+        //Button
         String courseTitle = ((EditText) getView().findViewById(R.id.courseNameTxtInput)).getText().toString();
         String startDate = setCourseStartBtn.getText().toString();
         String endDate = setCourseEndBtn.getText().toString();
@@ -639,14 +669,16 @@ public class CourseDetailsFragment extends Fragment {
             repo.update(course);
         }
 
-        Date startNotification = getStartNotificationDate();
-        if (startNotification != null) {
-            triggerAlertBroadcastReciever(startNotification);
+        //Get the date format of the notification start then pass it to the boradcastreceiver
+        //to set the notification
+        if(!startNotificationString.equals("Notify Start")){
+            Date dateNotifyStart = getStartNotificationDate();
+            triggerAlertBroadcastReciever(dateNotifyStart);
         }
-
-        Date endNotification = getEndNotificationDate();
-        if (endNotification != null) {
-            triggerAlertBroadcastReciever(endNotification);
+        //Same with the end notification date
+        if(!endNotificationString.equals("Notify End")){
+            Date dateNotifyEnd = getEndNotificationDate();
+            triggerAlertBroadcastReciever(dateNotifyEnd);
         }
     }
 
@@ -707,8 +739,8 @@ public class CourseDetailsFragment extends Fragment {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
-        endNotification = (Button) getView().findViewById(R.id.notifyEndBtn);
-        endNotification.setText(simpleDateFormat.format(notifyEndDateCalendar.getTime()));
+        endNotificationBtn = (Button) getView().findViewById(R.id.notifyEndBtn);
+        endNotificationBtn.setText(simpleDateFormat.format(notifyEndDateCalendar.getTime()));
     }
 
     private void updateStartDateLabel() {
@@ -731,8 +763,15 @@ public class CourseDetailsFragment extends Fragment {
         String dateFormat = "MM/dd/YY";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         String currentDate = simpleDateFormat.format(new Date());
-        startNotificationString = (Button) getView().findViewById(R.id.notifyStartBtn);
-        startNotificationString.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
+        startNotificationBtn = (Button) getView().findViewById(R.id.notifyStartBtn);
+        startNotificationBtn.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
+    }
+
+    private String formatDate(String dateFromDB){
+        String dateFormat = "MM/dd/YY";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        String formatedDate = simpleDateFormat.format(new Date());
+        return formatedDate;
     }
 
     //Send information to and from radios
@@ -792,25 +831,35 @@ public class CourseDetailsFragment extends Fragment {
 
     //Get dates for the notification Broadcast reciever / and the trigger
     private Date getStartNotificationDate() {
-        String dateFromScreen = startNotificationString.getText().toString();
-        String dateFormat = "MM/dd/yy";
-        isStartNotify = true;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(dateFromScreen);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            e.getCause();
-            e.getMessage();
+        Button startNotificationBtn = getView().findViewById(R.id.notifyStartBtn);
+        if(startNotificationBtn!= null) {
+        String dateFromScreen = startNotificationBtn.getText().toString();
+            if(dateFromScreen.equals("Start")){
+                dateFromScreen = "00/00/00";
+            }
+            String dateFormat = "MM/dd/yy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+            Date date = null;
+            try {
+                date = simpleDateFormat.parse(dateFromScreen);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                e.getCause();
+                e.getMessage();
+            }
+            return date;
         }
-        return date;
+        return null;
     }
 
     private Date getEndNotificationDate() {
-        String dateFromScreen = endNotification.getText().toString();
+        Button endNotificationBtn = (Button) getView().findViewById(R.id.notifyEndBtn);
+        if(endNotificationBtn != null){
+            String dateFromScreen = endNotificationBtn.getText().toString();
+            if(dateFromScreen.equals("End")){
+                dateFromScreen = "00/00/00";
+            }
         String dateFormat = "MM/dd/yy";
-        isEndNotify = false;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
         Date date = null;
         try {
@@ -821,6 +870,8 @@ public class CourseDetailsFragment extends Fragment {
             e.getMessage();
         }
         return date;
+        }
+        return null;
     }
 
     private void triggerAlertBroadcastReciever(Date dateFromScreen) {
@@ -845,46 +896,32 @@ public class CourseDetailsFragment extends Fragment {
 
     }
 
+    private void setTermSpinner(int associatedTerm){
+        //Set the terms spinner
+        ArrayList<Term> termArrayList = (ArrayList<Term>) repo.getmAllTerms(); //Get terms from repo, add them to the list
+        Spinner termsSelectionSpinner = (Spinner) getView().findViewById(R.id.associatedTermSpinner);
+        ArrayAdapter<Term> termArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, termArrayList);
+        termsSelectionSpinner.setAdapter(termArrayAdapter);
+        int termPosition = getItemPosition(associatedTerm, termArrayList);
+        System.out.println("Term Position: " + termPosition);
 
-//    public int getNotificationId(int courseId) {
-//            ArrayList<Notification> notificationArrayList = (ArrayList<Notification>) repo.getmAllNotifications();
-//            if (notificationArrayList.size() != 0) {
-//                for (int i = 0; i < notificationArrayList.size(); i++) {
-//
-//                    Notification notification = notificationArrayList.get(i);
-//                    if (notification.getEntityType().equals("Course") && notification.getStartOrEnd() == startOrEnd
-//                    &&(notification.getEntityIdNo() == courseId){
-//                        return notification.getNotificationId();
-//                    }
-//                }
-//            }
-//            return -1;
-//        }
+        if (termPosition != -1) {
+            termsSelectionSpinner.setSelection(termPosition);
+        } else {
+            termsSelectionSpinner.setSelection(0);
+        }
+    }
 
-//    public int assignNotificationId(int courseId, int notificationId) {
-//        ArrayList<Notification> notificationArrayList = (ArrayList<Notification>) repo.getmAllNotifications();
-//        if (notificationArrayList.size() == 0) {
-//            notificationId = 1;
-//            return notificationId;
-//        }
-//        if (notificationArrayList.size() > 0) {
-//
-//            if (notificationId == -1) {
-//                //increment the highest Id number
-//                notificationId = repo.getmAllNotifications().get(repo.getmAllNotifications().size() - 1).getNotificationId() + 1;
-//                return notificationId;
-//            } else {
-//
-//
-//                for (Notification notification :
-//                        notificationArrayList) {
-//                    int entityId = notification.getEntityIdNo();
-//                    String entityType = notification.getEntityType();
-//                    if (entityId == courseId && entityType.equals("Course"))
-//                }
-//            }
-//            return 0;
-//        }
+    private void setInstructorSpinner(int instructorId){
+        //Set the instructor spinner
+        ArrayList<Instructor> instructorArrayList = (ArrayList<Instructor>) repo.getmAllInstructors(); //Get instructors from repo, add them to the list
+        Spinner instructorSelectionSpinner = (Spinner) getView().findViewById(R.id.chooseInstructorSpinner);
+        ArrayAdapter<Instructor> instructorArrayAdapter = new ArrayAdapter<>(this.getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, instructorArrayList);
+        instructorSelectionSpinner.setAdapter(instructorArrayAdapter);
+        int instructorPosition = getItemPosition(instructorId, instructorArrayList);
+        instructorSelectionSpinner.setSelection(instructorPosition);
+    }
+
 
 
     }

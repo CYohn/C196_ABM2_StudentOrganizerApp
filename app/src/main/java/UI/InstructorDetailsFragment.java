@@ -274,6 +274,9 @@ public class InstructorDetailsFragment extends Fragment {
         String courseInstructor;
         String courseProgress;
         int insructorId;
+        String notifyStartDate;
+        String notifyEndDate;
+
         for (int i = 0; i < courseList.size(); i++) {
             Course course = (Course) courseList.get(i);
             if (course.getCourseId() == courseId) {
@@ -284,6 +287,8 @@ public class InstructorDetailsFragment extends Fragment {
                 courseInstructor = course.getCourseInstructor();
                 courseProgress = course.getCourseStatus();
                 insructorId = course.getInstructorId();
+                notifyStartDate = course.getNotifyStartDate();
+                notifyEndDate = course.getNotifyEndDate();
 
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("associatedTerm", termId);

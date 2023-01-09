@@ -41,6 +41,8 @@ public class CourseActivity extends AppCompatActivity {
             bundle1.putString("courseEnd", "End");
             bundle1.putString("courseInstructor", "None");
             bundle1.putInt("insructorId", -1);
+            bundle1.putString("notifyStart", "Start");
+            bundle1.putString("notifyEnd", "End");
 
             Fragment addCourse = new CourseDetailsFragment();
             addCourse.setArguments(bundle1);
