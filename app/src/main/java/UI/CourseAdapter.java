@@ -65,6 +65,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     bundle.putString("courseInstructor", selectedCourse.getCourseInstructor());
                     bundle.putInt("insructorId", selectedCourse.getInstructorId());
                     bundle.putString("courseStatus", selectedCourse.getCourseStatus());
+                    bundle.putString("notifyStart", selectedCourse.getNotifyStartDate());
+                    bundle.putString("notifyEnd", selectedCourse.getNotifyEndDate());
                     courseDetails.setArguments(bundle);
                     fragmentTransaction.replace(R.id.fragmentContainerViewCourses, courseDetails);
                     fragmentTransaction.addToBackStack("TermDetailsFragmentView");

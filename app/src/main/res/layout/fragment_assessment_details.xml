@@ -173,23 +173,15 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/assessmentAlarmBtn"
-            android:layout_width="136dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/setNotificationLabelText"
-            android:src="@android:drawable/ic_lock_idle_alarm" />
-
-        <ImageButton
             android:id="@+id/deleteAssessmentBtn"
-            android:layout_width="104dp"
+            android:layout_width="156dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_delete_forever_24" />
 
         <ImageButton
             android:id="@+id/assessmentSaveButton"
-            android:layout_width="107dp"
+            android:layout_width="156dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/saveAndAddCourseBtn"
             android:src="@android:drawable/ic_menu_save" />

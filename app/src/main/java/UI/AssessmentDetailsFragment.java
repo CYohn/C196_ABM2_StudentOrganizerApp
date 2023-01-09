@@ -62,6 +62,8 @@ private String assessmentEndDate;
 private String assessmentType;
 private int courseIdNumber;
 private int assessmentId;
+private String assessmentNotifyStart;
+private String assessmentNotifyEnd;
 
 EditText titleText;
 Button startDateBtn;
@@ -69,7 +71,6 @@ Button endDateBtn;
 Spinner associatedCourseSpinner;
 ToggleButton assessmentTypeToggle;
 ImageButton closeBtn;
-ImageButton alertsBtn;
 ImageButton saveBtn;
 ImageButton deleteBtn;
 Button endNotification;
@@ -105,6 +106,8 @@ Bundle bundle;
             assessmentType = bundle.getString("assessmentTypeTxtView");
             courseIdNumber = bundle.getInt("associatedCourseId", -1);
             assessmentId = bundle.getInt("assessmentId", -1);
+            assessmentNotifyStart = bundle.getString("assessmentNotifyStart");
+            assessmentNotifyEnd = bundle.getString("assessmentNotifyEnd");
         }
     }
 
@@ -133,7 +136,6 @@ Bundle bundle;
         startDateBtn = (Button) getView().findViewById(R.id.assessmentStartDateBtn);
         endDateBtn = (Button) getView().findViewById(R.id.assessmentEndDateBtn);
         deleteBtn = (ImageButton) getView().findViewById(R.id.deleteAssessmentBtn);
-        alertsBtn = (ImageButton) getView().findViewById(R.id.assessmentAlarmBtn);
         saveBtn = (ImageButton) getView().findViewById(R.id.assessmentSaveButton);
         startNotification = (Button) getView().findViewById(R.id.startNotificationBtn);
         endNotification = (Button) getView().findViewById(R.id.endNotificationBtn);
@@ -148,6 +150,8 @@ Bundle bundle;
             assessmentType = bundle.getString("assessmentTypeTxtView");
             courseIdNumber = bundle.getInt("associatedCourseId", -1);
             assessmentId = bundle.getInt("assessmentId", -1);
+            assessmentNotifyStart = bundle.getString("assessmentNotifyStart");
+            assessmentNotifyEnd = bundle.getString("assessmentNotifyEnd");
 
             int coursePosition = getItemPosition(courseIdNumber, courseArrayList);
             associatedCourseSpinner.setSelection(coursePosition);
@@ -155,6 +159,9 @@ Bundle bundle;
             titleText.setText(assessmentTitle, TextView.BufferType.EDITABLE);
             startDateBtn.setText(assessmentStartDate);
             endDateBtn.setText(assessmentEndDate);
+            startNotification.setText(assessmentNotifyStart);
+            endNotification.setText(assessmentNotifyEnd);
+
             //Spinner associatedCourseSpinner;
             String performance = "Performance";
             String objective = "Objective";
@@ -173,14 +180,11 @@ Bundle bundle;
             assessmentTypeToggle.setChecked(false);
             assessmentTypeToggle.setText("Type");
             associatedCourseSpinner.setSelection(0);
+            startNotification.setText("Notify Start");
+            endNotification.setText("Notify End");
         }
 
-        alertsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         //Handling the delete button
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -198,14 +202,14 @@ Bundle bundle;
                         assessmentEndDate = bundle.getString("assessmentEndTxtView");
                         assessmentTitle = bundle.getString("assessmentTitleTxtView");
                         courseIdNumber = bundle.getInt("associatedCourse");
-                        String notifyStart = getStartNotificationDate().toString();
-                        String notifyEnd = getEndNotificationDate().toString();
+                        assessmentNotifyStart = bundle.getString("assessmentNotifyStart");
+                        assessmentNotifyEnd = bundle.getString("assessmentNotifyEnd");
 
                         assessment = new Assessment(assessmentId, assessmentType,
                                 assessmentTitle, assessmentEndDate,
-                                assessmentStartDate, courseIdNumber, notifyStart,notifyEnd);
+                                assessmentStartDate, courseIdNumber, assessmentNotifyStart,assessmentNotifyEnd);
 
-                        //Set an alert to confirm the coice to delete
+                        //Set an alert to confirm the choice to delete
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setCancelable(true);
                         builder.setTitle("Permanently Deleting Assessment");
@@ -294,8 +298,22 @@ Bundle bundle;
                     if(assessmentRepoSize == 0){
                         assessmentId = 1;
                         assessment = new Assessment(assessmentId, assessmentType,
-                                assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
+                                assessmentTitle, endDate, startDate,
+                                courseId, notifyStartDate, notifyEndDate);
                         repo.insert(assessment);
+
+
+                        //Get the date format of the notification start then pass it to the boradcastreceiver
+                        //to set the notification
+                        if(!notifyStartDate.equals("Notify Start")){
+                            Date dateNotifyStart = getStartNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyStart);
+                        }
+                        //Same with the end notification date
+                        if(!notifyEndDate.equals("Notify End")){
+                            Date dateNotifyEnd = getEndNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyEnd);
+                        }
 
                         //Inform the user the assessment was saved
                         Context context = getContext();
@@ -312,6 +330,20 @@ Bundle bundle;
                                 assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
                         repo.insert(assessment);
 
+
+                        //Get the date format of the notification start then pass it to the boradcastreceiver
+                        //to set the notification
+                        if(!notifyStartDate.equals("Notify Start")){
+                            Date dateNotifyStart = getStartNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyStart);
+                        }
+                        //Same with the end notification date
+                        if(!notifyEndDate.equals("Notify End")){
+                            Date dateNotifyEnd = getEndNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyEnd);
+                        }
+
+
                         //Inform the user the assessment was saved
                         Context context = getContext();
                         CharSequence text = "Assessment saved successfully";
@@ -327,6 +359,18 @@ Bundle bundle;
                         assessment = new Assessment(assessmentId, assessmentType,
                                 assessmentTitle, endDate, startDate, courseId, notifyStartDate, notifyEndDate);
                         repo.update(assessment);
+
+                        //Get the date format of the notification start then pass it to the boradcastreceiver
+                        //to set the notification
+                        if(!notifyStartDate.equals("Notify Start")){
+                            Date dateNotifyStart = getStartNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyStart);
+                        }
+                        //Same with the end notification date
+                        if(!notifyEndDate.equals("Notify End")){
+                            Date dateNotifyEnd = getEndNotificationDate();
+                            triggerAlertBroadcastReciever(dateNotifyEnd);
+                        }
 
                         //Inform the user the assessment updated successfully
                         Context context = getContext();
@@ -350,18 +394,24 @@ Bundle bundle;
                     String courseInstructor;
                     String courseProgress;
                     int insructorId;
-                    for (int i = 0; i < courseList.size(); i++){
-                        Course course = (Course) courseList.get(i);
-                        if (course.getCourseId() == courseId){
-                            termId = course.getAssociatedTermId();
-                            courseTitle = course.getCourseTitle();
-                            courseStart = course.getCourseStartDate();
-                            courseEnd = course.getCourseEndDate();
-                            courseInstructor = course.getCourseInstructor();
-                            courseProgress = course.getCourseStatus();
-                            insructorId = course.getInstructorId();
-                        }
-                    }
+                    String notifyStart;
+                    String notifyEnd;
+
+//                    for (int i = 0; i < courseList.size(); i++){
+//                        Course course = (Course) courseList.get(i);
+//                        if (course.getCourseId() == courseId){
+//                            termId = course.getAssociatedTermId();
+//                            courseId = course.getCourseId();
+//                            courseTitle = course.getCourseTitle();
+//                            courseStart = course.getCourseStartDate();
+//                            courseEnd = course.getCourseEndDate();
+//                            courseInstructor = course.getCourseInstructor();
+//                            courseProgress = course.getCourseStatus();
+//                            insructorId = course.getInstructorId();
+//                            notifyStart = course.getNotifyStartDate();
+//                            notifyEnd = course.getNotifyEndDate();
+//                        }
+//                    }
                     Bundle bundle1 = new Bundle();
                     bundle1.putInt("associatedTerm", selectedCourse.getAssociatedTermId());
                     bundle1.putInt("courseId", selectedCourse.getCourseId());
@@ -371,6 +421,8 @@ Bundle bundle;
                     bundle1.putString("courseInstructor", selectedCourse.getCourseInstructor());
                     bundle1.putInt("insructorId", selectedCourse.getInstructorId());
                     bundle1.putString("courseStatus", selectedCourse.getCourseStatus());
+                    bundle1.putString("notifyStart", selectedCourse.getNotifyStartDate());
+                    bundle1.putString("notifyEnd", selectedCourse.getNotifyEndDate());
 
                     Fragment courseDetails = new CourseDetailsFragment();
                     FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();
