@@ -156,12 +156,14 @@ public class TermDetailsFragment extends Fragment {
                 System.out.println("associatedTerm from TermDetailsFragment newtBtn method: " + termId);
                 }
                 intent.putExtra("courseId", -1);
+                intent.putExtra("insructorId", -1);
                 intent.putExtra("courseTitle", "Course Title");
                 intent.putExtra("courseStart", "Start");
                 intent.putExtra("courseEnd", "End");
                 intent.putExtra("courseInstructor", -1);
-                intent.putExtra("insructorId", -1);
-                //intent.putExtra("courseStatus", 0);
+                intent.putExtra("notifyStart", "Start");
+                intent.putExtra("notifyEnd", "End");
+                intent.putExtra("courseStatus", "Unchecked");
 
                 Context context = getContext();
                 context.startActivity(intent);

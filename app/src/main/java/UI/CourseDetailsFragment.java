@@ -229,7 +229,7 @@ public class CourseDetailsFragment extends Fragment {
             int selectedCourseId = extras.getInt("courseId");
             int instructorId = extras.getInt("instructorId");
 
-            editCourseTitle.setText(extras.getString(courseTitle));
+            editCourseTitle.setText(extras.getString("courseTitle"));
             setCourseStartBtn.setText(extras.getString("courseStart"));
             setCourseEndBtn.setText(extras.getString("courseEnd"));
             String formattedNotifyStart = formatDate(extras.getString("notifyStart"));
@@ -767,11 +767,17 @@ public class CourseDetailsFragment extends Fragment {
         startNotificationBtn.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
     }
 
-    private String formatDate(String dateFromDB){
-        String dateFormat = "MM/dd/YY";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-        String formatedDate = simpleDateFormat.format(new Date());
-        return formatedDate;
+    private String formatDate(String dateFromDB) {
+        if (!dateFromDB.equals("Notify Start") && !dateFromDB.equals("Start") &&
+                !dateFromDB.equals("End") && !dateFromDB.equals("Notify End")) {
+            String dateFormat = "MM/dd/YY";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+            String formattedDate = simpleDateFormat.format(new Date());
+            return formattedDate;
+        } else {
+            String formattedDate = "Date";
+            return formattedDate;
+        }
     }
 
     //Send information to and from radios

@@ -43,6 +43,8 @@ public class CourseActivity extends AppCompatActivity {
             bundle1.putInt("insructorId", -1);
             bundle1.putString("notifyStart", "Start");
             bundle1.putString("notifyEnd", "End");
+            bundle1.putString("courseStatus", "Unchecked");
+
 
             Fragment addCourse = new CourseDetailsFragment();
             addCourse.setArguments(bundle1);
