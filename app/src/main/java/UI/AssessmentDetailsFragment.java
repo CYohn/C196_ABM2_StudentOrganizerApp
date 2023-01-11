@@ -70,7 +70,6 @@ Button startDateBtn;
 Button endDateBtn;
 Spinner associatedCourseSpinner;
 ToggleButton assessmentTypeToggle;
-ImageButton closeBtn;
 ImageButton saveBtn;
 ImageButton deleteBtn;
 Button endNotification;

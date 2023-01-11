@@ -33,16 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <ImageButton
-            android:id="@+id/addAssessmentFragmentCloseBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_gravity="right"
-            android:baselineAlignBottom="true"
-            android:contentDescription="@string/addAssessmentFragmentCloseBtn"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:textAlignment="viewEnd" />
-
     </LinearLayout>
 
     <EditText
