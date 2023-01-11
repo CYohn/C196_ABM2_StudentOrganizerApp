@@ -55,18 +55,6 @@
         app:layout_constraintTop_toBottomOf="@id/instructorEmailTxtInput"
         tools:text="@string/instructorPhone" />
 
-    <ImageButton
-        android:id="@+id/closeAddInstructorScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/close"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
 
     <LinearLayout
         android:id="@+id/saveAndDeleteBtnHolder"

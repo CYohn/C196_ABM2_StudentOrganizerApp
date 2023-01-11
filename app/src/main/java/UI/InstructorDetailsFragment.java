@@ -38,7 +38,7 @@ public class InstructorDetailsFragment extends Fragment {
     EditText editEmail;
     EditText editPhone;
     ImageButton saveInstructorBtn;
-    ImageButton closeInstructorBtn;
+
     ImageButton deleteBtn;
 
     RepositoryForStudentOrganizer.Repository repo;
@@ -81,7 +81,7 @@ public class InstructorDetailsFragment extends Fragment {
         editEmail = (EditText) getView().findViewById(R.id.instructorEmailTxtInput);
         editPhone = (EditText) getView().findViewById(R.id.instructorPhoneTxtinput);
         saveInstructorBtn = (ImageButton) getView().findViewById(R.id.saveInstructorBtn);
-        closeInstructorBtn = (ImageButton) getView().findViewById(R.id.closeAddInstructorScreen);
+
         deleteBtn = (ImageButton) getView().findViewById(R.id.deleteInstructorBtn);
 
         Bundle bundle = getArguments();
@@ -174,13 +174,7 @@ public class InstructorDetailsFragment extends Fragment {
             }
         });
 
-        closeInstructorBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendToAllInstructorsList();
-            }
-        });
-
+        
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

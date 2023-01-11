@@ -246,7 +246,7 @@ public class CourseDetailsFragment extends Fragment {
             int associatedTerm = -1;
             int selectedCourseId = -1;
             int instructorId = -1;
-            editCourseTitle.setText("Bundle and Extras Null");
+            editCourseTitle.setText("Course Title");
             setCourseStartBtn.setText("Start");
             setCourseEndBtn.setText("End");
             startNotificationBtn.setText("Start");

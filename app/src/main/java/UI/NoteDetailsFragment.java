@@ -250,27 +250,27 @@ public class NoteDetailsFragment extends Fragment {
                 System.out.println("Activity name =  " + activityName);
 
                 if (activityName.equals("UI.CourseActivity")) {
-                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
-                    courseId = bundle.getInt("associatedCourse");
-                    int termId;
-                    String courseTitle;
-                    String courseStart;
-                    String courseEnd;
-                    String courseInstructor;
-                    String courseProgress;
-                    int insructorId;
-                    for (int i = 0; i < courseList.size(); i++){
-                        Course course = (Course) courseList.get(i);
-                        if (course.getCourseId() == courseId){
-                            termId = course.getAssociatedTermId();
-                            courseTitle = course.getCourseTitle();
-                            courseStart = course.getCourseStartDate();
-                            courseEnd = course.getCourseEndDate();
-                            courseInstructor = course.getCourseInstructor();
-                            courseProgress = course.getCourseStatus();
-                            insructorId = course.getInstructorId();
-                        }
-                    }
+//                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
+//                    courseId = bundle.getInt("associatedCourse");
+//                    int termId;
+//                    String courseTitle;
+//                    String courseStart;
+//                    String courseEnd;
+//                    String courseInstructor;
+//                    String courseProgress;
+//                    int insructorId;
+//                    for (int i = 0; i < courseList.size(); i++){
+//                        Course course = (Course) courseList.get(i);
+//                        if (course.getCourseId() == courseId){
+//                            termId = course.getAssociatedTermId();
+//                            courseTitle = course.getCourseTitle();
+//                            courseStart = course.getCourseStartDate();
+//                            courseEnd = course.getCourseEndDate();
+//                            courseInstructor = course.getCourseInstructor();
+//                            courseProgress = course.getCourseStatus();
+//                            insructorId = course.getInstructorId();
+//                        }
+//                    }
                     Bundle bundle1 = new Bundle();
                     bundle1.putInt("associatedTerm", selectedCourse.getAssociatedTermId());
                     bundle1.putInt("courseId", selectedCourse.getCourseId());

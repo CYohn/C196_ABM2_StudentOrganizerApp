@@ -385,17 +385,17 @@ Bundle bundle;
                 System.out.println("Activity name =  " + activityName);
 
                 if (activityName.equals("UI.CourseActivity")) {
-                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
-                    courseId = bundle.getInt("associatedCourse");
-                    int termId;
-                    String courseTitle;
-                    String courseStart;
-                    String courseEnd;
-                    String courseInstructor;
-                    String courseProgress;
-                    int insructorId;
-                    String notifyStart;
-                    String notifyEnd;
+//                    ArrayList<Course> courseList = (ArrayList<Course>)repo.getmAllCourses();
+//                    courseId = bundle.getInt("associatedCourse");
+//                    int termId;
+//                    String courseTitle;
+//                    String courseStart;
+//                    String courseEnd;
+//                    String courseInstructor;
+//                    String courseProgress;
+//                    int insructorId;
+//                    String notifyStart;
+//                    String notifyEnd;
 
 //                    for (int i = 0; i < courseList.size(); i++){
 //                        Course course = (Course) courseList.get(i);
