@@ -174,7 +174,7 @@ public class InstructorDetailsFragment extends Fragment {
             }
         });
 
-        
+
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
