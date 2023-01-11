@@ -138,8 +138,9 @@ Bundle bundle;
         saveBtn = (ImageButton) getView().findViewById(R.id.assessmentSaveButton);
         startNotification = (Button) getView().findViewById(R.id.startNotificationBtn);
         endNotification = (Button) getView().findViewById(R.id.endNotificationBtn);
-
         assessmentTypeToggle = (ToggleButton) getView().findViewById(R.id.assessmentTypeToggle);
+        startNotification.setText("Start");
+        endNotification.setText("End");
 
         if (bundle != null) {
 
@@ -151,15 +152,16 @@ Bundle bundle;
             assessmentId = bundle.getInt("assessmentId", -1);
             assessmentNotifyStart = bundle.getString("assessmentNotifyStart");
             assessmentNotifyEnd = bundle.getString("assessmentNotifyEnd");
-
+            String formattedNotifyStart = formatDate(assessmentNotifyStart);
+            String formattedNotifyEnd = formatDate(assessmentNotifyEnd);
             int coursePosition = getItemPosition(courseIdNumber, courseArrayList);
             associatedCourseSpinner.setSelection(coursePosition);
 
             titleText.setText(assessmentTitle, TextView.BufferType.EDITABLE);
             startDateBtn.setText(assessmentStartDate);
             endDateBtn.setText(assessmentEndDate);
-            startNotification.setText(assessmentNotifyStart);
-            endNotification.setText(assessmentNotifyEnd);
+            startNotification.setText(formattedNotifyStart);
+            endNotification.setText(formattedNotifyEnd);
 
             //Spinner associatedCourseSpinner;
             String performance = "Performance";
@@ -179,8 +181,8 @@ Bundle bundle;
             assessmentTypeToggle.setChecked(false);
             assessmentTypeToggle.setText("Type");
             associatedCourseSpinner.setSelection(0);
-            startNotification.setText("Notify Start");
-            endNotification.setText("Notify End");
+            startNotification.setText("Start");
+            endNotification.setText("End");
         }
 
 
@@ -669,6 +671,19 @@ Bundle bundle;
         startNotification.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
         TextView notifyStartLabel = (TextView) getView().findViewById(R.id.startNotifyLabel);
         notifyStartLabel.setText("Notify Start");
+    }
+
+    private String formatDate(String dateFromDB) {
+        if (!dateFromDB.equals("Notify Start") && !dateFromDB.equals("Start") &&
+                !dateFromDB.equals("End") && !dateFromDB.equals("Notify End")) {
+            String dateFormat = "MM/dd/YY";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+            String formattedDate = simpleDateFormat.format(new Date());
+            return formattedDate;
+        } else {
+            String formattedDate = "Date";
+            return formattedDate;
+        }
     }
 
 

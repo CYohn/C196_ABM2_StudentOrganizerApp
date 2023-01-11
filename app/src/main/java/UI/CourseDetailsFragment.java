@@ -671,12 +671,12 @@ public class CourseDetailsFragment extends Fragment {
 
         //Get the date format of the notification start then pass it to the boradcastreceiver
         //to set the notification
-        if(!startNotificationString.equals("Notify Start")){
+        if(!startNotificationString.equals("Notify Start") && !startNotificationString.equals("Start")){
             Date dateNotifyStart = getStartNotificationDate();
             triggerAlertBroadcastReciever(dateNotifyStart);
         }
         //Same with the end notification date
-        if(!endNotificationString.equals("Notify End")){
+        if(!endNotificationString.equals("Notify End") && !endNotificationString.equals("End")){
             Date dateNotifyEnd = getEndNotificationDate();
             triggerAlertBroadcastReciever(dateNotifyEnd);
         }
