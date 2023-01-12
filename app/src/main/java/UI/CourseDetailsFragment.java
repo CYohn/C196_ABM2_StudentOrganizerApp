@@ -329,6 +329,8 @@ public class CourseDetailsFragment extends Fragment {
                     bundle2.putString("assessmentStartTxtView", "Start");
                     bundle2.putString("assessmentEndTxtView", "End");
                     bundle2.putString("assessmentTypeTxtView", "Type");
+                    bundle2.putString("assessmentNotifyStart", "Start");
+                    bundle2.putString("assessmentNotifyEnd", "End");
                     bundle2.putInt("assessmentId", -1);
 
                     saveCourse();
@@ -347,6 +349,8 @@ public class CourseDetailsFragment extends Fragment {
                     bundle2.putString("assessmentStartTxtView", "Start");
                     bundle2.putString("assessmentEndTxtView", "End");
                     bundle2.putString("assessmentTypeTxtView", "Type");
+                    bundle2.putString("assessmentNotifyStart", "Start");
+                    bundle2.putString("assessmentNotifyEnd", "End");
                     bundle2.putInt("assessmentId", -1);
 
                     saveCourse();

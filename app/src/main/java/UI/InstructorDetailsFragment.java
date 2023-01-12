@@ -284,6 +284,7 @@ public class InstructorDetailsFragment extends Fragment {
                 notifyStartDate = course.getNotifyStartDate();
                 notifyEndDate = course.getNotifyEndDate();
 
+
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt("associatedTerm", termId);
                 bundle1.putInt("courseId", courseId);
@@ -293,6 +294,8 @@ public class InstructorDetailsFragment extends Fragment {
                 bundle1.putString("courseInstructor", courseInstructor);
                 bundle1.putInt("insructorId", insructorId);
                 bundle1.putString("courseStatus", courseProgress);
+                bundle1.putString("notifyStart", notifyStartDate);
+                bundle1.putString("notifyEnd", notifyEndDate);
 
                 Fragment courseDetails = new CourseDetailsFragment();
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction();

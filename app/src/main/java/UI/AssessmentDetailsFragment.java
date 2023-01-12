@@ -77,6 +77,7 @@ Button startNotification;
 
 RepositoryForStudentOrganizer.Repository repo;
 ArrayList<Course> courseArrayList;
+ArrayList<Assessment> assessmentArrayList;
 final Calendar startDateCalendar = Calendar.getInstance();
 DatePickerDialog.OnDateSetListener startDateDialog;
 final Calendar endDateCalendar = Calendar.getInstance();
@@ -124,6 +125,7 @@ Bundle bundle;
 
         repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
         courseArrayList = (ArrayList<Course>) repo.getmAllCourses();
+        assessmentArrayList = (ArrayList<Assessment>) repo.getmAllAssessments();
 
         associatedCourseSpinner = (Spinner) getView().findViewById(R.id.assessmentAssociatedCourseSpinner);
         ArrayAdapter<Course> courseArrayAdapter = new ArrayAdapter<>(this.getActivity(),
@@ -150,10 +152,23 @@ Bundle bundle;
             assessmentType = bundle.getString("assessmentTypeTxtView");
             courseIdNumber = bundle.getInt("associatedCourseId", -1);
             assessmentId = bundle.getInt("assessmentId", -1);
+
             assessmentNotifyStart = bundle.getString("assessmentNotifyStart");
             assessmentNotifyEnd = bundle.getString("assessmentNotifyEnd");
-            String formattedNotifyStart = formatDate(assessmentNotifyStart);
-            String formattedNotifyEnd = formatDate(assessmentNotifyEnd);
+
+            String formattedNotifyStart;
+            if(assessmentNotifyStart.equals(null)){
+                formattedNotifyStart = "Start";
+            } else {
+            formattedNotifyStart = formatDate(assessmentNotifyStart);
+        }
+            String formattedNotifyEnd;
+            if(assessmentNotifyEnd.equals(null)){
+                formattedNotifyEnd = "End";
+            } else {
+              formattedNotifyEnd = formatDate(assessmentNotifyEnd);
+            }
+
             int coursePosition = getItemPosition(courseIdNumber, courseArrayList);
             associatedCourseSpinner.setSelection(coursePosition);
 
