@@ -414,6 +414,27 @@ public class CourseDetailsFragment extends Fragment {
         });
 
 
+        addTermBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),TermsActivity.class);
+
+//                intent.putExtra("courseId", -1);
+//                intent.putExtra("insructorId", -1);
+//                intent.putExtra("courseTitle", "Course Title");
+//                intent.putExtra("courseStart", "Start");
+//                intent.putExtra("courseEnd", "End");
+//                intent.putExtra("courseInstructor", -1);
+//                intent.putExtra("notifyStart", "Start");
+//                intent.putExtra("notifyEnd", "End");
+//                intent.putExtra("courseStatus", "Unchecked");
+
+                Context context = getContext();
+                context.startActivity(intent);
+            }
+        });
+
+
         //Button addNoteBtn = (Button) view.findViewById(R.id.addNoteBtn);
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
