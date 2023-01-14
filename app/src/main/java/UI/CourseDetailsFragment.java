@@ -240,6 +240,7 @@ public class CourseDetailsFragment extends Fragment {
             setInstructorSpinner(instructorId);
             setTermSpinner(associatedTerm);
             //Set the term progress
+            courseProgress = extras.getString("courseStatus", "Unchecked");
             setCourseProgressBtn(courseProgress);
 
         } else if((bundle == null) && (extras == null)) { //Bundle and extras are null
@@ -255,6 +256,7 @@ public class CourseDetailsFragment extends Fragment {
             setTermSpinner(associatedTerm);
             setInstructorSpinner(instructorId);
             //Set the term progress
+            courseProgress = "Unchecked";
             setCourseProgressBtn(courseProgress);
         }
 
@@ -684,6 +686,11 @@ public class CourseDetailsFragment extends Fragment {
             Date dateNotifyEnd = getEndNotificationDate();
             triggerAlertBroadcastReciever(dateNotifyEnd);
         }
+        else{
+            String dateFormat = "MM/dd/YY";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+            String currentDate = simpleDateFormat.format(new Date());
+        }
     }
 
 
@@ -786,31 +793,33 @@ public class CourseDetailsFragment extends Fragment {
 
     //Send information to and from radios
     private String setCourseProgressBtn(String courseProgress) {
+        if (!courseProgress.equals(null)) {
+            switch (courseProgress) {
+                case "Planned":
+                    plannedRadioBtn = getView().findViewById(R.id.plannedRadio);
+                    plannedRadioBtn.setChecked(true);
+                    return "Planned";
 
-        switch (courseProgress) {
-            case "Planned":
-                plannedRadioBtn = getView().findViewById(R.id.plannedRadio);
-                plannedRadioBtn.setChecked(true);
-                return "Planned";
+                case "In Progress":
+                    inProgressRadioBtn = getView().findViewById(R.id.inProgressRadioBtn);
+                    inProgressRadioBtn.setChecked(true);
+                    return "In Progress";
 
-            case "In Progress":
-                inProgressRadioBtn = getView().findViewById(R.id.inProgressRadioBtn);
-                inProgressRadioBtn.setChecked(true);
-                return "In Progress";
+                case "Completed":
+                    completedRadioBtn = getView().findViewById(R.id.completedRadioBtn);
+                    completedRadioBtn.setChecked(true);
+                    return "Completed";
 
-            case "Completed":
-                completedRadioBtn = getView().findViewById(R.id.completedRadioBtn);
-                completedRadioBtn.setChecked(true);
-                return "Completed";
+                case "Dropped":
+                    droppedRadioBtn = getView().findViewById(R.id.droppedRadioBtn);
+                    droppedRadioBtn.setChecked(true);
+                    return "Dropped";
 
-            case "Dropped":
-                droppedRadioBtn = getView().findViewById(R.id.droppedRadioBtn);
-                droppedRadioBtn.setChecked(true);
-                return "Dropped";
-
-            default:
-                return "Unchecked";
+                default:
+                    return "Unchecked";
+            }
         }
+        else{return "Unchecked";}
     }
 
     private String getCourseProgress() {
@@ -842,10 +851,10 @@ public class CourseDetailsFragment extends Fragment {
     //Get dates for the notification Broadcast reciever / and the trigger
     private Date getStartNotificationDate() {
         Button startNotificationBtn = getView().findViewById(R.id.notifyStartBtn);
-        if(startNotificationBtn!= null) {
+        if(!startNotificationBtn.getText().toString().equals(null)) {
         String dateFromScreen = startNotificationBtn.getText().toString();
             if(dateFromScreen.equals("Start")){
-                dateFromScreen = "00/00/00";
+                dateFromScreen = "01/01/3000";
             }
             String dateFormat = "MM/dd/yy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
@@ -867,7 +876,7 @@ public class CourseDetailsFragment extends Fragment {
         if(endNotificationBtn != null){
             String dateFromScreen = endNotificationBtn.getText().toString();
             if(dateFromScreen.equals("End")){
-                dateFromScreen = "00/00/00";
+                dateFromScreen = "01/01/3000";
             }
         String dateFormat = "MM/dd/yy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
@@ -887,6 +896,7 @@ public class CourseDetailsFragment extends Fragment {
     private void triggerAlertBroadcastReciever(Date dateFromScreen) {
 
         //Set the trigger to the Broadcast receiver
+        courseTitle = getView().findViewById(R.id.courseNameTxtInput).toString();
         Long alertId = Long.valueOf(++MainActivity.alertId);
         Long trigger = dateFromScreen.getTime();
         Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);

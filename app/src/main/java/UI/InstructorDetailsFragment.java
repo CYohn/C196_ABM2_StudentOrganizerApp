@@ -133,6 +133,8 @@ public class InstructorDetailsFragment extends Fragment {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
+                        redirectBasedOnActivity();
+
                     }else{
                         newId = repo.getmAllInstructors().get(repo.getmAllInstructors().size() - 1).getInstructorId() + 1;
                         System.out.println("newId for instructor =  " + newId);
@@ -146,6 +148,8 @@ public class InstructorDetailsFragment extends Fragment {
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+
+                        redirectBasedOnActivity();
                     }
 
                 } else {
@@ -160,16 +164,7 @@ public class InstructorDetailsFragment extends Fragment {
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                }
-
-                String activityName = getActivity().getClass().getCanonicalName();
-                System.out.println("Activity name =  " + activityName);
-
-                if (activityName.equals("UI.CourseActivity")) {
-                    sendToCourseDetails();
-
-                } else {
-                    sendToAllInstructorsList();
+                    redirectBasedOnActivity();
                 }
             }
         });
@@ -247,6 +242,18 @@ public class InstructorDetailsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void redirectBasedOnActivity(){
+        String activityName = getActivity().getClass().getCanonicalName();
+        System.out.println("Activity name =  " + activityName);
+
+        if (activityName.equals("UI.CourseActivity")) {
+            sendToCourseDetails();
+
+        } else {
+            sendToAllInstructorsList();
+        }
     }
 
     public void sendToAllInstructorsList(){
