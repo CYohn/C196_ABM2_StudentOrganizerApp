@@ -125,7 +125,7 @@ public class InstructorDetailsFragment extends Fragment {
                         newId = 1;
                         instructor = new Instructor(newId, name, email, phone);
                         repo.insert(instructor);
-
+                        bundle.putInt("instructorIdValue", newId);
                         //Inform the user the instructor was saved
                         Context context = getContext();
                         CharSequence text = "Instructor successfully saved";
@@ -140,7 +140,7 @@ public class InstructorDetailsFragment extends Fragment {
                         System.out.println("newId for instructor =  " + newId);
                         instructor = new Instructor(newId, name, email, phone);
                         repo.insert(instructor);
-
+                        bundle.putInt("instructorIdValue", newId);
                         //Inform the user the instructor was saved
                         Context context = getContext();
                         CharSequence text = "Instructor successfully saved";

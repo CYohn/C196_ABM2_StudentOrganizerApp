@@ -630,7 +630,7 @@ public class CourseDetailsFragment extends Fragment {
 
         int instructorRepoSize = repo.getmAllInstructors().size();
         if (instructorRepoSize == 0) {
-            insructorId = 0;
+            insructorId = -1;
             courseInstructor = "None Assigned";
         } else {
             Instructor selectedInstructor = (Instructor) instructorSpinner.getSelectedItem();
@@ -665,7 +665,7 @@ public class CourseDetailsFragment extends Fragment {
                 repo.insert(course);
             } else {
                 repo = new RepositoryForStudentOrganizer.Repository(getActivity().getApplication());
-                newId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
+                newId = repo.getmAllCourses().get(repo.getmAllCourses().size() - 1).getCourseId() + 1;//Without this line, the program was throwing a null pointer exception for the reponewId = repo.getmAllTerms().get(repo.getmAllTerms().size() - 1).getTermId() + 1;
                 System.out.println("Course Repo Size = " + courseRepoSize + ", " + "New Id No = " + newId);
                 course = new Course(newId, courseTitle, startDate, endDate, courseStatus, courseInstructor, insructorId, termId, startNotificationString, endNotificationString);
                 repo.insert(course);
