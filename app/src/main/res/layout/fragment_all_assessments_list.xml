@@ -14,15 +14,15 @@
         app:layout_constraintBottom_toTopOf="@+id/assessmentsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentsRecyclerView"
-        android:layout_width="355dp"
-        android:layout_height="366dp"
+        android:layout_width="356dp"
+        android:layout_height="368dp"
         app:layout_constraintBottom_toTopOf="@id/addAssessmentFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterAssessmentsSpinner">
 
@@ -31,14 +31,14 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addAssessmentFloatingAction"
         android:layout_width="57dp"
-        android:layout_height="63dp"
+        android:layout_height="55dp"
         android:clickable="true"
         android:contentDescription="@string/addAssesmentsBtnLabel"
         android:onClick="pressedOpenAddAssessmentFragBtn"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_bias="0.946"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assessmentsRecyclerView"
         app:rippleColor="@color/teal_700"
