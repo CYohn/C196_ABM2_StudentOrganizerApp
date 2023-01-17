@@ -141,7 +141,6 @@ public class AllCoursesListFragment extends Fragment {
             Course course = (Course) courses.get(i);
             if(course.getAssociatedTermId() == termId){
                 filteredCourses.add(course);
-                return filteredCourses;
             }
         }
         return filteredCourses;

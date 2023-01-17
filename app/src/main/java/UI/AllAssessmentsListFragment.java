@@ -167,7 +167,6 @@ public class AllAssessmentsListFragment extends Fragment {
             Assessment assessment = (Assessment) arrayList.get(i);
             if(assessment.getAssociatedCourseId() == courseId){
                 filteredAssessments.add(assessment);
-                return filteredAssessments;
             }
         }
         return filteredAssessments;

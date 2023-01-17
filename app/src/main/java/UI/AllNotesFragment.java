@@ -163,7 +163,7 @@ public class AllNotesFragment extends Fragment {
             Note note = (Note) notes.get(i);
             if(note.getAssociatedCourseId() == courseId){
                 filteredNotes.add(note);
-                return filteredNotes;
+
             }
         }
         return filteredNotes;
