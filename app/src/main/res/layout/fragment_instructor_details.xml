@@ -36,8 +36,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/instructorNameTxtInput"
-        app:layout_constraintVertical_bias="0.052"
-        tools:text="@string/instructorEmail" />
+        app:layout_constraintVertical_bias="0.052"/>
+        <!--tools:text="@string/instructorEmail"!-->
 
     <EditText
         android:id="@+id/instructorPhoneTxtinput"

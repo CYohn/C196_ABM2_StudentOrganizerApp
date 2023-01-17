@@ -19,8 +19,8 @@ public class Instructor {
     @Override
     public String toString() {
         return instructorName +
-                " | Email" + instructorEmail +
-                " | Phone " + instructorPhone;
+                " | Email: " + instructorEmail +
+                " | Phone: " + instructorPhone;
     }
 
     public Instructor(int instructorId, String instructorName, String instructorEmail, String instructorPhone) {
