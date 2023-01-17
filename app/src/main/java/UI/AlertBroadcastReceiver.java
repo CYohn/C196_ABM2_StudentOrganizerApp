@@ -27,8 +27,8 @@ public class AlertBroadcastReceiver extends BroadcastReceiver {
 
         Notification notify = new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(("Alert: Beginning or End Date Approaching:"))
                 .setContentText(intent.getStringExtra("alertMessage"))
-                .setContentTitle(intent.getStringExtra("alertMessage"))
                 .setAutoCancel(true)
                 .build();
 

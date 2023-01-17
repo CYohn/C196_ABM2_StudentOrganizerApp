@@ -52,7 +52,7 @@ public class CourseDetailsFragment extends Fragment {
 
     int termId;
     int courseId;
-    String courseTitle;
+    String courseTitleButton;
     String courseStart;
     String courseEnd;
     String courseInstructor;
@@ -108,7 +108,7 @@ public class CourseDetailsFragment extends Fragment {
         if (bundle != null) {
             termId = bundle.getInt("associatedTerm", -1);
             courseId = bundle.getInt("courseId", -1);
-            courseTitle = bundle.getString("courseTitle");
+            courseTitleButton = bundle.getString("courseTitle");
             courseStart = bundle.getString("courseStart");
             courseEnd = bundle.getString("courseEnd");
             courseInstructor = bundle.getString("courseInstructor");
@@ -125,7 +125,7 @@ public class CourseDetailsFragment extends Fragment {
         if (extras != null){
             termId = extras.getInt("associatedTerm", -1);
             courseId = extras.getInt("courseId", -1);
-            courseTitle = extras.getString("courseTitle");
+            courseTitleButton = extras.getString("courseTitle");
             courseStart = extras.getString("courseStart");
             courseEnd = extras.getString("courseEnd");
             courseInstructor = extras.getString("courseInstructor");
@@ -206,7 +206,7 @@ public class CourseDetailsFragment extends Fragment {
             int instructorId = insructorId;
             int associatedTerm = termId;
             int selectedCourseId = courseId;
-            editCourseTitle.setText(courseTitle);
+            editCourseTitle.setText(courseTitleButton);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
             String formattedNotifyStart = formatDate(notifyStart);
@@ -502,7 +502,7 @@ public class CourseDetailsFragment extends Fragment {
 
                         termId = bundle.getInt("associatedTerm", -1);
                         courseId = bundle.getInt("courseId");
-                        courseTitle = bundle.getString("coursetitle");
+                        courseTitleButton = bundle.getString("coursetitle");
                         courseStart = bundle.getString("courseStart");
                         courseEnd = bundle.getString("courseEnd");
                         insructorId = bundle.getInt("instructorId", -1);
@@ -510,7 +510,7 @@ public class CourseDetailsFragment extends Fragment {
                         String startNotification = getStartNotificationDate().toString();
                         String endNotification = getEndNotificationDate().toString();
 
-                        course = new Course(courseId, courseTitle, courseStart,
+                        course = new Course(courseId, courseTitleButton, courseStart,
                                 courseEnd, courseProgress, courseInstructor,
                                 insructorId, termId, startNotification, endNotification);
 
@@ -917,14 +917,20 @@ public class CourseDetailsFragment extends Fragment {
     private void triggerAlertBroadcastReciever(Date dateFromScreen) {
 
         //Set the trigger to the Broadcast receiver
-        courseTitle = getView().findViewById(R.id.courseNameTxtInput).toString();
+        EditText courseTitleButton = getView().findViewById(R.id.courseNameTxtInput);
+        String courseTitle = courseTitleButton.getText().toString();
+        Button startButton = getView().findViewById(R.id.courseStartDateBtn);
+        Button endButton = getView().findViewById(R.id.courseEndDateBtn);
+        String startDate = startButton.getText().toString();
+        String endDate = endButton.getText().toString();
         Long alertId = Long.valueOf(++MainActivity.alertId);
         Long trigger = dateFromScreen.getTime();
         Intent intent = new Intent(getActivity().getApplicationContext(), AlertBroadcastReceiver.class);
-        System.out.println("Course title: " + courseTitle.toString());
+        System.out.println("Course title: " + courseTitle);
         System.out.println("Date for course Start: " + dateFromScreen);
         //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
-        intent.putExtra("alertMessage ", "Course: " + courseTitle.toString() + " Starting On " + dateFromScreen);
+        intent.putExtra("alertMessage", "Course: " + courseTitle + " Starting On " +
+                startDate + "and Ending on " + endDate);
         intent.putExtra("alertCreatedToast", "Alert Number: " + alertId + " Saved");
         PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);

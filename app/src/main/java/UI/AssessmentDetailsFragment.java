@@ -690,10 +690,13 @@ public class AssessmentDetailsFragment extends Fragment {
             String assessmentTitleString = assessmentTitleField.getText().toString();
             Button startDateButton = getView().findViewById(R.id.assessmentStartDateBtn);
             String startDate = startDateButton.getText().toString();
+            Button endDateButton = getView().findViewById(R.id.assessmentEndDateBtn);
+            String endDate = endDateButton.getText().toString();
             System.out.println("Assessment title: " + assessmentTitleString);
-            System.out.println("Date for Assessment Start: " + dateFromScreen);
+            System.out.println("Date for Assessment Start: " + startDate);
             //PendingIntent intent = PendingIntent.getActivity(getActivity().getApplicationContext(), 0, new Intent(), 0);
-            intent.putExtra("alertMessage", "Course: " + assessmentTitleString + " Starting On " + startDate);
+            intent.putExtra("alertMessage", "Assessment: " + assessmentTitleString +
+                    " Starting On " + startDate + "and Ending On " + endDate);
             intent.putExtra("alertCreatedToast", "Alert Number: " + ++MainActivity.alertId + " Saved");
             PendingIntent sender = PendingIntent.getBroadcast(getActivity().getApplicationContext(), ++MainActivity.alertId, intent, PendingIntent.FLAG_IMMUTABLE);
             AlarmManager alarmManager = (AlarmManager) getActivity().getApplication().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
