@@ -545,7 +545,7 @@ public class CourseDetailsFragment extends Fragment {
                         dialog.show();
 
                     }
-                } else { //Else if the assessmentId is the default -1, then no assessment exists to delete -
+                } else { //Else if the courseId is the default -1, then no course exists to delete -
                     //alert the user.
                     Context context = getContext();
                     CharSequence text = "Course must be saved before deleting.";
