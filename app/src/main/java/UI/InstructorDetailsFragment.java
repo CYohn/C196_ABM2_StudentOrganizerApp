@@ -133,7 +133,7 @@ public class InstructorDetailsFragment extends Fragment {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        redirectBasedOnActivity();
+                        redirectBasedOnActivity(newId);
 
                     }else{
                         newId = repo.getmAllInstructors().get(repo.getmAllInstructors().size() - 1).getInstructorId() + 1;
@@ -149,7 +149,7 @@ public class InstructorDetailsFragment extends Fragment {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        redirectBasedOnActivity();
+                        redirectBasedOnActivity(newId);
                     }
 
                 } else {
@@ -164,7 +164,7 @@ public class InstructorDetailsFragment extends Fragment {
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    redirectBasedOnActivity();
+                    redirectBasedOnActivity(bundle.getInt("instructorIdValue"));
                 }
             }
         });
@@ -244,12 +244,12 @@ public class InstructorDetailsFragment extends Fragment {
         });
     }
 
-    public void redirectBasedOnActivity(){
+    public void redirectBasedOnActivity(int instructorId){
         String activityName = getActivity().getClass().getCanonicalName();
         System.out.println("Activity name =  " + activityName);
 
         if (activityName.equals("UI.CourseActivity")) {
-            sendToCourseDetails();
+            sendToCourseDetails(instructorId);
 
         } else {
             sendToAllInstructorsList();
@@ -264,7 +264,7 @@ public class InstructorDetailsFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    public void sendToCourseDetails(){
+    public void sendToCourseDetails(int instructorId){
         ArrayList<Course> courseList = (ArrayList<Course>) repo.getmAllCourses();
         Bundle bundle = getArguments();
         int courseId = bundle.getInt("courseId");
@@ -274,7 +274,6 @@ public class InstructorDetailsFragment extends Fragment {
         String courseEnd;
         String courseInstructor;
         String courseProgress;
-        int insructorId;
         String notifyStartDate;
         String notifyEndDate;
 
@@ -285,11 +284,10 @@ public class InstructorDetailsFragment extends Fragment {
                 courseTitle = course.getCourseTitle();
                 courseStart = course.getCourseStartDate();
                 courseEnd = course.getCourseEndDate();
-                courseInstructor = course.getCourseInstructor();
                 courseProgress = course.getCourseStatus();
-                insructorId = course.getInstructorId();
                 notifyStartDate = course.getNotifyStartDate();
                 notifyEndDate = course.getNotifyEndDate();
+                courseInstructor = editName.getText().toString();
 
 
                 Bundle bundle1 = new Bundle();
@@ -299,7 +297,7 @@ public class InstructorDetailsFragment extends Fragment {
                 bundle1.putString("courseStart", courseStart);
                 bundle1.putString("courseEnd", courseEnd);
                 bundle1.putString("courseInstructor", courseInstructor);
-                bundle1.putInt("insructorId", insructorId);
+                bundle1.putInt("insructorId", instructorId);
                 bundle1.putString("courseStatus", courseProgress);
                 bundle1.putString("notifyStart", notifyStartDate);
                 bundle1.putString("notifyEnd", notifyEndDate);

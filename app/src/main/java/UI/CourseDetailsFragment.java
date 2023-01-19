@@ -209,10 +209,10 @@ public class CourseDetailsFragment extends Fragment {
             editCourseTitle.setText(courseTitleButton);
             setCourseStartBtn.setText(courseStart);
             setCourseEndBtn.setText(courseEnd);
-            String formattedNotifyStart = formatDate(notifyStart);
-            String formattedNotifyEnd = formatDate(notifyEnd);
-            startNotificationBtn.setText(formattedNotifyStart);
-            endNotificationBtn.setText(formattedNotifyEnd);
+//            String formattedNotifyStart = formatDate(notifyStart);
+//            String formattedNotifyEnd = formatDate(notifyEnd);
+            startNotificationBtn.setText(notifyStart);
+            endNotificationBtn.setText(notifyEnd);
             courseProgress = bundle.getString("courseStatus", "Unchecked");
             //Set the progress radio
             setCourseProgressBtn(courseProgress);
@@ -232,10 +232,10 @@ public class CourseDetailsFragment extends Fragment {
             editCourseTitle.setText(extras.getString("courseTitle"));
             setCourseStartBtn.setText(extras.getString("courseStart"));
             setCourseEndBtn.setText(extras.getString("courseEnd"));
-            String formattedNotifyStart = formatDate(extras.getString("notifyStart"));
-            String formattedNotifyEnd = formatDate(extras.getString("notifyEnd"));
-            startNotificationBtn.setText(formattedNotifyStart);
-            endNotificationBtn.setText(formattedNotifyEnd);
+//            String formattedNotifyStart = formatDate(extras.getString("notifyStart"));
+//            String formattedNotifyEnd = formatDate(extras.getString("notifyEnd"));
+            startNotificationBtn.setText(extras.getString("notifyStart"));
+            endNotificationBtn.setText(extras.getString("notifyEnd"));
             //Set the spinners
             setInstructorSpinner(instructorId);
             setTermSpinner(associatedTerm);
@@ -507,12 +507,12 @@ public class CourseDetailsFragment extends Fragment {
                         courseEnd = bundle.getString("courseEnd");
                         insructorId = bundle.getInt("instructorId", -1);
                         courseProgress = bundle.getString("courseStatus");
-                        String startNotification = getStartNotificationDate().toString();
-                        String endNotification = getEndNotificationDate().toString();
+                        notifyStart = bundle.getString("notifyStart");
+                        notifyEnd = bundle.getString("notifyEnd");
 
                         course = new Course(courseId, courseTitleButton, courseStart,
                                 courseEnd, courseProgress, courseInstructor,
-                                insructorId, termId, startNotification, endNotification);
+                                insructorId, termId, notifyStart, notifyEnd);
 
                         //Set an alert to confirm the choice to delete
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -677,8 +677,23 @@ public class CourseDetailsFragment extends Fragment {
         Course course;
         int courseRepoSize = repo.getmAllCourses().size();
         int newId;
-        String startNotificationString = getStartNotificationDate().toString();
-        String endNotificationString = getEndNotificationDate().toString();
+        //if (){}
+        Button startNotificationBtn = getView().findViewById(R.id.notifyStartBtn);
+        Button endNotificationBtn = getView().findViewById(R.id.notifyEndBtn);
+        String startNotificationString = startNotificationBtn.getText().toString();
+        String endNotificationString = endNotificationBtn.getText().toString();
+
+//        if(!startNotificationString.equals("Notify Start") && !startNotificationString.equals("Start")){
+//            Date dateNotifyStart = getStartNotificationDate();
+//            triggerAlertBroadcastReciever(dateNotifyStart);
+//        }
+//        //Same with the end notification date
+//        if(!endNotificationString.equals("Notify End") && !endNotificationString.equals("End")){
+//            Date dateNotifyEnd = getEndNotificationDate();
+//            triggerAlertBroadcastReciever(dateNotifyEnd);
+//        }
+
+
         if (courseId == -1) {
             if (courseRepoSize == 0) {
                 newId = 1;
@@ -696,8 +711,7 @@ public class CourseDetailsFragment extends Fragment {
             repo.update(course);
         }
 
-        //Get the date format of the notification start then pass it to the boradcastreceiver
-        //to set the notification
+        //Only pass the date to the broadcast receiver if a date has been selected
         if(!startNotificationString.equals("Notify Start") && !startNotificationString.equals("Start")){
             Date dateNotifyStart = getStartNotificationDate();
             triggerAlertBroadcastReciever(dateNotifyStart);
@@ -707,11 +721,7 @@ public class CourseDetailsFragment extends Fragment {
             Date dateNotifyEnd = getEndNotificationDate();
             triggerAlertBroadcastReciever(dateNotifyEnd);
         }
-        else{
-            String dateFormat = "MM/dd/YY";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-            String currentDate = simpleDateFormat.format(new Date());
-        }
+
     }
 
 
@@ -799,18 +809,18 @@ public class CourseDetailsFragment extends Fragment {
         startNotificationBtn.setText(simpleDateFormat.format(notifyStartDateCalendar.getTime()));
     }
 
-    private String formatDate(String dateFromDB) {
-        if (!dateFromDB.equals("Notify Start") && !dateFromDB.equals("Start") &&
-                !dateFromDB.equals("End") && !dateFromDB.equals("Notify End")) {
-            String dateFormat = "MM/dd/YY";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
-            String formattedDate = simpleDateFormat.format(new Date());
-            return formattedDate;
-        } else {
-            String formattedDate = "Date";
-            return formattedDate;
-        }
-    }
+//    private String formatDate(String dateFromDB) {
+//        if (!dateFromDB.equals("Notify Start") && !dateFromDB.equals("Start") &&
+//                !dateFromDB.equals("End") && !dateFromDB.equals("Notify End")) {
+//            String dateFormat = "MM/dd/YY";
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+//            String formattedDate = simpleDateFormat.format(new Date(dateFromDB));
+//            return formattedDate;
+//        } else {
+//            String formattedDate = "Date";
+//            return formattedDate;
+//        }
+//    }
 
     //Send information to and from radios
     private String setCourseProgressBtn(String courseProgress) {
