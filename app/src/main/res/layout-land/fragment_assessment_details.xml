@@ -1,0 +1,158 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addAssessmentFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:label="Add_Assessment"
+    tools:context="UI.AssessmentDetailsFragment">
+
+    <EditText
+        android:id="@+id/assessmentNameTxtInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="@string/assessmentName"
+        app:layout_constraintBottom_toTopOf="@id/assessmentStartAndEndHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/assessmentStartAndEndHolder"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/assessmentAssociatedCourseLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessmentNameTxtInput"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/assessmentStartDateBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/courseStartLabel" />
+
+        <Space
+            android:layout_width="13dp"
+            android:layout_height="56dp" />
+
+        <Button
+            android:id="@+id/assessmentEndDateBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/endDateLabel" />
+
+        <Space
+            android:layout_width="118dp"
+            android:layout_height="56dp"
+            android:layout_weight="1" />
+
+        <TableRow
+            android:id="@+id/notifyBtnHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/startNotifyLabel"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/notifyStart" />
+
+            <Button
+                android:id="@+id/startNotificationBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/start"
+                tools:text="@string/start" />
+
+            <Space
+                android:layout_width="13dp"
+                android:layout_height="56dp" />
+
+            <TextView
+                android:id="@+id/endNotifyLabel"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/notifyEnd" />
+
+            <Button
+                android:id="@+id/endNotificationBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/end"
+                tools:text="@string/end" />
+        </TableRow>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/assessmentAssociatedCourseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assessmentAssociatedCourseLabel"
+        app:layout_constraintBottom_toTopOf="@id/assessmentAssociatedCourseSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/assessmentTypeToggle"
+
+        app:layout_constraintTop_toBottomOf="@id/assessmentStartAndEndHolder" />
+
+    <Spinner
+        android:id="@+id/assessmentAssociatedCourseSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:contentDescription="@string/chooseAssociatedCourse"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assessmentAssociatedCourseLabel" />
+
+    <LinearLayout
+        android:id="@+id/bottomNavigationHolder"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/deleteAssessmentBtn"
+            android:layout_width="566dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_delete_forever_24" />
+
+        <ImageButton
+            android:id="@+id/assessmentSaveButton"
+            android:layout_width="332dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/saveAndAddCourseBtn"
+            android:src="@android:drawable/ic_menu_save" />
+
+    </LinearLayout>
+
+    <ToggleButton
+        android:id="@+id/assessmentTypeToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="234dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="left"
+        android:textOff="Objective"
+        android:textOn="Performance"
+        app:layout_constraintBottom_toTopOf="@+id/assessmentAssociatedCourseSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/assessmentAssociatedCourseLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessmentStartAndEndHolder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,8 +9,8 @@
 
     <Spinner
         android:id="@+id/filterAssessmentsSpinner"
-        android:layout_width="355dp"
-        android:layout_height="71dp"
+        android:layout_width="594dp"
+        android:layout_height="44dp"
         android:contentDescription="@string/filterSpeakableText"
         app:layout_constraintBottom_toTopOf="@+id/assessmentsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,11 +19,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assessmentsRecyclerView"
-        android:layout_width="345dp"
-        android:layout_height="461dp"
+        android:layout_width="590dp"
+        android:layout_height="179dp"
         app:layout_constraintBottom_toTopOf="@id/addAssessmentFloatingAction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterAssessmentsSpinner">
 
