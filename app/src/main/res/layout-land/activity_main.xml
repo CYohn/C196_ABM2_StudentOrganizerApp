@@ -21,14 +21,14 @@
 
     <ImageView
         android:id="@+id/bookImage"
-        android:layout_width="261dp"
-        android:layout_height="218dp"
+        android:layout_width="164dp"
+        android:layout_height="98dp"
         android:layout_marginTop="28dp"
         android:contentDescription="@string/bookIconDescription"
+        app:layout_constraintBottom_toTopOf="@id/getStartedBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintBottom_toTopOf="@id/getStartedBtn"
         app:srcCompat="@drawable/ic_book_foreground" />
 
     <Button
