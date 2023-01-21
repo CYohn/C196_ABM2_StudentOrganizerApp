@@ -1,0 +1,83 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instructorDetailsConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:label="Add or Edit Instructor"
+    tools:context="UI.InstructorDetailsFragment">
+
+
+    <EditText
+        android:id="@+id/instructorNameTxtInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/instructorEmailTxtInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/instructorEmailTxtInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:ems="10"
+        android:text="@string/instructorEmail"
+        app:layout_constraintBottom_toTopOf="@+id/instructorPhoneTxtinput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructorNameTxtInput"
+        app:layout_constraintVertical_bias="0.052"/>
+        <!--tools:text="@string/instructorEmail"!-->
+
+    <EditText
+        android:id="@+id/instructorPhoneTxtinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:text="@string/instructorPhone"
+        app:layout_constraintBottom_toTopOf="@+id/saveAndDeleteBtnHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructorEmailTxtInput"
+        tools:text="@string/instructorPhone" />
+
+
+    <LinearLayout
+        android:id="@+id/saveAndDeleteBtnHolder"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/saveInstructorBtn"
+            android:layout_width="180dp"
+            android:layout_height="69dp"
+            android:contentDescription="@string/saveAndExitBtn"
+            android:src="@android:drawable/ic_menu_save" />
+
+        <ImageButton
+            android:id="@+id/deleteInstructorBtn"
+            android:layout_width="179dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_baseline_delete_forever_24" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
