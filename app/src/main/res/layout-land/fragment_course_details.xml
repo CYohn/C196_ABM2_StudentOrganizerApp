@@ -14,199 +14,198 @@
         android:text="@string/enterNameOfCourseInstruction"
         app:layout_constraintBottom_toTopOf="@id/startAndEndBtnHolder"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TableLayout
 
         android:id="@+id/startAndEndBtnHolder"
-        android:layout_width="889dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/chooseInstructorWidgetHolder"
+        app:layout_constraintBottom_toTopOf="@id/spinnerHolder"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/courseNameTxtInput">
 
 
-        <TableRow android:layout_height="8dp">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
 
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="77dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:text="@string/courseStartLabel" />
 
-            <RadioGroup
-                android:id="@+id/courseStatusRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:orientation="horizontal"
+            <Button
+                android:id="@+id/courseStartDateBtn"
+                android:layout_width="125dp"
+                android:layout_height="53dp"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:text="@string/start" />
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:text="@string/courseEndLabel" />
 
-                <RadioButton
-                    android:id="@+id/plannedRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/planned"
-                    android:textSize="12sp" />
+            <Button
+                android:id="@+id/courseEndDateBtn"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:text="@string/end" />
 
-                <RadioButton
-                    android:id="@+id/inProgressRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/inProgress"
-                    android:textSize="12sp" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="58dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/notifyStart" />
 
-                <RadioButton
-                    android:id="@+id/completedRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/completed"
-                    android:textSize="12sp" />
+            <Button
+                android:id="@+id/notifyStartBtn"
+                android:layout_width="125dp"
+                android:layout_height="53dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/start" />
 
-                <RadioButton
-                    android:id="@+id/droppedRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dropped"
-                    android:textSize="12sp" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="62dp"
+                android:layout_height="33dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/notifyEnd" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="51dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="@string/courseStartLabel" />
-
-                    <Button
-                        android:id="@+id/courseStartDateBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="53dp"
-                        android:layout_gravity="left"
-                        android:gravity="center|left"
-                        android:text="@string/start" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="42dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:text="@string/courseEndLabel" />
-
-                    <Button
-                        android:id="@+id/courseEndDateBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:gravity="center|right"
-                        android:text="@string/end" />
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="52dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|left"
-                        android:gravity="center|left"
-                        android:text="@string/notifyStart" />
-
-                    <Button
-                        android:id="@+id/notifyStartBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="53dp"
-                        android:layout_gravity="left"
-                        android:gravity="left"
-                        android:text="@string/start" />
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="52dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|right"
-                        android:gravity="center|right"
-                        android:text="@string/notifyEnd" />
-
-                    <Button
-                        android:id="@+id/notifyEndBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        android:text="@string/end" />
-
-                </TableRow>
-            </RadioGroup>
+            <Button
+                android:id="@+id/notifyEndBtn"
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="@string/end" />
 
         </TableRow>
 
     </TableLayout>
 
-
-    <LinearLayout
-        android:id="@+id/chooseInstructorWidgetHolder"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/chooseTermInstruction"
-        app:layout_constraintTop_toBottomOf="@id/startAndEndBtnHolder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-        <Spinner
-            android:id="@+id/chooseInstructorSpinner"
-            android:layout_width="397dp"
-            android:layout_height="48dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/addInstructorBtn"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/addInstructor"
-            android:src="@android:drawable/ic_input_add" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/chooseTermInstruction"
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
-        android:text="@string/addAssociatedTermInstruction"
-        app:layout_constraintBottom_toTopOf="@id/associatedTermContainer"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseInstructorWidgetHolder" />
+        app:layout_constraintTop_toBottomOf="@+id/startAndEndBtnHolder">
+
+
+        <RadioGroup
+            android:id="@+id/courseStatusRadioGroup"
+            android:layout_width="874dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioButton
+                android:id="@+id/plannedRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/planned"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/inProgressRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inProgress"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/completedRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/completed"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/droppedRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dropped"
+                android:textSize="12sp" />
+
+        </RadioGroup>
+
+    </TableRow>
 
     <LinearLayout
-        android:id="@+id/associatedTermContainer"
+        android:id="@+id/spinnerHolder"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/saveCourseBtnHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseTermInstruction">
+        app:layout_constraintTop_toBottomOf="@id/startAndEndBtnHolder">
 
-        <Spinner
-            android:id="@+id/associatedTermSpinner"
-            android:layout_width="365dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:dropDownSelector="@color/light_teal" />
+        <LinearLayout
+            android:id="@+id/chooseInstructorWidgetHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/addAssociatedTermBtn"
-            android:layout_width="8dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_input_add" />
+
+            <Spinner
+                android:id="@+id/chooseInstructorSpinner"
+                android:layout_width="376dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/addInstructorBtn"
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/addInstructor"
+                android:src="@android:drawable/ic_input_add" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/associatedTermContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/associatedTermSpinner"
+                android:layout_width="337dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:dropDownSelector="@color/light_teal" />
+
+            <ImageButton
+                android:id="@+id/addAssociatedTermBtn"
+                android:layout_width="76dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_input_add" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -219,7 +218,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/associatedTermContainer">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHolder">
 
         <Button
             android:id="@+id/addAssessmentBtn"
@@ -249,26 +248,5 @@
             android:src="@drawable/ic_baseline_delete_forever_24" />
 
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="491dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
