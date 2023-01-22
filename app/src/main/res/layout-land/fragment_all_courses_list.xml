@@ -17,7 +17,7 @@
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintHorizontal_bias="0.946"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseRecyclerView"
         app:rippleColor="@color/teal_700"
@@ -26,7 +26,7 @@
     <Spinner
         android:id="@+id/filterCoursesSpinner"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="56dp"
         app:layout_constraintBottom_toTopOf="@id/courseRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseRecyclerView"
-        android:layout_width="882dp"
-        android:layout_height="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
